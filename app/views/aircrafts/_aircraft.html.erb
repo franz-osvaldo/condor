@@ -1,0 +1,7 @@
+<tr id="<%=  dom_id(aircraft) %>">
+  <td><%= aircraft.manufacturer %></td>
+  <td><%= aircraft.trade_name %></td>
+  <td><%= link_to 'Mostrar', aircraft, remote: true %></td>
+  <td><%= link_to 'Editar', edit_aircraft_path(aircraft), remote: true %></td>
+  <td><%= link_to 'Eliminar', aircraft, method: :delete, data:{confirm: 'Estas seguro?'}, remote: true %></td>
+</tr>
