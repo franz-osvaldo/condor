@@ -1,0 +1,131 @@
+.components.index{
+  .components_container{
+    margin-top: 20px;
+    .component_list{
+      background-color: white;
+      border-radius: 8px;
+      border: thin solid rgba(#016ecd, 0.3);
+      overflow: hidden;
+      padding: 0 15px;
+      .row.table_head{
+        background-color: #016ecd;
+        color: white;
+        padding: 7px 0;
+      }
+      .row{
+        padding: 5px 0;
+        &:hover{
+          background-color: rgba(#4aafcd, 0.2);
+        }
+        .btn{
+          width: 100%;
+        }
+        .component_field{
+          padding: 5px 15px;
+        }
+      }
+    }
+    .form_header{
+      background-color: #016ecd;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      padding: 7px 0;
+      color: white;
+    }
+    #new_component{
+      background-color: white;
+      padding: 15px 15px;
+      border: thin solid rgba(#016ecd, 0.3);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      .btn{
+        width: 100%;
+      }
+    }
+  }
+  .modal_show{
+    .modal-content{
+      width: 350px;
+      margin: 0 auto;
+    }
+    .modal-header{
+      background-color: #4aafcd;
+      color: white;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      text-align: center;
+    }
+    .modal-footer{
+      border-radius: 0;
+      border-top-color: #4aafcd;
+      margin: 0 auto;
+      text-align: center;
+      button{
+        background-color: #4aafcd;
+        color: white;
+        border: 0;
+      }
+    }
+  }
+  .modal_edit{
+    .modal-content{
+      width: 350px;
+      margin: 0 auto;
+    }
+    .modal-header{
+      background-color:#faa632;
+      color: white;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      text-align: center;
+    }
+    .modal-body{
+      .btn{
+        width: 100%;
+      }
+    }
+    .modal-footer{
+      border-radius: 0;
+      border-top-color:#faa632;
+      margin: 0 auto;
+      text-align: center;
+      button{
+        background-color:#faa632;
+        color: white;
+        border: 0;
+      }
+    }
+  }
+  .modal_delete{
+    .modal-content{
+      width: 350px;
+      margin: 0 auto;
+    }
+    .modal-header{
+      background-color:#da4f4a;
+      color: white;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      text-align: center;
+    }
+    .modal-body{
+      text-align: center;
+    }
+    .modal-footer{
+      border-radius: 0;
+      border-top-color:#da4f4a;
+      margin: 0 auto;
+      text-align: center;
+      button{
+        background-color:#4aafcd;
+        color: white;
+        border: 0;
+      }
+      a{
+        background-color:#da4f4a;
+        color: white;
+        border: 0;
+      }
+    }
+  }
+}

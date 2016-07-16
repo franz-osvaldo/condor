@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160716191618) do
+ActiveRecord::Schema.define(version: 20160716214216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20160716191618) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "components", force: :cascade do |t|
+    t.integer  "system_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["system_id"], name: "index_components_on_system_id", using: :btree
+  end
+
   create_table "systems", force: :cascade do |t|
     t.integer  "aircraft_id"
     t.string   "title"
@@ -31,5 +39,6 @@ ActiveRecord::Schema.define(version: 20160716191618) do
     t.index ["aircraft_id"], name: "index_systems_on_aircraft_id", using: :btree
   end
 
+  add_foreign_key "components", "systems"
   add_foreign_key "systems", "aircrafts"
 end

@@ -1,33 +1,31 @@
-<div class="row" id="<%= dom_id(system) %>">
-  <div class="col-md-2 system_field">
-    <%= system.chapter_number %>
+<div class="row" id="<%= dom_id(component) %>">
+  <div class="col-md-4 component_field">
+    <%= component.name %>
   </div>
-  <div class="col-md-2 system_field">
-    <%= system.title %>
-  </div>
+
   <div class="col-md-2">
-    <%= link_to system, class: 'btn btn-info btn-sm', remote: true do %>
+    <%= link_to component, class: 'btn btn-info btn-sm', remote: true do %>
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
     <% end %>
   </div>
   <div class="col-md-2">
-    <%= link_to edit_system_path(system), class: 'btn btn-warning btn-sm', remote: true  do %>
+    <%= link_to edit_component_path(component), class: 'btn btn-warning btn-sm', remote: true  do %>
         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
     <% end %>
   </div>
   <div class="col-md-2">
-    <button type="button" class="btn btn-danger btn-sm" aria-label="Left Align" data-toggle="modal" data-target="#modal-<%= dom_id(system) %>">
+    <button type="button" class="btn btn-danger btn-sm" aria-label="Left Align" data-toggle="modal" data-target="#modal-<%= dom_id(component) %>">
       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
     </button>
   </div>
   <div class="col-md-2">
-    <%= link_to system_components_path(system), class: 'btn btn-success btn-sm'  do %>
-        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Componentes
+    <%= link_to '#', class: 'btn btn-success btn-sm'  do %>
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Partes
     <% end %>
   </div>
 </div>
 
-<div id="modal-<%= dom_id(system) %>" class="modal fade modal_delete" role="dialog">
+<div id="modal-<%= dom_id(component) %>" class="modal fade modal_delete" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -39,7 +37,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
-        <%= link_to system, class: 'btn btn-danger btn-sm', method: :delete, remote: true do %>
+        <%= link_to component, class: 'btn btn-danger btn-sm', method: :delete, remote: true do %>
             Eliminar
         <% end %>
       </div>

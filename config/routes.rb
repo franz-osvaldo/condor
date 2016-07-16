@@ -3,4 +3,7 @@ Rails.application.routes.draw do
   resources :aircrafts do
     resources :systems, shallow: true
   end
+  resources :systems, only: [] do
+    resources :components, shallow: true
+  end
 end
