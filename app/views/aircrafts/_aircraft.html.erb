@@ -1,6 +1,6 @@
 <div class="row"  id="<%=  dom_id(aircraft) %>">
-    <div class="col-md-3 aircraft_field"><%= aircraft.manufacturer %></div>
-  <div class="col-md-3 aircraft_field"><%= aircraft.trade_name %></div>
+    <div class="col-md-2 aircraft_field"><%= aircraft.manufacturer %></div>
+  <div class="col-md-2 aircraft_field"><%= aircraft.trade_name %></div>
   <div class="col-md-2">
       <%= link_to aircraft, class: 'btn btn-info btn-sm', remote: true do %>
           <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
@@ -15,6 +15,11 @@
     <button type="button" class="btn btn-danger btn-sm" aria-label="Left Align" data-toggle="modal" data-target="#modal-<%= dom_id(aircraft) %>">
       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
     </button>
+  </div>
+  <div class="col-md-2">
+    <%= link_to aircraft_systems_path(aircraft), class: 'btn btn-success btn-sm'  do %>
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Sistemas
+    <% end %>
   </div>
 </div>
 

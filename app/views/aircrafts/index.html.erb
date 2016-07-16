@@ -1,5 +1,5 @@
 <div class="row aircrafts_container">
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="form_header text-center">
       <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Catalogo
     </div>
@@ -15,12 +15,13 @@
       <%= f.submit 'Guardar', class: 'btn btn-primary' %>
     <% end %>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-9">
     <div class="aircraft_list">
       <div class="row table_head">
-        <div class="col-md-3">Fabricante</div>
-        <div class="col-md-3">Nombre comercial</div>
-        <div class="col-md-6">Acciones</div>
+        <div class="col-md-2">Fabricante</div>
+        <div class="col-md-2">Nombre</div>
+        <div class="col-md-6">Administración</div>
+        <div class="col-md-2">Sistemas</div>
       </div>
       <%= render  @aircrafts %>
     </div>

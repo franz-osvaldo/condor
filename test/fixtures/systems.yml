@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  aircraft: one
+  title: MyString
+  chapter_number: 1
+
+two:
+  aircraft: two
+  title: MyString
+  chapter_number: 1
