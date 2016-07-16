@@ -1,3 +1,42 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "aircrafts";
+
+.top_navbar{
+  margin-bottom: 0;
+  border: 0;
+  background-color: #f39c12;
+  color: white!important;
+  a{
+    color: white;
+  }
+}
+body{
+  margin-top: 50px;
+}
+//*************************** Barra lateral ****************************//
+
+$width_sidebar: 250px;
+
+.main_container{
+  margin-left: $width_sidebar;
+}
+.side_navbar{
+  width: $width_sidebar;
+  height: 100%;
+  position: fixed;
+  border-radius: 0;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  background-color: white;
+
+  ul{
+    width: 100%;
+    li{
+      width: 100%;
+      border-bottom: thin solid rgba(#666666, 0.2);
+      a{
+        color: #2E2F30;
+      }
+    }
+  }
+}

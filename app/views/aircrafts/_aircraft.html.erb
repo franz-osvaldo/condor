@@ -1,7 +1,40 @@
-<tr id="<%=  dom_id(aircraft) %>">
-  <td><%= aircraft.manufacturer %></td>
-  <td><%= aircraft.trade_name %></td>
-  <td><%= link_to 'Mostrar', aircraft, remote: true %></td>
-  <td><%= link_to 'Editar', edit_aircraft_path(aircraft), remote: true %></td>
-  <td><%= link_to 'Eliminar', aircraft, method: :delete, data:{confirm: 'Estas seguro?'}, remote: true %></td>
-</tr>
+<div class="row"  id="<%=  dom_id(aircraft) %>">
+    <div class="col-md-3 aircraft_field"><%= aircraft.manufacturer %></div>
+  <div class="col-md-3 aircraft_field"><%= aircraft.trade_name %></div>
+  <div class="col-md-2">
+      <%= link_to aircraft, class: 'btn btn-info btn-sm', remote: true do %>
+          <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
+      <% end %>
+  </div>
+  <div class="col-md-2">
+    <%= link_to edit_aircraft_path(aircraft), class: 'btn btn-warning btn-sm', remote: true  do %>
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Editar
+    <% end %>
+  </div>
+  <div class="col-md-2">
+    <button type="button" class="btn btn-danger btn-sm" aria-label="Left Align" data-toggle="modal" data-target="#modal-<%= dom_id(aircraft) %>">
+      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
+    </button>
+  </div>
+</div>
+
+
+<div id="modal-<%= dom_id(aircraft) %>" class="modal fade modal_delete" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Eliminar
+      </div>
+      <div class="modal-body">
+        <p>¿Estas seguro?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
+        <%= link_to aircraft, class: 'btn btn-danger btn-sm', method: :delete, remote: true do %>
+             Eliminar
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

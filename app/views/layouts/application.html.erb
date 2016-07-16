@@ -9,7 +9,9 @@
   </head>
 
   <body class="<%= controller_name %> <%= action_name %>">
-    <div class="container-fluid">
+    <%= render partial: 'layouts/top_navbar' %>
+    <%= render partial: 'layouts/side_navbar' %>
+    <div class="container-fluid main_container">
       <%= yield %>
     </div>
   </body>

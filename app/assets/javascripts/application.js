@@ -14,5 +14,42 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require turbolinks
-//= require data-confirm-modal
 //= require_tree .
+$(document).on('turbolinks:load', function() {
+    function setCookie(c_name, value){
+        document.cookie  =  c_name + " = " + value + "; path=/";
+    }
+    function deleteCookie(c_name) {
+        document.cookie = c_name + '=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+    function wasCookieSet(cookie_name) {
+        var array_of_cookies = document.cookie.split(';');
+        for (var i = 0; i < array_of_cookies.length; i++){
+            if (array_of_cookies[i].indexOf(cookie_name) > -1) {
+                return true
+            }
+        }
+        return false
+    }
+    function setInitialState() {
+        if (wasCookieSet('sidebar_state')){
+            $('.side_navbar').css('marginLeft', '-250px');
+            $('.main_container').css('marginLeft', '0');
+        }
+    }
+    setInitialState();
+
+    $('.sidebar_button').click(function (event) {
+        event.preventDefault();
+        if (wasCookieSet('sidebar_state')){
+            deleteCookie('sidebar_state');
+            $('.side_navbar').animate({marginLeft: "0"},500);
+            $('.main_container').animate({marginLeft: "250px"},500);
+        }
+        else{
+            setCookie('sidebar_state', 'toggled');
+            $('.side_navbar').animate({marginLeft: "-250px"},500);
+            $('.main_container').animate({marginLeft: "0"},500);
+        }
+    });
+});
