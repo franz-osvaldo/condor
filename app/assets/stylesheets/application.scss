@@ -3,6 +3,8 @@
 @import "aircrafts";
 @import "systems";
 @import "components";
+@import "parts";
+
 .top_navbar{
   margin-bottom: 0;
   border: 0;
@@ -37,6 +39,120 @@ $width_sidebar: 250px;
       border-bottom: thin solid rgba(#666666, 0.2);
       a{
         color: #2E2F30;
+      }
+    }
+  }
+}
+//**************************** Migas de pan****************************/
+.my_breadcrumb{
+  $blue-gray: #34495e;
+  $blue-gray-darken: #2c3e50;
+  $blue: #3498db;
+  $blue-darken: #2980b9;
+  $green: #1abc9c;
+  $green-darken: #16a085;
+  background-color: rgba(#1abc9c,0.1);
+  height: 40px;
+  padding-left: 15px;
+  margin-top: 10px;
+  *{
+    margin: 0;
+    padding: 0;
+    //@include box-sizing(border-box);
+    //font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+  }
+
+
+  #breadcrumb{
+    list-style:none;
+    display: inline-block;
+    li{
+      float:left;
+
+      a{
+        color:#FFF;
+        display:block;
+        background: $blue;
+        text-decoration: none;
+        position:relative;
+        height: 40px;
+        line-height:40px;
+        padding: 0 10px 0 5px;
+        text-align: center;
+        margin-right: 23px;
+      }
+      &:nth-child(even){
+        a{
+          background-color: $blue-darken;
+          &:before{
+            border-color:$blue-darken;
+            border-left-color:transparent;
+          }
+          &:after{
+            border-left-color:$blue-darken;
+          }
+        }
+      }
+      &:first-child{
+        a{
+          padding-left:15px;
+          &:before{
+            border:none;
+          }
+        }
+      }
+      &:last-child{
+        a{
+          padding-right:15px;
+          &:after{
+            //border:none;
+          }
+        }
+      }
+
+      a{
+        &:before,
+        &:after{
+          content: "";
+          position:absolute;
+          top: 0;
+          border:0 solid $blue;
+          border-width:20px 10px;
+          width: 0;
+          height: 0;
+        }
+        &:before{
+          left:-20px;
+          border-left-color:transparent;
+        }
+        &:after{
+          left:100%;
+          border-color:transparent;
+          border-left-color:$blue;
+        }
+        &:hover{
+          background-color: $green;
+
+          &:before{
+            border-color:$green;
+            border-left-color:transparent;
+          }
+          &:after{
+            border-left-color:$green;
+          }
+        }
+        &:active{
+          background-color: $green-darken;
+
+          &:before{
+            border-color:$green-darken;
+            border-left-color:transparent;
+          }
+          &:after{
+            border-left-color:$green-darken;
+          }
+        }
       }
     }
   }

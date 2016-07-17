@@ -6,4 +6,7 @@ Rails.application.routes.draw do
   resources :systems, only: [] do
     resources :components, shallow: true
   end
+  resources :components, only: [] do
+    resources :parts, shallow: true
+  end
 end

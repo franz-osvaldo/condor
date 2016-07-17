@@ -1,17 +1,14 @@
-// Place all the styles related to the Systems controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
 .systems.index{
   .systems_container{
-    margin-top: 20px;
+    margin-top: 10px;
     .system_list{
       background-color: white;
-      border-radius: 8px;
+      //border-radius: 8px;
       border: thin solid rgba(#016ecd, 0.3);
       overflow: hidden;
       padding: 0 15px;
       .row.table_head{
-        background-color: #016ecd;
+        background-color: #2980b9;
         color: white;
         padding: 7px 0;
       }
@@ -22,6 +19,7 @@
         }
         .btn{
           width: 100%;
+          border-radius: 0;
         }
         .system_field{
           padding: 5px 15px;
@@ -29,9 +27,9 @@
       }
     }
     .form_header{
-      background-color: #016ecd;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
+      background-color:  #2980b9;
+      //border-top-left-radius: 8px;
+      //border-top-right-radius: 8px;
       padding: 7px 0;
       color: white;
     }
@@ -39,8 +37,11 @@
       background-color: white;
       padding: 15px 15px;
       border: thin solid rgba(#016ecd, 0.3);
-      border-bottom-left-radius: 8px;
-      border-bottom-right-radius: 8px;
+      //border-bottom-left-radius: 8px;
+      //border-bottom-right-radius: 8px;
+      input{
+        border-radius: 0;
+      }
       .btn{
         width: 100%;
       }
@@ -50,23 +51,27 @@
     .modal-content{
       width: 350px;
       margin: 0 auto;
+      border-radius: 0;
     }
     .modal-header{
       background-color: #4aafcd;
       color: white;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+      //border-top-left-radius: 5px;
+      //border-top-right-radius: 5px;
       text-align: center;
+      font-size: 1.5em;
     }
     .modal-footer{
-      border-radius: 0;
+      //border-radius: 0;
       border-top-color: #4aafcd;
-      margin: 0 auto;
+      //margin: 0 auto;
       text-align: center;
       button{
         background-color: #4aafcd;
         color: white;
         border: 0;
+        border-radius: 0;
+        font-size: 12px;
       }
     }
   }
@@ -74,28 +79,36 @@
     .modal-content{
       width: 350px;
       margin: 0 auto;
+      border-radius: 0;
     }
     .modal-header{
       background-color:#faa632;
       color: white;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+      //border-top-left-radius: 5px;
+      //border-top-right-radius: 5px;
       text-align: center;
+      font-size: 1.5em;
     }
     .modal-body{
+      input{
+        border-radius: 0;
+      }
       .btn{
         width: 100%;
+        border-radius: 0;
       }
     }
     .modal-footer{
-      border-radius: 0;
+      //border-radius: 0;
       border-top-color:#faa632;
-      margin: 0 auto;
+      //margin: 0 auto;
       text-align: center;
       button{
         background-color:#faa632;
         color: white;
         border: 0;
+        border-radius: 0;
+        font-size: 12px;
       }
     }
   }
@@ -103,31 +116,37 @@
     .modal-content{
       width: 350px;
       margin: 0 auto;
+      border-radius: 0;
     }
     .modal-header{
       background-color:#da4f4a;
       color: white;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
+      //border-top-left-radius: 5px;
+      //border-top-right-radius: 5px;
       text-align: center;
+      font-size: 1.5em;
     }
     .modal-body{
       text-align: center;
     }
     .modal-footer{
-      border-radius: 0;
+      //border-radius: 0;
       border-top-color:#da4f4a;
-      margin: 0 auto;
+      //margin: 0 auto;
       text-align: center;
       button{
         background-color:#4aafcd;
         color: white;
         border: 0;
+        border-radius: 0;
+        font-size: 12px;
       }
       a{
         background-color:#da4f4a;
         color: white;
         border: 0;
+        border-radius: 0;
+        font-size: 12px;
       }
     }
   }
