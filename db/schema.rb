@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160716224258) do
+ActiveRecord::Schema.define(version: 20160717063312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 20160716224258) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["system_id"], name: "index_components_on_system_id", using: :btree
+  end
+
+  create_table "fleets", force: :cascade do |t|
+    t.integer  "aircraft_id"
+    t.string   "name"
+    t.string   "aircraft_registration"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["aircraft_id"], name: "index_fleets_on_aircraft_id", using: :btree
   end
 
   create_table "parts", force: :cascade do |t|
@@ -49,6 +58,7 @@ ActiveRecord::Schema.define(version: 20160716224258) do
   end
 
   add_foreign_key "components", "systems"
+  add_foreign_key "fleets", "aircrafts"
   add_foreign_key "parts", "components"
   add_foreign_key "systems", "aircrafts"
 end

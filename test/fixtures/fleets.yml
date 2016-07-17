@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  aircraft: one
+  name: MyString
+  aircraft_registration: MyString
+
+two:
+  aircraft: two
+  name: MyString
+  aircraft_registration: MyString
