@@ -32,7 +32,17 @@ $width_sidebar: 250px;
   border-radius: 0;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   background-color: white;
+  border: 0;
+  .active_sidebar{
+    background-color:  #16a085;
+    a{
+      color: white;
+      &:hover{
+        background-color: #1abc9c;
+      }
+    }
 
+  }
   ul{
     width: 100%;
     li{
@@ -44,6 +54,8 @@ $width_sidebar: 250px;
     }
   }
 }
+
+
 //**************************** Migas de pan****************************/
 .my_breadcrumb{
   $blue-gray: #34495e;
