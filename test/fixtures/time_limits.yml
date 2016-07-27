@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  action: one
+  unit: one
+  inspection: one
+  time: 1.5
+
+two:
+  action: two
+  unit: two
+  inspection: two
+  time: 1.5

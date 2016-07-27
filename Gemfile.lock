@@ -44,8 +44,10 @@ GEM
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap-select-rails (1.6.3)
     builder (3.2.2)
     byebug (9.0.5)
+    choice (0.2.0)
     concurrent-ruby (1.0.2)
     debug_inspector (0.0.2)
     erubis (2.7.0)
@@ -100,6 +102,11 @@ GEM
     rails-dom-testing (2.0.1)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6.0)
+    rails-erd (1.4.7)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     railties (5.0.0)
@@ -112,6 +119,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    ruby-graphviz (1.2.2)
     sass (3.4.22)
     sass-rails (5.0.5)
       railties (>= 4.0.0, < 6)
@@ -154,6 +162,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-sass (~> 3.3.6)
+  bootstrap-select-rails
   byebug
   jbuilder (~> 2.5)
   jquery-rails
@@ -161,6 +170,7 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.0)
+  rails-erd (~> 1.4, >= 1.4.7)
   sass-rails (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.0)

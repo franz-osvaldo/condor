@@ -13,9 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
+//= require bootstrap-select
 //= require turbolinks
 //= require_tree .
 $(document).on('turbolinks:load', function() {
+
     function setCookie(c_name, value){
         document.cookie  =  c_name + " = " + value + "; path=/";
     }

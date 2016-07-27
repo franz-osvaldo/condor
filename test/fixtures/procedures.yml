@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task: one
+  action: one
+  procedure: MyString
+
+two:
+  task: two
+  action: two
+  procedure: MyString

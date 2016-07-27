@@ -1,0 +1,84 @@
+<div class="row my_breadcrumb">
+  <ul id="breadcrumb">
+    <li>
+      <%= link_to aircrafts_path do %>
+          <%= @scheduled_inspection.system.aircraft.trade_name %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to aircraft_systems_path(@scheduled_inspection.system.aircraft) do %>
+          <%= @scheduled_inspection.system.title %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to system_scheduled_inspections_path(@scheduled_inspection.system) do %>
+          Lista de inspecciones
+      <% end %>
+    </li>
+    <li>
+      <%= link_to '#' do %>
+          Mostrar
+      <% end %>
+    </li>
+  </ul>
+</div>
+<div class="row table_head">
+  <div class="col-md-1">Nombre</div>
+  <div class="col-md-2">Inspecciones prioritarias</div>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-3">Tareas</div>
+      <div class="col-md-2">Referencias</div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-3">Tiempo limite</div>
+          <div class="col-md-3">Excedente</div>
+          <div class="col-md-6">Inspecciones previas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row table_body">
+        <div class="col-md-1"><%= @scheduled_inspection.name %></div>
+        <div class="col-md-2">
+          <% @scheduled_inspection.inspections.each do |inspection| %>
+            <%= inspection.name %> <br>
+          <% end %>
+        </div>
+        <div class="col-md-9">
+          <% @scheduled_inspection.actions.each do |action| %>
+              <div class="row action_item">
+                <div class="col-md-3">
+                  <%= action.action %>
+                </div>
+                <div class="col-md-2">
+                  <% action.tasks.each do |task| %>
+                    <%= task.name %>
+                  <% end %>
+                </div>
+                <div class="col-md-7">
+                  <% action.time_limits.each do |t| %>
+                     <div class="row">
+                       <div class="col-md-3"><%= t.time %> <%= t.unit.name %></div>
+                       <div class="col-md-3"><%= t.over_the_time_limit.time %> <%= t.over_the_time_limit.unit.name %></div>
+                       <div class="col-md-6"><%= t.inspection.name %></div>
+                     </div>
+                  <% end %>
+                </div>
+              </div>
+          <% end %>
+        </div>
+</div>
+
+<div class="footer">
+  <div class="foot_content">
+    <%= link_to edit_scheduled_inspection_path(@scheduled_inspection) do %>
+        <span class="glyphicon glyphicon-pencil"> </span> Editar
+    <% end %>
+    <%= link_to system_scheduled_inspections_path(@scheduled_inspection.system) do %>
+        <span class="glyphicon glyphicon-align-justify"> </span> Lista de inspecciones
+    <% end %>
+  </div>
+</div>

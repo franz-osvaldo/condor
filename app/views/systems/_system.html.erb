@@ -21,9 +21,24 @@
     </button>
   </div>
   <div class="col-md-2">
-    <%= link_to system_components_path(system), class: 'btn btn-success btn-sm'  do %>
-        <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Componentes
-    <% end %>
+    <div class="dropdown">
+      <button class="btn btn-default dropdown-toggle btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Opciones
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+        <li>
+          <%= link_to system_components_path(system)  do %>
+              <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Sistemas
+          <% end %>
+        </li>
+        <li>
+          <%= link_to system_scheduled_inspections_path(system)  do %>
+              <span class="glyphicon glyphicon-list" aria-hidden="true"></span> Inspecciones programadas
+          <% end %>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
