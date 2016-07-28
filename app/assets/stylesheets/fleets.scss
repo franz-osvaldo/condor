@@ -151,3 +151,27 @@
     }
   }
 }
+.fleets.aircrafts{
+  background-color: rgba(#2980b9, 0.1);
+  .aircraft_card{
+    margin: 10px 0;
+    background-color: white;
+    img{
+      width: 100%;
+      margin-bottom: 15px;
+    }
+    a{
+      margin-top: 25px;
+      padding: 10px 0;
+      display: block;
+      text-decoration: none;
+      background-color: #faa632;
+      color: white;
+      &:hover{
+        background-color: rgba(#f39c12, 0.9);
+        color: #2E2F30;
+
+      }
+    }
+  }
+}

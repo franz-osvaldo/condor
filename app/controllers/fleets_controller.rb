@@ -1,4 +1,7 @@
 class FleetsController < ApplicationController
+  def aircrafts
+    @aircrafts  = Fleet.all
+  end
   def index
     @fleet = Fleet.new
     @aircrafts = Aircraft.all

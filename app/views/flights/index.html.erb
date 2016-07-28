@@ -1,0 +1,34 @@
+<div class="row my_breadcrumb">
+  <ul id="breadcrumb">
+    <li>
+      <%= link_to aircrafts_fleets_path do %>
+          <%= @aircraft.aircraft_registration %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to '' do %>
+          Lista de inspecciones
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+<div class="row flights_container">
+  <div class="col-md-12">
+    <div class="flight_list">
+      <div class="row table_head">
+        <div class="col-md-6">Registro</div>
+        <div class="col-md-6">Administración</div>
+      </div>
+      <%= render @flights %>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="foot_content">
+    <%= link_to  new_fleet_flight_path(@aircraft) do %>
+        <span class="glyphicon glyphicon-plus"></span> Nueva inspección
+    <% end %>
+  </div>
+</div>

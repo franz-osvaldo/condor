@@ -1,0 +1,82 @@
+<div class="row my_breadcrumb">
+  <ul id="breadcrumb">
+    <li>
+      <%= link_to aircrafts_fleets_path do %>
+          <%= @flight.fleet.aircraft_registration %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to '' do %>
+          Vista detallada
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+
+<div class="details_container">
+  <div class="row table_head">
+    <div class="col-md-3">GENERAL</div>
+    <div class="col-md-3">TIEMPOS</div>
+    <div class="col-md-3">TRIPULACIÓN</div>
+    <div class="col-md-3">PASAJEROS</div>
+  </div>
+  <div class="row details">
+    <div class="col-md-3">
+      <div class="row">
+        Aeronave: <%= @flight.fleet.aircraft.trade_name %>
+      </div>
+      <div class="row">
+        Fecha de registro: <%= @flight.created_at.strftime '%Y-%m-%d %H:%M:%S' %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="row">
+        Fecha de salida: <%= @flight.departure_date %>
+      </div>
+      <div class="row">
+        Hora de salida: <%= @flight.departure_time.to_s(:time) %>
+      </div>
+      <div class="row">
+        Hora de llegada: <%= @flight.arrival_time.to_s(:time) %>
+      </div>
+      <div class="row">
+        Hora de despegue: <%= @flight.takeoff_time.to_s(:time) %>
+      </div>
+      <div class="row">
+        Hora de aterrizaje: <%= @flight.landing_time.to_s(:time) %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <% @flight.flight_crews.each do |crew| %>
+          <div class="row">
+            <%= crew.name %>
+          </div>
+      <% end %>
+    </div>
+    <div class="col-md-3">
+      <% @flight.passengers.each do |passenger| %>
+          <div class="row">
+            <%= passenger.name %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<div class="footer">
+  <div class="foot_content">
+    <%= link_to edit_flight_path(@flight) do %>
+        <span class="glyphicon glyphicon-pencil"> </span> Editar
+    <% end %>
+    <%= link_to fleet_flights_path(@flight.fleet) do %>
+        <span class="glyphicon glyphicon-align-justify"> </span> Lista de inspecciones
+    <% end %>
+  </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,185 @@
+.flights.new{
+  .form_container{
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+    border: thin solid rgba(#016ecd, 0.3);
+    .form_header{
+      background-color:  #2980b9;
+      padding: 7px 0;
+      color: white;
+    }
+    .add_passenger{
+      border-bottom-left-radius: 16px;
+      border-top-left-radius: 16px;
+      //background-color: rgba(#2980b9, 0.2);
+      border: thin solid rgba(#016ecd, 0.3);
+      color: #2980b9;
+      &:hover{
+        cursor: pointer;
+      }
+      span{
+        padding: 7px;
+        border-radius: 50%;
+        color: white;
+        background-color: #2980b9;
+      }
+
+    }
+  }
+  #flight_departure_date_1i{
+    width: 30%;
+    float: left;
+    margin-right: 5%;
+  }
+  #flight_departure_date_2i{
+    width: 30%;
+    float: left;
+  }
+  #flight_departure_date_3i{
+    width: 30%;
+    float: left;
+    margin-left: 5%;
+  }
+  #flight_departure_time_4i,
+  #flight_arrival_time_4i,
+  #flight_takeoff_time_4i,
+  #flight_landing_time_4i{
+    width: 45%;
+    float: left;
+    margin-right: 5%;
+  }
+  #flight_departure_time_5i,
+  #flight_arrival_time_5i,
+  #flight_takeoff_time_5i,
+  #flight_landing_time_5i{
+    width: 45%;
+    float: left;
+    margin-left: 5%;
+  }
+  #passengers_container{
+    .passenger{
+      display: none;
+      button{
+        margin-top: 28px;
+      }
+    }
+  }
+}
+.flights.show{
+  .details_container{
+    margin: 10px 15px 0 15px;
+    .table_head{
+      background-color: #2980b9;
+      color: white;
+      padding: 7px 0;
+    }
+    .details{
+      border: thin solid rgba(#2980b9, 0.2);
+      .col-md-3{
+        .row{
+          padding: 7px 5px;
+        }
+      }
+    }
+  }
+}
+.flights.edit{
+  .form_container{
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-bottom: 50px;
+    border: thin solid rgba(#016ecd, 0.3);
+    .form_header{
+      background-color:  #2980b9;
+      padding: 7px 0;
+      color: white;
+    }
+    .add_passenger{
+      border-bottom-left-radius: 16px;
+      border-top-left-radius: 16px;
+      //background-color: rgba(#2980b9, 0.2);
+      border: thin solid rgba(#016ecd, 0.3);
+      color: #2980b9;
+      &:hover{
+        cursor: pointer;
+      }
+      span{
+        padding: 7px;
+        border-radius: 50%;
+        color: white;
+        background-color: #2980b9;
+      }
+
+    }
+  }
+  #flight_departure_date_1i{
+    width: 30%;
+    float: left;
+    margin-right: 5%;
+  }
+  #flight_departure_date_2i{
+    width: 30%;
+    float: left;
+  }
+  #flight_departure_date_3i{
+    width: 30%;
+    float: left;
+    margin-left: 5%;
+  }
+  #flight_departure_time_4i,
+  #flight_arrival_time_4i,
+  #flight_takeoff_time_4i,
+  #flight_landing_time_4i{
+    width: 45%;
+    float: left;
+    margin-right: 5%;
+  }
+  #flight_departure_time_5i,
+  #flight_arrival_time_5i,
+  #flight_takeoff_time_5i,
+  #flight_landing_time_5i{
+    width: 45%;
+    float: left;
+    margin-left: 5%;
+  }
+  #passengers_container{
+    .passenger{
+      display: none;
+      button{
+        margin-top: 28px;
+      }
+    }
+  }
+}
+.flights.index{
+  .flights_container{
+    margin-bottom: 52px;
+    margin-top: 10px;
+    .flight_list{
+      background-color: white;
+      //border-radius: 8px;
+      border: thin solid rgba(#016ecd, 0.3);
+      //overflow: hidden;
+      padding: 0 15px;
+      .row.table_head{
+        background-color: #2980b9;
+        color: white;
+        padding: 7px 0;
+      }
+      .row{
+        padding: 5px 0;
+        &:hover{
+          background-color: rgba(#4aafcd, 0.2);
+        }
+        .btn{
+          width: 100%;
+          border-radius: 0;
+        }
+        .inspection_field{
+          padding: 5px 15px;
+        }
+      }
+    }
+  }
+}

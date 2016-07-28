@@ -25,7 +25,7 @@ $(document).on('turbolinks:load', function() {
     });
 
     function my_func() {
-        if(document.getElementsByClassName('edit').length > 0 ){
+        if(document.getElementsByClassName('scheduled_inspections').length > 0 ){
             var cont = 0;
             var list = document.getElementsByClassName('edit')[0].getElementsByTagName('textarea');
             for(var i = 0; i< list.length; i++){

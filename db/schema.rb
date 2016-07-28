@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720055130) do
+ActiveRecord::Schema.define(version: 20160727222113) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,28 @@ ActiveRecord::Schema.define(version: 20160720055130) do
     t.index ["aircraft_id"], name: "index_fleets_on_aircraft_id", using: :btree
   end
 
+  create_table "flight_crews", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.integer  "fleet_id"
+    t.time     "takeoff_time"
+    t.time     "landing_time"
+    t.float    "flight_time"
+    t.date     "departure_date"
+    t.time     "departure_time"
+    t.time     "arrival_time"
+    t.float    "block_time"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "origin"
+    t.string   "destination"
+    t.index ["fleet_id"], name: "index_flights_on_fleet_id", using: :btree
+  end
+
   create_table "inspections", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -72,6 +94,15 @@ ActiveRecord::Schema.define(version: 20160720055130) do
     t.index ["component_id"], name: "index_parts_on_component_id", using: :btree
   end
 
+  create_table "passengers", force: :cascade do |t|
+    t.integer  "flight_id"
+    t.string   "name"
+    t.string   "identification_number"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["flight_id"], name: "index_passengers_on_flight_id", using: :btree
+  end
+
   create_table "priorities", force: :cascade do |t|
     t.integer  "scheduled_inspection_id"
     t.integer  "inspection_id"
@@ -89,6 +120,16 @@ ActiveRecord::Schema.define(version: 20160720055130) do
     t.datetime "updated_at", null: false
     t.index ["action_id"], name: "index_procedures_on_action_id", using: :btree
     t.index ["task_id"], name: "index_procedures_on_task_id", using: :btree
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.integer  "flight_crew_id"
+    t.integer  "flight_id"
+    t.string   "role"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["flight_crew_id"], name: "index_roles_on_flight_crew_id", using: :btree
+    t.index ["flight_id"], name: "index_roles_on_flight_id", using: :btree
   end
 
   create_table "scheduled_inspections", force: :cascade do |t|
@@ -138,13 +179,17 @@ ActiveRecord::Schema.define(version: 20160720055130) do
   add_foreign_key "actions", "scheduled_inspections"
   add_foreign_key "components", "systems"
   add_foreign_key "fleets", "aircrafts"
+  add_foreign_key "flights", "fleets"
   add_foreign_key "over_the_time_limits", "time_limits"
   add_foreign_key "over_the_time_limits", "units"
   add_foreign_key "parts", "components"
+  add_foreign_key "passengers", "flights"
   add_foreign_key "priorities", "inspections"
   add_foreign_key "priorities", "scheduled_inspections"
   add_foreign_key "procedures", "actions"
   add_foreign_key "procedures", "tasks"
+  add_foreign_key "roles", "flight_crews"
+  add_foreign_key "roles", "flights"
   add_foreign_key "scheduled_inspections", "systems"
   add_foreign_key "systems", "aircrafts"
   add_foreign_key "tasks", "systems"

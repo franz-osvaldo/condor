@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fleet: one
+  takeoff_time: 2016-07-27 07:24:46
+  landing_time: 2016-07-27 07:24:46
+  flight_time: 1.5
+  departure_date: 2016-07-27
+  departure_time: 2016-07-27 07:24:46
+  arrival_time: 2016-07-27 07:24:46
+  block_time: 1.5
+
+two:
+  fleet: two
+  takeoff_time: 2016-07-27 07:24:46
+  landing_time: 2016-07-27 07:24:46
+  flight_time: 1.5
+  departure_date: 2016-07-27
+  departure_time: 2016-07-27 07:24:46
+  arrival_time: 2016-07-27 07:24:46
+  block_time: 1.5

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  flight_crew: one
+  flight: one
+  role: MyString
+
+two:
+  flight_crew: two
+  flight: two
+  role: MyString

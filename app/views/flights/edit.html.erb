@@ -1,0 +1,107 @@
+<div class="row my_breadcrumb">
+  <ul id="breadcrumb">
+    <li>
+      <%= link_to aircrafts_fleets_path do %>
+          <%= @flight.fleet.aircraft_registration %>
+      <% end %>
+    </li>
+    <li>
+      <%= link_to '' do %>
+          Edición
+      <% end %>
+    </li>
+  </ul>
+</div>
+
+
+<%= form_for @flight, remote: true do |f| %>
+    <div class="row">
+      <div class="col-md-4 form_container">
+        <div class="row text-center form_header">
+          REGISTRO DE VUELO
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-12">
+            <%= f.label :departure_date, 'Fecha de salida' %> <br>
+            <%= f.date_select :departure_date, {}, class: 'form-control' %> <br>
+          </div>
+        </div>
+
+        <div class="row form-group">
+          <div class="col-md-6">
+            <%= f.label :origin, 'Origen' %>
+            <%= f.text_field :origin, class: 'form-control' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.label :destination, 'Destino' %>
+            <%= f.text_field :destination, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-6">
+            <%= f.label :departure_time, 'Hora de salida' %> <br>
+            <%= f.time_select :departure_time, {time_separator: ''}, {class: 'form-control'} %> <br>
+          </div>
+          <div class="col-md-6">
+            <%= f.label :arrival_time, 'Hora de llegada' %> <br>
+            <%= f.time_select :arrival_time, {time_separator: ''}, {class: 'form-control'} %> <br>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-6">
+            <%= f.label :takeoff_time, 'Hora de despegue' %> <br>
+            <%= f.time_select :takeoff_time, {time_separator: ''}, {class: 'form-control'} %>  <br>
+          </div>
+          <div class="col-md-6">
+            <%= f.label :landing_time, 'Hora de aterrizaje' %> <br>
+            <%= f.time_select :landing_time, {time_separator: ''}, {class: 'form-control'} %> <br>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-md-12">
+            <%= f.label :flight_crew_ids, 'Tripulación' %> <br>
+            <%= f.collection_select 'flight_crew_ids', FlightCrew.all, :id, :name, {}, {multiple: true, class: 'form-control selectpicker'} %> <br>
+          </div>
+        </div>
+        <p class=" add_passenger">
+          <span class="glyphicon glyphicon-plus"></span> Pasajeros
+        </p>
+        <div id="passengers_container">
+          <%= f.fields_for :passengers do |passengers_form| %>
+              <div class="passenger row">
+                <div class="col-md-6 passenger_name">
+                  <%= passengers_form.label :name, 'Nombre' %> <br>
+                  <%= passengers_form.text_field :name, placeholder: 'Nombre', class: 'form-control' %> <br>
+                </div>
+                <div class="col-md-4">
+                  <%= passengers_form.label :identification_number, 'CI' %> <br>
+                  <%= passengers_form.text_field :identification_number, placeholder: 'CI', class: 'form-control passenger_ci' %>
+                </div>
+                <div class="col-md-2 text-center">
+                  <button type="button" class="btn btn-danger remove_passenger">
+                    <span class="glyphicon glyphicon-trash pull-right"></span>
+                  </button>
+                </div>
+              </div>
+          <% end %>
+        </div>
+        <div class="form-group">
+          <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm form-control' %>
+        </div>
+
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+<% end %>
+
+<div class="footer">
+  <div class="foot_content">
+    <%= link_to @flight do %>
+        <span class="glyphicon glyphicon-search"> </span> Mostrar
+    <% end %>
+    <%= link_to fleet_flights_path(@flight.fleet) do %>
+        <span class="glyphicon glyphicon-align-justify"> </span> Lista de inspecciones
+    <% end %>
+  </div>
+</div>

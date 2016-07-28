@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   resources :components, only: [] do
     resources :parts, shallow: true
   end
-  resources :fleets
+  resources :fleets do
+    collection do
+      get 'aircrafts'
+    end
+    resources :flights, shallow: true
+  end
+
 end
 

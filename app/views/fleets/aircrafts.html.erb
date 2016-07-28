@@ -1,0 +1,15 @@
+<div class="row">
+  <% @aircrafts.each do |aircraft| %>
+      <div class="col-md-3">
+        <div class="aircraft_card text-center">
+          <%= image_tag 'ec145.jpg' %>
+          <%= aircraft.aircraft.manufacturer %> <br>
+          <%= aircraft.aircraft.trade_name %> <br>
+          <%= aircraft.aircraft_registration %> <br>
+          <%= link_to fleet_flights_path(aircraft) do %>
+              <span class="glyphicon glyphicon-pencil"></span> Registrar vuelo
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>
