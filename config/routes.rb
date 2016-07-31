@@ -18,6 +18,19 @@ Rails.application.routes.draw do
     end
     resources :flights, shallow: true
   end
-
+  resources :product_units
+  resources :products do
+    collection do
+      get 'get_products'
+    end
+  end
+  resources :suppliers
+  resources :incoming_movement_types
+  resources :incoming_movements do
+    member do
+      get 'new_field'
+    end
+  end
 end
+
 

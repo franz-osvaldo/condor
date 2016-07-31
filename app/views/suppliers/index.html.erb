@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-4">
+    <%= render partial: 'form', locals: {supplier: @supplier} %>
+  </div>
+  <div class="col-md-8 table_container">
+    <div class="row">
+      <div class="col-md-6">Nombre</div>
+      <div class="col-md-6">Administrar</div>
+    </div>
+    <%= render @suppliers %>
+  </div>
+</div>
+<div class="modal_container"></div>
+

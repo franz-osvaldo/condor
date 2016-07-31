@@ -1,0 +1,8 @@
+<div class="row" id="<%= dom_id(incoming_movement) %>">
+  <div class="col-md-6"><%= incoming_movement.folio %></div>
+  <div class="col-md-6">
+    <%= link_to incoming_movement, remote: true, class:'btn btn-info btn-sm' do %>
+      <span class="glyphicon glyphicon-search"></span> Mostrar
+    <% end %>
+  </div>
+</div>

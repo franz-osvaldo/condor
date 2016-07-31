@@ -15,7 +15,12 @@
 //= require bootstrap-sprockets
 //= require bootstrap-select
 //= require turbolinks
+//= require twitter/typeahead
 //= require_tree .
+
+
+
+
 $(document).on('turbolinks:load', function() {
 
     function setCookie(c_name, value){

@@ -1,0 +1,19 @@
+<%= form_for product, remote: true do |f| %>
+    <%= f.label :part_number, 'Numero de parte' %>
+    <%= f.text_field :part_number, class: 'form-control' %>
+    <%= f.label :description, 'Descripción' %>
+    <%= f.text_field :description, class: 'form-control' %>
+    <%= f.label :specification, 'Especificación' %>
+    <%= f.text_area :specification, class: 'form-control' %>
+    <%= f.label :product_unit_id, 'Unidad' %>
+    <%= f.collection_select :product_unit_id, ProductUnit.all, :id, :name, {}, {class: 'form-control'} %>
+    <%= f.label :procurement_lead_time, 'Tiempo de procuramiento' %>
+    <%= f.number_field :procurement_lead_time, class: 'form-control' %>
+    <%= f.label :maximum, 'Maximo' %>
+    <%= f.number_field :maximum, class: 'form-control' %>
+    <%= f.label :minimum, 'Mínimo' %>
+    <%= f.number_field :minimum, class: 'form-control' %>
+    <%= f.label :optimum, 'Optimo' %>
+    <%= f.number_field :optimum, class: 'form-control' %>
+    <%= f.submit 'Guardar' %>
+<% end %>

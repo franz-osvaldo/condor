@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-4">
+    <%= render partial: 'form', locals: {product: @product} %>
+  </div>
+  <div class="col-md-8 table_container">
+    <div class="row">
+      <div class="col-md-6">Nombre</div>
+      <div class="col-md-6">Administrar</div>
+    </div>
+    <%= render @products %>
+  </div>
+</div>
+<div class="modal_container"></div>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  incoming_movement: one
+  product: one
+  quantity: 1.5
+  expiration_date: 2016-07-30
+
+two:
+  incoming_movement: two
+  product: two
+  quantity: 1.5
+  expiration_date: 2016-07-30

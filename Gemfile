@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'bootstrap-sass', '~> 3.3.6'
-
+gem 'bootstrap-select-rails'
+gem 'twitter-typeahead-rails', '~> 0.11.1'
 group :development do
   gem 'rails-erd', '~> 1.4', '>= 1.4.7'
 end
-gem 'bootstrap-select-rails'
+
 
 
 

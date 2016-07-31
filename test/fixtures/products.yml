@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  procurement_lead_time: 1
+  part_number: MyString
+  description: MyString
+  specification: MyText
+  maximum: 1
+  minimum: 1
+  optimum: 1
+  obsolete: false
+
+two:
+  procurement_lead_time: 1
+  part_number: MyString
+  description: MyString
+  specification: MyText
+  maximum: 1
+  minimum: 1
+  optimum: 1
+  obsolete: false

@@ -1,0 +1,4 @@
+$('.modal_container').html('<%= escape_javascript(render partial: 'modal_form', locals: {incoming_movement_type: @incoming_movement_type}) %>');
+$('#modal').modal('show');
+
+
