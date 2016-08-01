@@ -10,10 +10,28 @@ class IncomingMovementsController < ApplicationController
     @incoming_movement = IncomingMovement.new
   end
 
-  def create
-    render :text => params.inspect
+  def show
+    @incoming_movement = IncomingMovement.find(params[:id])
+    respond_to do |format|
+      format.js{}
+    end
   end
 
-
+  def create
+    @incoming_movement = IncomingMovement.create(incoming_movement_params)
+    params[:incoming_details].each do |my_params|
+      @incoming_movement.incoming_details.create(incoming_detail_params(my_params))
+    end
+    respond_to do |format|
+      format.js{}
+    end
+  end
+  private
+  def incoming_movement_params
+    params.require(:incoming_movement).permit(:incoming_movement_type_id, :supplier_id)
+  end
+  def incoming_detail_params(my_params)
+    my_params.permit(:quantity, :expiration_date, :product_id)
+  end
 end
 

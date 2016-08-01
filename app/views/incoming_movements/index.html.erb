@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-md-7">
-    <%= form_for @incoming_movement do |f| %>
+  <div class="col-md-6">
+    <%= form_for @incoming_movement, remote: true do |f| %>
         <div class="row">
           <div class="col-md-4">
             <%= f.label :incoming_movement_type_id, 'Tipo de movimiento' %>
@@ -15,26 +15,32 @@
             <input class="typeahead form-control" type="text" id="search_input">
           </div>
         </div>
-        <div class="product_details">
-          <div class="row">
-            <div class="col-md-4">Descripcion</div>
-            <div class="col-md-4">Cantidad</div>
-            <div class="col-md-4">Expiracion</div>
+        <div class="row table_header">
+          <div class="col-md-4">Descripcion</div>
+          <div class="col-md-2">Cantidad</div>
+          <div class="col-md-4">Expiración</div>
+          <div class="col-md-2"></div>
+        </div>
+
+        <div class="nano">
+          <div class="product_details content">
+
           </div>
         </div>
-        <%= f.submit %>
+        <%= f.submit 'Guardar', class:'btn btn-primary' %>
     <% end %>
-
-
   </div>
-  <div class="col-md-5 table_container">
+  <div class="col-md-6 table_container">
     <div class="row">
-      <div class="col-md-6">Documento</div>
-      <div class="col-md-6">Administrar</div>
+      <div class="col-md-4">Documento</div>
+      <div class="col-md-5">Movimiento</div>
+      <div class="col-md-3">Administrar</div>
     </div>
     <%= render @incoming_movements %>
+
   </div>
 </div>
+<div class="modal_container"></div>
 
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function () {
@@ -59,5 +65,22 @@ $(document).ready(function () {
         dataType:'script'
       });
     });
-  });
+    $(".nano").nanoScroller();
+
+
+    $('.product_details ').on('click', 'button', function () {
+      $(this).parent().parent().remove();
+    });
+
+    $('.product_details ').on('focus', '.datepicker', function () {
+      $(this).datepicker({
+        format: "yyyy/mm/dd",
+        language: "es",
+        clearBtn: true,
+        autoclose: true,
+        orientation: "bottom auto"
+      });
+    });
+
+});
 </script>

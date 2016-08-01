@@ -1,35 +1,68 @@
 .twitter-typeahead{
   width: 100%;
 }
-.product_details{
-  height: 400px;
-  //background-color: red;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  margin-right: -15px;
-  .row{
-    margin: 8px 0;
+//.product_details{
+//  height: 400px;
+//  //background-color: red;
+//  overflow-y: scroll;
+//  overflow-x: hidden;
+//  margin-right: -15px;
+//  .row{
+//    margin: 8px 0;
+//  }
+//  input{
+//    border: 0;
+//    border-bottom: thin solid #2E2F30;
+//    border-radius: 0;
+//    height: 25px;
+//    padding: 0;
+//    margin: 0;
+//  }
+//}
+
+
+.incoming_movements.index{
+  .nano {
+    //background: #bba;
+    border: 1px solid rgba(#2980b9, 0.2);
+    width: 100%;
+    height: 250px;
+    margin-bottom: 5px;
   }
-  input{
-    border: 0;
-    border-bottom: thin solid #2E2F30;
+  .nano .content{
+    padding: 10px;
+  }
+  .nano .pane{
     border-radius: 0;
-    height: 25px;
-    padding: 0;
-    margin: 0;
+    width: 5px;
+  }
+  .nano .slider {
+    border-radius: 0;
+    width: 5px;
+  }
+  .table_row{
+    margin-bottom: 8px;
+  }
+  .table_header{
+    padding: 7px 0;
+    background-color: #2980b9;
+    color: white;
+    margin-left: 0;
+    margin-top: 15px;
+    margin-right: 0;
+  }
+
+  .tt-menu.tt-open{
+    background-color: white;
+    width: 100%;
+    border: thin solid rgba(#2E2F30, 0.2);
+    .tt-suggestion.tt-selectable{
+      font-size: 15px;
+      padding: 3px 8px;
+      &:hover{
+        background-color: #2980b9;
+        color: white;
+      }
+    }
   }
 }
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px rgba(#2980b9,0.5);
-}
-
