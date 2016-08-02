@@ -1,0 +1,3 @@
+$('.modal_container').html('<%= escape_javascript(render partial: 'full_details', locals: {receiver: @receiver}) %>');
+$('#modal').modal('show');
+

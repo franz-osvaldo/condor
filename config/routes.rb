@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       get 'new_field'
     end
   end
+  resources :receivers
 end
 
 

@@ -1,0 +1,5 @@
+<%= form_for receiver, remote: true do |f| %>
+    <%= f.label :receiver, 'Destinatario' %>
+    <%= f.text_field :receiver, class: 'form-control' %>
+    <%= f.submit 'Guardar' %>
+<% end %>
