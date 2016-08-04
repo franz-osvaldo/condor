@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160802080639) do
+ActiveRecord::Schema.define(version: 20160803124538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,33 @@ ActiveRecord::Schema.define(version: 20160802080639) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "outgoing_details", force: :cascade do |t|
+    t.integer  "product_id"
+    t.integer  "outgoing_movement_id"
+    t.float    "quantity"
+    t.date     "expiration_date"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["outgoing_movement_id"], name: "index_outgoing_details_on_outgoing_movement_id", using: :btree
+    t.index ["product_id"], name: "index_outgoing_details_on_product_id", using: :btree
+  end
+
+  create_table "outgoing_movement_types", force: :cascade do |t|
+    t.string   "movement_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "outgoing_movements", force: :cascade do |t|
+    t.integer  "outgoing_movement_type_id"
+    t.integer  "receiver_id"
+    t.string   "folio"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["outgoing_movement_type_id"], name: "index_outgoing_movements_on_outgoing_movement_type_id", using: :btree
+    t.index ["receiver_id"], name: "index_outgoing_movements_on_receiver_id", using: :btree
+  end
+
   create_table "over_the_time_limits", force: :cascade do |t|
     t.integer  "time_limit_id"
     t.integer  "unit_id"
@@ -147,6 +174,16 @@ ActiveRecord::Schema.define(version: 20160802080639) do
     t.datetime "updated_at", null: false
     t.index ["action_id"], name: "index_procedures_on_action_id", using: :btree
     t.index ["task_id"], name: "index_procedures_on_task_id", using: :btree
+  end
+
+  create_table "product_quantities", force: :cascade do |t|
+    t.integer  "product_id"
+    t.string   "description"
+    t.float    "quantity"
+    t.date     "expiration_date"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["product_id"], name: "index_product_quantities_on_product_id", using: :btree
   end
 
   create_table "product_units", force: :cascade do |t|
@@ -244,6 +281,10 @@ ActiveRecord::Schema.define(version: 20160802080639) do
   add_foreign_key "incoming_details", "products"
   add_foreign_key "incoming_movements", "incoming_movement_types"
   add_foreign_key "incoming_movements", "suppliers"
+  add_foreign_key "outgoing_details", "outgoing_movements"
+  add_foreign_key "outgoing_details", "products"
+  add_foreign_key "outgoing_movements", "outgoing_movement_types"
+  add_foreign_key "outgoing_movements", "receivers"
   add_foreign_key "over_the_time_limits", "time_limits"
   add_foreign_key "over_the_time_limits", "units"
   add_foreign_key "parts", "components"
@@ -252,6 +293,7 @@ ActiveRecord::Schema.define(version: 20160802080639) do
   add_foreign_key "priorities", "scheduled_inspections"
   add_foreign_key "procedures", "actions"
   add_foreign_key "procedures", "tasks"
+  add_foreign_key "product_quantities", "products"
   add_foreign_key "products", "product_units"
   add_foreign_key "roles", "flight_crews"
   add_foreign_key "roles", "flights"

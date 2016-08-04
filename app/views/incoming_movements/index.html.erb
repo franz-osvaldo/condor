@@ -47,7 +47,7 @@ $(document).ready(function () {
     var motor = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['part_number','description']),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: { url: '/products/get_products.json', ttl: 0, cache: false}
+      prefetch: { url: '/incoming_movements/get_products.json', ttl: 0, cache: false}
     });
     $('.typeahead').typeahead({
       highlight: true,

@@ -19,19 +19,29 @@ Rails.application.routes.draw do
     resources :flights, shallow: true
   end
   resources :product_units
-  resources :products do
-    collection do
-      get 'get_products'
-    end
-  end
+  resources :products
   resources :suppliers
   resources :incoming_movement_types
   resources :incoming_movements do
     member do
       get 'new_field'
     end
+    collection do
+      get 'get_products'
+    end
   end
   resources :receivers
+  resources :outgoing_movement_types
+  resources :outgoing_movements do
+    member do
+      get 'new_field'
+    end
+    collection do
+      get 'get_products'
+    end
+  end
+
 end
+
 
 

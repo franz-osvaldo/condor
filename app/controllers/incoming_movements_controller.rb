@@ -5,6 +5,11 @@ class IncomingMovementsController < ApplicationController
       format.js{}
     end
   end
+  def get_products
+    respond_to do |format|
+      format.json{render :json => Product.all.to_json(:only=>[:id, :part_number, :description])}
+    end
+  end
   def index
     @incoming_movements = IncomingMovement.all
     @incoming_movement = IncomingMovement.new

@@ -1,0 +1,89 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= form_for @outgoing_movement do |f| %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= f.label :outgoing_movement_type_id, 'Tipo de movimiento' %>
+            <%= f.collection_select :outgoing_movement_type_id, OutgoingMovementType.all, :id, :movement_type, {}, {class: 'form-control'} %>
+          </div>
+          <div class="col-md-6">
+            <%= f.label :receiver_id, 'Destinatario' %>
+            <%= f.collection_select :receiver_id, Receiver.all, :id, :receiver, {}, {class: 'form-control'} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <label for="search_input">Buscar producto</label> <br>
+            <input class="typeahead form-control" type="text" id="search_input">
+          </div>
+        </div>
+        <div class="row table_header">
+          <div class="col-md-4">Descripcion</div>
+          <div class="col-md-6">Cantidad</div>
+          <div class="col-md-2 text-center"><span class="glyphicon glyphicon-cog"></span></div>
+        </div>
+
+        <div class="nano">
+          <div class="product_details content">
+
+          </div>
+        </div>
+        <%= f.submit 'Guardar', class:'btn btn-primary' %>
+    <% end %>
+  </div>
+  <div class="col-md-6 table_container">
+    <div class="row">
+      <div class="col-md-4">Documento</div>
+      <div class="col-md-5">Movimiento</div>
+      <div class="col-md-3">Administrar</div>
+    </div>
+    <%= render @outgoing_movements %>
+
+  </div>
+</div>
+<div class="modal_container"></div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    var motor = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['description']),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: { url: '/outgoing_movements/get_products.json', ttl: 0, cache: false}
+    });
+    $('.typeahead').typeahead({
+          highlight: true,
+          minLength: 1
+        },
+        {
+          displayKey: 'description',
+          source: motor.ttAdapter(),
+          templates: {
+            suggestion: function (data) {
+              return "<div class='row'><div class='col-md-4'>"+data.description+"</div><div class='col-md-4'>"+data.quantity+"</div><div class='col-md-4'>"+data.expiration_date+"</div></div>"
+            },
+            header: function () {
+              return "<div class='row data_header'><div class='col-md-4'>Descripcion</div><div class='col-md-4'>Cantidad</div><div class='col-md-4'>Expiracion</div></div>"
+            },
+            notFound: function () {
+              return "<div class='row text-center data_not_found'><span class='glyphicon glyphicon-exclamation-sign'></span> Producto no encontrado</div> "
+            }
+          }
+        }).on('typeahead:select', function(ev, suggestion) {
+      console.log(ev);
+      $(this).typeahead('val','');
+      $.ajax({
+        method: "GET",
+        url: "/outgoing_movements/"+suggestion.id+"/new_field",
+        dataType:'script'
+      });
+    });
+    $(".nano").nanoScroller();
+
+
+    $('.product_details ').on('click', 'button', function () {
+      $(this).parent().parent().remove();
+    });
+
+
+  });
+</script>

@@ -1,0 +1,2 @@
+module OutgoingMovementsHelper
+end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  outgoing_movement_type: one
+  receiver: one
+  folio: MyString
+
+two:
+  outgoing_movement_type: two
+  receiver: two
+  folio: MyString

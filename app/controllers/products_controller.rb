@@ -1,9 +1,5 @@
 class ProductsController < ApplicationController
-  def get_products
-    respond_to do |format|
-      format.json{render :json => Product.all.to_json(:only=>[:id, :part_number, :description])}
-    end
-  end
+
   def index
     @products = Product.all
     @product = Product.new
