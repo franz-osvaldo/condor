@@ -1,5 +1,8 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-6 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Movimiento de salida
+    </div>
     <%= form_for @outgoing_movement do |f| %>
         <div class="row">
           <div class="col-md-6">
@@ -31,14 +34,15 @@
         <%= f.submit 'Guardar', class:'btn btn-primary' %>
     <% end %>
   </div>
-  <div class="col-md-6 table_container">
-    <div class="row">
-      <div class="col-md-4">Documento</div>
-      <div class="col-md-5">Movimiento</div>
-      <div class="col-md-3">Administrar</div>
+  <div class="col-md-6">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-4">Documento</div>
+        <div class="col-md-5">Movimiento</div>
+        <div class="col-md-3">Administrar</div>
+      </div>
+      <%= render @outgoing_movements %>
     </div>
-    <%= render @outgoing_movements %>
-
   </div>
 </div>
 <div class="modal_container"></div>

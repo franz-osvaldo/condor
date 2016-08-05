@@ -1,13 +1,18 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-4 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-book" aria-hidden="true"></i> Productos
+    </div>
     <%= render partial: 'form', locals: {product: @product} %>
   </div>
-  <div class="col-md-8 table_container">
-    <div class="row">
-      <div class="col-md-6">Nombre</div>
-      <div class="col-md-6">Administrar</div>
+  <div class="col-md-8">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-6">Nombre</div>
+        <div class="col-md-6">Administrar</div>
+      </div>
+      <%= render @products %>
     </div>
-    <%= render @products %>
   </div>
 </div>
 <div class="modal_container"></div>

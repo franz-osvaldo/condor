@@ -4,6 +4,8 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'bootstrap-select-rails'
 gem 'twitter-typeahead-rails', '~> 0.11.1'
 gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
+gem 'font-awesome-sass', '~> 4.6', '>= 4.6.2'
+
 group :development do
   gem 'rails-erd', '~> 1.4', '>= 1.4.7'
 end

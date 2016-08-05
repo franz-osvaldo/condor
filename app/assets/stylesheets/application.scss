@@ -13,6 +13,126 @@
 @import "nano";
 @import "bootstrap-datepicker3";
 @import "outgoing_movements";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+// Estilos para el almacén
+.product_units.index,
+.products.index,
+.suppliers.index,
+.incoming_movement_types.index,
+.outgoing_movement_types.index,
+.receivers.index,
+.incoming_movements.index,
+.outgoing_movements.index{
+  margin-top: 10px;
+  .modal_show, .modal_edit, .modal_delete{
+    .modal-content{
+      width: 350px;
+      margin: 0 auto;
+      border-radius: 0;
+    }
+    .modal-header{
+      color: white;
+      text-align: center;
+      font-size: 1.5em;
+    }
+    .modal-footer{
+      text-align: center;
+      button{
+        color: white;
+        border: 0;
+        border-radius: 0;
+        font-size: 12px;
+      }
+    }
+  }
+  .modal_show{
+    .modal-header{
+      background-color: #4aafcd;
+    }
+    .modal-footer{
+      border-top-color: #4aafcd;
+      button{
+        background-color: #4aafcd;
+      }
+    }
+  }
+  .modal_edit{
+    .modal-header{
+      background-color:#faa632;
+    }
+    .modal-body{
+      input{
+        border-radius: 0;
+      }
+      .btn{
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+    .modal-footer{
+      border-top-color:#faa632;
+      button{
+        background-color:#faa632;
+      }
+    }
+  }
+  .modal_delete{
+    .modal-header{
+      background-color:#da4f4a;
+    }
+    .modal-body{
+      text-align: center;
+    }
+    .modal-footer{
+      border-top-color:#da4f4a;
+      button{
+        background-color:#4aafcd;
+      }
+      a{
+        background-color:#da4f4a;
+      }
+    }
+  }
+  .form_container{
+    .form_header{
+      background-color: #2980b9;
+      padding: 7px 0;
+      color: white;
+    }
+    form{
+      background-color: white;
+      padding: 15px 15px;
+      border: thin solid rgba(#016ecd, 0.3);
+      input{
+        border-radius: 0;
+      }
+      .btn{
+        width: 100%;
+      }
+    }
+  }
+  .table_container{
+    border: thin solid rgba(#016ecd, 0.3);
+    padding: 0 15px;
+    .table_head{
+      background-color: #2980b9;
+      color: white;
+      padding: 7px 0!important;
+    }
+    .row{
+      padding: 5px 0;
+      &:hover:not(.table_head){
+        background-color: rgba(#4aafcd, 0.2);
+      }
+      .btn{
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+  }
+}
 
 
 

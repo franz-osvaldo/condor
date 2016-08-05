@@ -1,5 +1,7 @@
 <%= form_for receiver, remote: true do |f| %>
+  <div class="form-group">
     <%= f.label :receiver, 'Destinatario' %>
     <%= f.text_field :receiver, class: 'form-control' %>
-    <%= f.submit 'Guardar' %>
+  </div>
+  <%= f.submit 'Guardar', class: 'btn btn-primary bt-sm' %>
 <% end %>

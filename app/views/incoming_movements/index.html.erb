@@ -1,9 +1,12 @@
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-6 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-truck" aria-hidden="true"></i> Movimiento de entrada
+    </div>
     <%= form_for @incoming_movement, remote: true do |f| %>
         <div class="row">
           <div class="col-md-4">
-            <%= f.label :incoming_movement_type_id, 'Tipo de movimiento' %>
+            <%= f.label :incoming_movement_type_id, 'Movimiento' %>
             <%= f.collection_select :incoming_movement_type_id, IncomingMovementType.all, :id, :movement_type, {}, {class: 'form-control'} %>
           </div>
           <div class="col-md-4">
@@ -21,23 +24,21 @@
           <div class="col-md-4">Expiración</div>
           <div class="col-md-2"></div>
         </div>
-
         <div class="nano">
-          <div class="product_details content">
-
-          </div>
+          <div class="product_details content"></div>
         </div>
         <%= f.submit 'Guardar', class:'btn btn-primary' %>
     <% end %>
   </div>
-  <div class="col-md-6 table_container">
-    <div class="row">
-      <div class="col-md-4">Documento</div>
-      <div class="col-md-5">Movimiento</div>
-      <div class="col-md-3">Administrar</div>
+  <div class="col-md-6">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-4">Documento</div>
+        <div class="col-md-5">Movimiento</div>
+        <div class="col-md-3">Administrar</div>
+      </div>
+      <%= render @incoming_movements %>
     </div>
-    <%= render @incoming_movements %>
-
   </div>
 </div>
 <div class="modal_container"></div>

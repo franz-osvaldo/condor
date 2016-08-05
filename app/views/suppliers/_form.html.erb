@@ -1,5 +1,7 @@
 <%= form_for supplier, remote: true do |f| %>
+  <div class="form-group">
     <%= f.label :supplier, 'Proveedor' %>
     <%= f.text_field :supplier, class: 'form-control' %>
-    <%= f.submit 'Guardar' %>
+  </div>
+  <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
 <% end %>

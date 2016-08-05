@@ -1,5 +1,81 @@
 <div class="side_navbar navbar">
   <ul class="nav navbar-nav">
+    <li>
+
+
+
+      <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                <span class="glyphicon glyphicon-home"></span> Almacén
+              </a>
+            </h4>
+          </div>
+          <div id="collapse1" class="panel-collapse collapse in">
+            <div class="panel-body">
+              <%= link_to product_units_path do %>
+                <i class="fa fa-balance-scale" aria-hidden="true"></i> Unidades <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to products_path do %>
+                  <i class="fa fa-book" aria-hidden="true"></i> Catalogo de productos <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to suppliers_path do %>
+                <i class="fa fa-ship" aria-hidden="true"></i> Proveedores <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to incoming_movement_types_path do %>
+                  <i class="fa fa-share" aria-hidden="true"></i> Tipos de entrada <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to outgoing_movement_types_path do %>
+                  <i class="fa fa-reply" aria-hidden="true"></i> Tipos de salida <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to receivers_path do %>
+                  <i class="fa fa-users" aria-hidden="true"></i> Destinatarios <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to incoming_movements_path do %>
+                  <i class="fa fa-truck" aria-hidden="true"></i> Movimiento de entrada
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to outgoing_movements_path do %>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Movimiento de salida
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <%= link_to do %>
+        <span class="glyphicon glyphicon-home"></span> Almacen
+      <% end %>
+    </li>
     <li class = <%= ('active_sidebar' if (controller_name == 'aircrafts' ||controller_name == 'systems' || controller_name == 'components' || controller_name == 'parts') ) %>>
       <%= link_to aircrafts_path do %>
           <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Catalogo de aeronaves
