@@ -1,0 +1,15 @@
+<%= form_for tool, remote: true do |f| %>
+    <div class="form-group">
+      <%= f.label :part_number, 'Numero de parte' %>
+      <%= f.text_field :part_number, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description, 'Descripción' %>
+      <%= f.text_field :description, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :specification, 'Especificación' %>
+      <%= f.text_area :specification, class: 'form-control' %>
+    </div>
+    <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
+<% end %>

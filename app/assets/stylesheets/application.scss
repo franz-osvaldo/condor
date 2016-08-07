@@ -16,7 +16,9 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 
+
 // Estilos para el almacén
+.tools.index,
 .product_units.index,
 .products.index,
 .suppliers.index,
@@ -115,14 +117,53 @@
   }
   .table_container{
     border: thin solid rgba(#016ecd, 0.3);
-    padding: 0 15px;
+    padding: 0;
+    .nano{
+      height: 350px;
+      .pane{
+        border-radius: 0;
+        width: 5px;
+        .slider{
+          border-radius: 0;
+          width: 5px;
+        }
+      }
+    }
     .table_head{
       background-color: #2980b9;
       color: white;
       padding: 7px 0!important;
+      margin-right: 0;
+      margin-left: 0;
+      a{
+        color: white;
+        text-decoration: none;
+      }
+      a.current.desc:before{
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 5px 0 5px;
+        border-color: white transparent transparent transparent;
+        position: relative;
+        top: 14px;
+        margin-right: 3px;
+      }
+      a.current.asc:before{
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 5px 10px 5px;
+        border-color: transparent transparent white transparent;
+        position: relative;
+        bottom: 14px;
+        margin-right: 3px;
+      }
     }
     .row{
-      padding: 5px 0;
+      padding: 5px 15px;
       &:hover:not(.table_head){
         background-color: rgba(#4aafcd, 0.2);
       }

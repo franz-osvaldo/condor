@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-4 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-wrench" aria-hidden="true"></i> Herramientas
+    </div>
+    <%= render partial: 'form', locals: {tool: @tool} %>
+  </div>
+  <div class="col-md-8">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-3"><%= sortable('part_number', 'Numero de parte')  %></div>
+        <div class="col-md-3"><%= sortable('description', 'Descripcion')  %></div>
+        <div class="col-md-6">Administrar</div>
+      </div>
+      <div class="nano">
+        <div class="content">
+          <%= render @tools %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal_container"></div>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function () {
+  $(".nano").nanoScroller();
+});
+</script>

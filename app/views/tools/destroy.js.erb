@@ -1,0 +1,7 @@
+$('#<%= dom_id(@destroyed) %>').remove();
+$('#modal-<%= dom_id(@destroyed) %>').modal('hide');
+$("#modal-<%= dom_id(@destroyed) %>").on('hidden.bs.modal', function () {$(this).remove();});
+
+
+
+

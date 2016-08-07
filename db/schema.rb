@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803124538) do
+ActiveRecord::Schema.define(version: 20160806125626) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -265,6 +265,14 @@ ActiveRecord::Schema.define(version: 20160803124538) do
     t.index ["action_id"], name: "index_time_limits_on_action_id", using: :btree
     t.index ["inspection_id"], name: "index_time_limits_on_inspection_id", using: :btree
     t.index ["unit_id"], name: "index_time_limits_on_unit_id", using: :btree
+  end
+
+  create_table "tools", force: :cascade do |t|
+    t.string   "part_number"
+    t.string   "description"
+    t.text     "specification"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "units", force: :cascade do |t|
