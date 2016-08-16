@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-md-8 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Movimiento de salida
+    </div>
+    <%= form_for @outgoing_tool do |f| %>
+        <div class="row">
+          <div class="col-md-12">
+            <%= f.label :outgoing_tool_type_id, 'Movimiento' %>
+            <%= f.collection_select :outgoing_tool_type_id, OutgoingToolType.all, :id, :movement_type, {}, {class: 'form-control'} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <br><label for="search_input">Buscar herramienta</label>
+            <input class="typeahead form-control" type="text" id="search_input" placeholder="Numero de parte o descripcion">
+          </div>
+        </div>
+        <div class="row table_header">
+          <div class="col-md-3">Parte</div>
+          <div class="col-md-4">Descripcion</div>
+          <div class="col-md-3">Serie</div>
+          <div class="col-md-2"></div>
+        </div>
+        <div class="nano">
+          <div class="tool_details content"></div>
+        </div>
+        <%= f.submit 'Guardar', class:'btn btn-primary' %>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-7">Documento</div>
+        <div class="col-md-5">Administrar</div>
+      </div>
+      <div class="nano">
+        <div class="content table_body">
+          <%= render @outgoing_tools %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal_container"></div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $('#search_input').on('typeahead:render', function () {
+      $('.table_row').each(function () {
+        $('.'+$(this).data('tool-quantity-id')).remove();
+      });
+    });
+    var motor = new Bloodhound({
+      datumTokenizer: function(d) {
+        return Bloodhound.tokenizers.whitespace([d.tool.description]).concat(Bloodhound.tokenizers.whitespace([d.tool.part_number]));
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: { url: '/outgoing_tools/get_outgoing_tools.json', ttl: 0, cache: false}
+    });
+    $('.typeahead').typeahead({
+          highlight: true,
+          minLength: 1
+        },
+        {
+          source: motor.ttAdapter(),
+          templates: {
+            suggestion: function (data) {
+              return "<div class='row "+data.id+"'>" +
+                       "<div class='col-md-4'>"+data.tool.part_number+"</div>" +
+                       "<div class='col-md-5'>"+data.tool.description+"</div>" +
+                       "<div class='col-md-3'>"+data.serial_number+"</div>" +
+                     "</div>"
+            },
+            header: function () {
+              return "<div class='row data_header'>" +
+                       "<div class='col-md-4'>Numero de parte</div>" +
+                       "<div class='col-md-5'>Descripcion</div>" +
+                       "<div class='col-md-3'>Serie</div>" +
+                     "</div>"
+            },
+            notFound: function () {
+              return "<div class='row text-center data_not_found'>" +
+                       "<span class='glyphicon glyphicon-exclamation-sign'></span> Herramienta no encontrada" +
+                     "</div> "
+            }
+          }
+        }).on('typeahead:select', function(ev, suggestion) {
+      $(this).typeahead('val','');
+      $.ajax({
+        method: "GET",
+        url: "/outgoing_tools/"+suggestion.id+"/get_outgoing_tool_field",
+        dataType:'script'
+      });
+    });
+    $(".nano").nanoScroller({ scroll: 'bottom' });
+    $('.tool_details ').on('click', 'button', function () {
+      $(this).parent().parent().remove();
+    });
+
+
+  });
+</script>

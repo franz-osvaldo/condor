@@ -2,6 +2,7 @@ class ReceiversController < ApplicationController
   def index
     @receivers  = Receiver.all
     @receiver = Receiver.new
+    flash.now[:products] = 'in'
   end
   def show
     @receiver = Receiver.find(params[:id])

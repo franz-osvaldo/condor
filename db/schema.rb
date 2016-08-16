@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160806125626) do
+ActiveRecord::Schema.define(version: 20160815003351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,26 @@ ActiveRecord::Schema.define(version: 20160806125626) do
     t.string   "trade_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "borrowed_quantities", force: :cascade do |t|
+    t.integer  "borrowed_tool_id"
+    t.integer  "tool_quantity_id"
+    t.date     "expiration_date",  default: '3000-01-01'
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "serial_number"
+    t.index ["borrowed_tool_id"], name: "index_borrowed_quantities_on_borrowed_tool_id", using: :btree
+    t.index ["tool_quantity_id"], name: "index_borrowed_quantities_on_tool_quantity_id", using: :btree
+  end
+
+  create_table "borrowed_tools", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "folio"
+    t.string   "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_borrowed_tools_on_user_id", using: :btree
   end
 
   create_table "components", force: :cascade do |t|
@@ -96,6 +116,34 @@ ActiveRecord::Schema.define(version: 20160806125626) do
     t.index ["supplier_id"], name: "index_incoming_movements_on_supplier_id", using: :btree
   end
 
+  create_table "incoming_quantities", force: :cascade do |t|
+    t.integer  "incoming_tool_id"
+    t.integer  "tool_id"
+    t.string   "serial_number"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "aisle"
+    t.string   "section"
+    t.string   "level"
+    t.string   "position"
+    t.index ["incoming_tool_id"], name: "index_incoming_quantities_on_incoming_tool_id", using: :btree
+    t.index ["tool_id"], name: "index_incoming_quantities_on_tool_id", using: :btree
+  end
+
+  create_table "incoming_tool_types", force: :cascade do |t|
+    t.string   "movement_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "incoming_tools", force: :cascade do |t|
+    t.integer  "incoming_tool_type_id"
+    t.string   "folio"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["incoming_tool_type_id"], name: "index_incoming_tools_on_incoming_tool_type_id", using: :btree
+  end
+
   create_table "inspections", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -127,6 +175,31 @@ ActiveRecord::Schema.define(version: 20160806125626) do
     t.datetime "updated_at",                null: false
     t.index ["outgoing_movement_type_id"], name: "index_outgoing_movements_on_outgoing_movement_type_id", using: :btree
     t.index ["receiver_id"], name: "index_outgoing_movements_on_receiver_id", using: :btree
+  end
+
+  create_table "outgoing_quantities", force: :cascade do |t|
+    t.integer  "outgoing_tool_id"
+    t.integer  "tool_id"
+    t.string   "serial_number"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "tool_quantity_id"
+    t.index ["outgoing_tool_id"], name: "index_outgoing_quantities_on_outgoing_tool_id", using: :btree
+    t.index ["tool_id"], name: "index_outgoing_quantities_on_tool_id", using: :btree
+  end
+
+  create_table "outgoing_tool_types", force: :cascade do |t|
+    t.string   "movement_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "outgoing_tools", force: :cascade do |t|
+    t.integer  "outgoing_tool_type_id"
+    t.string   "folio"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["outgoing_tool_type_id"], name: "index_outgoing_tools_on_outgoing_tool_type_id", using: :btree
   end
 
   create_table "over_the_time_limits", force: :cascade do |t|
@@ -213,6 +286,24 @@ ActiveRecord::Schema.define(version: 20160806125626) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "returned_quantities", force: :cascade do |t|
+    t.integer  "tool_quantity_id"
+    t.integer  "returned_tool_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "serial_number"
+    t.index ["returned_tool_id"], name: "index_returned_quantities_on_returned_tool_id", using: :btree
+    t.index ["tool_quantity_id"], name: "index_returned_quantities_on_tool_quantity_id", using: :btree
+  end
+
+  create_table "returned_tools", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "folio"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_returned_tools_on_user_id", using: :btree
+  end
+
   create_table "roles", force: :cascade do |t|
     t.integer  "flight_crew_id"
     t.integer  "flight_id"
@@ -267,12 +358,31 @@ ActiveRecord::Schema.define(version: 20160806125626) do
     t.index ["unit_id"], name: "index_time_limits_on_unit_id", using: :btree
   end
 
+  create_table "tool_quantities", force: :cascade do |t|
+    t.integer  "tool_id"
+    t.integer  "quantity_available"
+    t.string   "serial_number"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.integer  "user_id",            default: 0
+    t.boolean  "asset",              default: true
+    t.string   "aisle"
+    t.string   "section"
+    t.string   "level"
+    t.string   "position"
+    t.index ["tool_id"], name: "index_tool_quantities_on_tool_id", using: :btree
+  end
+
   create_table "tools", force: :cascade do |t|
     t.string   "part_number"
     t.string   "description"
     t.text     "specification"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "units", force: :cascade do |t|
@@ -281,7 +391,16 @@ ActiveRecord::Schema.define(version: 20160806125626) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   add_foreign_key "actions", "scheduled_inspections"
+  add_foreign_key "borrowed_quantities", "borrowed_tools"
+  add_foreign_key "borrowed_quantities", "tool_quantities"
+  add_foreign_key "borrowed_tools", "users"
   add_foreign_key "components", "systems"
   add_foreign_key "fleets", "aircrafts"
   add_foreign_key "flights", "fleets"
@@ -289,10 +408,16 @@ ActiveRecord::Schema.define(version: 20160806125626) do
   add_foreign_key "incoming_details", "products"
   add_foreign_key "incoming_movements", "incoming_movement_types"
   add_foreign_key "incoming_movements", "suppliers"
+  add_foreign_key "incoming_quantities", "incoming_tools"
+  add_foreign_key "incoming_quantities", "tools"
+  add_foreign_key "incoming_tools", "incoming_tool_types"
   add_foreign_key "outgoing_details", "outgoing_movements"
   add_foreign_key "outgoing_details", "products"
   add_foreign_key "outgoing_movements", "outgoing_movement_types"
   add_foreign_key "outgoing_movements", "receivers"
+  add_foreign_key "outgoing_quantities", "outgoing_tools"
+  add_foreign_key "outgoing_quantities", "tools"
+  add_foreign_key "outgoing_tools", "outgoing_tool_types"
   add_foreign_key "over_the_time_limits", "time_limits"
   add_foreign_key "over_the_time_limits", "units"
   add_foreign_key "parts", "components"
@@ -303,6 +428,9 @@ ActiveRecord::Schema.define(version: 20160806125626) do
   add_foreign_key "procedures", "tasks"
   add_foreign_key "product_quantities", "products"
   add_foreign_key "products", "product_units"
+  add_foreign_key "returned_quantities", "returned_tools"
+  add_foreign_key "returned_quantities", "tool_quantities"
+  add_foreign_key "returned_tools", "users"
   add_foreign_key "roles", "flight_crews"
   add_foreign_key "roles", "flights"
   add_foreign_key "scheduled_inspections", "systems"
@@ -311,4 +439,5 @@ ActiveRecord::Schema.define(version: 20160806125626) do
   add_foreign_key "time_limits", "actions"
   add_foreign_key "time_limits", "inspections"
   add_foreign_key "time_limits", "units"
+  add_foreign_key "tool_quantities", "tools"
 end

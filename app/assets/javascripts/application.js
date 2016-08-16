@@ -23,6 +23,7 @@
 
 
 $(document).on('turbolinks:load', function() {
+    $(".nano").nanoScroller({ scroll: 'bottom' });
 
     function setCookie(c_name, value){
         document.cookie  =  c_name + " = " + value + "; path=/";

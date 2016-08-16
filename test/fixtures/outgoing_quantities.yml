@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  outgoing_tool: one
+  tool: one
+  quantity: 1
+
+two:
+  outgoing_tool: two
+  tool: two
+  quantity: 1

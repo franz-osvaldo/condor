@@ -1,0 +1,44 @@
+<div id="modal" class="modal fade modal_document" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
+      </div>
+      <div class="modal-body text-center">
+        <br>
+        <strong>Numero de folio</strong>
+        <p><%= borrowed_tool.folio %></p>
+        <strong>Fecha de creación</strong>
+        <p><%= borrowed_tool.created_at.to_date %></p>
+        <strong>Custodio</strong>
+        <p><%= borrowed_tool.user.name %></p>
+        <strong>Herramientas</strong>
+        <div class="table_container">
+          <div class="row table_header">
+            <div class="col-md-3">Parte</div>
+            <div class= "col-md-3">Descripcion</div>
+            <div class= "col-md-3">Serie</div>
+            <div class= "col-md-3">Limite</div>
+          </div>
+          <div class="nano body_container">
+            <div class="content">
+              <% borrowed_tool.borrowed_quantities.each do |quantity| %>
+                  <div class="row item">
+                    <div class="col-md-3"><%= quantity.tool_quantity.tool.part_number %></div>
+                    <div class="col-md-3"><%= quantity.tool_quantity.tool.description %></div>
+                    <div class="col-md-3"><%= quantity.serial_number %></div>
+                    <div class="col-md-3  <%= out_of_date?(quantity.expiration_date) ? 'alert-danger' : 'alert-success'%> "><%= quantity.expiration_date %></div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

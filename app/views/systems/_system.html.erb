@@ -21,9 +21,23 @@
     </button>
   </div>
   <div class="col-md-2">
-    <%= link_to system_components_path(system), class: 'btn btn-success btn-sm'  do %>
-        Componentes
-    <% end %>
+    <div class="btn-group" style="width: 100%">
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Acción <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li>
+          <%= link_to system_components_path(system) do %>
+              <i class="fa fa-book" aria-hidden="true"></i> Componentes
+          <% end %>
+        </li>
+        <li>
+          <%= link_to system_scheduled_inspections_path(system)do %>
+              <i class="fa fa-clock-o" aria-hidden="true"></i> Inspecciones programadas
+          <% end %>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 

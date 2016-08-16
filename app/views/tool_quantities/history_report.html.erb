@@ -1,0 +1,125 @@
+<div class="row">
+  <div class="col-md-3 data_container">
+    <div class="data_info">
+
+      <div class="small-box bg-green">
+        <div class="inner">
+          <h3><%= BorrowedTool.count %></h3>
+          <p>Resguardos</p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-shopping-cart fa-flip-horizontal" aria-hidden="true"></i>
+        </div>
+        <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+      <div class="small-box bg-yellow">
+        <div class="inner">
+          <h3><%= ReturnedTool.count %></h3>
+          <p>Devoluciones</p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        </div>
+        <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+      <div class="small-box bg-red">
+        <div class="inner">
+          <h3>0</h3>
+          <p>Datos</p>
+        </div>
+        <div class="icon">
+          <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        </div>
+        <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-2">Folio</div>
+        <div class="col-md-2">Fecha</div>
+        <div class="col-md-5">
+          <div class="row" style="padding: 0; margin: 0">
+            <div class="col-md-6">Serie</div>
+            <div class="col-md-6">Descripcion</div>
+          </div>
+        </div>
+        <div class="col-md-3 " data-toggle="collapse" data-target="#search_user" style="position: relative">
+          <i class="fa fa-filter" aria-hidden="true"></i> Responsable
+        </div>
+        <div id="search_user" class="collapse" style="position: absolute; right: 18px; top: 34px">
+          <input class="typeahead form-control" type="text" id="search_input" placeholder="Responsable">
+        </div>
+      </div>
+
+
+      <div class="nano">
+        <div class="content table_striped">
+          <% @history_report.each do |history_report| %>
+            <div class="row">
+              <div class="col-md-2"><%= history_report.folio %></div>
+              <div class="col-md-2"><%= history_report.created_at.to_date %></div>
+              <div class="col-md-5">
+                <% if history_report.class == BorrowedTool %>
+                    <% history_report.borrowed_quantities.each do |detail| %>
+                        <div class="row inner_row">
+                          <div class="col-md-6"><%= detail.serial_number %></div>
+                          <div class="col-md-6"><%= detail.tool_quantity.tool.description %></div>
+
+                        </div>
+                    <% end %>
+                <% else %>
+                    <% history_report.returned_quantities.each do |detail| %>
+                        <div class="row inner_row">
+                          <div class="col-md-6"><%= detail.serial_number %></div>
+                          <div class="col-md-6"><%= detail.tool_quantity.tool.description %></div>
+                        </div>
+                    <% end %>
+                <% end %>
+              </div>
+              <div class="col-md-3"><%= User.find(history_report.user_id).name %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function () {
+    $(".nano").nanoScroller();
+
+    var motor = new Bloodhound({
+      datumTokenizer: function(d) {
+//        console.log(d.tool.part_number);
+        return Bloodhound.tokenizers.whitespace(d.name  );
+      },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: { url: '/tool_quantities/get_custodians.json', ttl: 0, cache: false}
+    });
+    $('.typeahead').typeahead({
+          highlight: true,
+          minLength: 1
+        },
+        {
+          displayKey: 'name',
+          source: motor.ttAdapter()
+
+        }).on('typeahead:select', function(ev, suggestion) {
+      $(this).typeahead('val','');
+      $.ajax({
+        method: "GET",
+        url: "/tool_quantities/"+suggestion.id+"/user_history",
+        dataType:'script'
+      });
+    });
+
+
+
+
+
+  });
+</script>

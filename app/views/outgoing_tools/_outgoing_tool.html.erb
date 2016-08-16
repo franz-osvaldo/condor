@@ -1,0 +1,9 @@
+<div class="row" id="<%= dom_id(outgoing_tool) %>">
+  <div class="col-md-7"><%= outgoing_tool.folio %></div>
+  <div class="col-md-5">
+    <%= link_to outgoing_tool, remote: true, class:'btn btn-info btn-sm' do %>
+        <span class="glyphicon glyphicon-search"></span> Mostrar
+    <% end %>
+  </div>
+</div>
+

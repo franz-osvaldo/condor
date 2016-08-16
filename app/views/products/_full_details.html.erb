@@ -6,15 +6,23 @@
 
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
       </div>
-      <div class="modal-body">
-        <strong>Numero de parte: </strong><%= product.part_number %> <br>
-        <strong>Descripcion: </strong><%= product.description %> <br>
-        <strong>Especificación: </strong><%= product.specification %> <br>
-        <strong>Unidad: </strong><%= product.product_unit.name %> <br>
-        <strong>Tiempo de procuramiento: </strong><%= product.procurement_lead_time %> Dias <br>
-        <strong>Máximo: </strong><%= product.maximum %> <br>
-        <strong>Mínimo: </strong><%= product.minimum %> <br>
-        <strong>Optimo: </strong><%= product.optimum %>
+      <div class="modal-body text-center">
+        <strong>Numero de parte</strong>
+        <p><%= product.part_number %></p>
+        <strong>Descripcion</strong>
+        <p><%= product.description %></p>
+        <strong>Especificación</strong>
+        <p><%= product.specification %></p>
+        <strong>Unidad</strong>
+        <p><%= product.product_unit.name %></p>
+        <strong>Tiempo de procuramiento</strong>
+        <p><%= product.procurement_lead_time %> Dias</p>
+        <strong>Máximo</strong>
+        <p><%= product.maximum %></p>
+        <strong>Mínimo</strong>
+        <p><%= product.minimum %></p>
+        <strong>Optimo</strong>
+        <p><%= product.optimum %></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>

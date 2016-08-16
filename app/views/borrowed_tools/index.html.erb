@@ -1,0 +1,112 @@
+<div class="row">
+  <div class="col-md-8 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-user" aria-hidden="true"></i> Resguardo
+    </div>
+    <%= form_for @borrowed_tool do |f| %>
+      <div class="form-group">
+        <%= f.label :user_id, 'Destinatario' %>
+        <%= f.collection_select :user_id, User.all, :id, :name, {}, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <label for="search_input">Herramienta</label>
+        <input class="typeahead form-control" type="text" id="search_input" placeholder="Numero de parte o descripcion">
+      </div>
+      <div class="row table_header">
+        <div class="col-md-2">Parte</div>
+        <div class="col-md-2">Descripcion</div>
+        <div class="col-md-2">Serie</div>
+        <div class="col-md-2">Ubicación</div>
+        <div class="col-md-2">Devolución</div>
+        <div class="col-md-2"></div>
+
+      </div>
+      <div class="nano">
+        <div class="tool_details content"></div>
+      </div>
+      <%= f.submit 'Guardar', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-7">Documento</div>
+        <div class="col-md-5">Detalle</div>
+      </div>
+      <div class="nano">
+        <div class="content table_body">
+          <%= render @borrowed_tools %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal_container"></div>
+<script>
+$(document).ready(function () {
+  $('#search_input').on('typeahead:render', function () {
+    $('.table_row').each(function () {
+      console.log();
+      $('.'+$(this).data('tool-quantity-id')).remove();
+    });
+  });
+  $(".nano").nanoScroller({ scroll: 'bottom' });
+
+  var motor = new Bloodhound({
+    datumTokenizer: function(d) {
+//      console.log(d.tool.part_number);
+      return Bloodhound.tokenizers.whitespace([d.tool.description]).concat(Bloodhound.tokenizers.whitespace([d.tool.part_number]));
+    },
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    prefetch: { url: '/borrowed_tools/get_tools.json', ttl: 0, cache: false}
+  });
+  $('.typeahead').typeahead({
+        highlight: true,
+        minLength: 1
+      },
+      {
+
+        source: motor.ttAdapter(),
+        templates: {
+          header: function () {
+            return "<div class='row data_header'>" +
+                      "<div class='col-md-4'>Numero de parte</div>" +
+                      "<div class='col-md-5'>Descripcion</div>" +
+                      "<div class='col-md-3'>Serie</div>" +
+                    "</div>"
+          },
+          suggestion: function (data) {
+//            console.log($('.table_row').data('tool-quantity-id'));
+              return "<div class='row "+data.id+"'>" +
+                  "<div class='col-md-4'>" + data.tool.part_number+ "</div>" +
+                  "<div class='col-md-5'>" + data.tool.description + "</div>" +
+                  "<div class='col-md-3'>" + data.serial_number + "</div>" +
+                  "</div>"
+          }
+        }
+      }).on('typeahead:select', function(ev, suggestion) {
+    $(this).typeahead('val','');
+    $.ajax({
+      method: "GET",
+      url: "/borrowed_tools/"+suggestion.id+"/new_field",
+      dataType:'script'
+    });
+  });
+
+
+  $('.tool_details ').on('click', 'button', function () {
+    $(this).parent().parent().remove();
+  });
+
+  $('.tool_details ').on('focus', '.datepicker', function () {
+    $(this).datepicker({
+      format: "yyyy/mm/dd",
+      language: "es",
+      clearBtn: true,
+      autoclose: true,
+      orientation: "bottom auto"
+    });
+  });
+
+});
+</script>

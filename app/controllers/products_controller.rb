@@ -3,6 +3,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
     @product = Product.new
+    flash.now[:products] = 'in'
   end
 
   def show
@@ -22,7 +23,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     respond_to do |format|
       if @product.save
-        format.js{}
+        format.html{ redirect_to products_path}
       else
         render :text => 'Algo salio mal!'
       end
@@ -33,7 +34,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     respond_to do |format|
       if @product.update(product_params)
-        format.js{}
+        format.html{ redirect_to products_path}
       else
         render :text => 'Algo salio mal'
       end

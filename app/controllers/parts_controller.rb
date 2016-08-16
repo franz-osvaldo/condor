@@ -3,6 +3,7 @@ class PartsController < ApplicationController
     @component = Component.find(params[:component_id])
     @parts = @component.parts
     @part = Part.new
+    flash.now[:aircrafts] = 'in'
   end
 
   def show

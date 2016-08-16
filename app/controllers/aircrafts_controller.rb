@@ -1,7 +1,9 @@
 class AircraftsController < ApplicationController
+
   def index
     @aircraft = Aircraft.new
     @aircrafts = Aircraft.all
+    flash.now[:aircrafts] = 'in'
   end
 
   def show

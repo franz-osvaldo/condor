@@ -1,0 +1,13 @@
+<div class="row table_row">
+  <div class="col-md-2 item_detail"><%= ToolQuantity.find(field).tool.part_number %></div>
+  <div class="col-md-3 item_detail"><%= ToolQuantity.find(field).tool.description %></div>
+  <div class="col-md-2 item_detail"><%= ToolQuantity.find(field).serial_number %></div>
+  <div class="col-md-3 item_detail"><%= ToolQuantity.find(field).location %></div>
+  <input type="hidden" name="returned_quantity[][serial_number]" value="<%= ToolQuantity.find(field).serial_number %>">
+  <input type="hidden" name="returned_quantity[][tool_quantity_id]" value="<%= ToolQuantity.find(field).id %>">
+  <div class="col-md-2">
+    <button type="button" class="btn btn-danger delete_row">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
+</div>

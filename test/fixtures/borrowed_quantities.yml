@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  borrowed_tool: one
+  tool_quantity: one
+  quantity: 1
+  expiration_date: 2016-08-09
+
+two:
+  borrowed_tool: two
+  tool_quantity: two
+  quantity: 1
+  expiration_date: 2016-08-09

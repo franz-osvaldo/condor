@@ -3,13 +3,13 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h1 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+              <a data-toggle="collapse" data-parent="#accordion" href="#products">
                 <span class="glyphicon glyphicon-home"></span> Almacén
                 <span class="glyphicon glyphicon-chevron-down pull-right"></span>
               </a>
             </h1>
           </div>
-          <div id="collapse1" class="panel-collapse collapse <%= add_in_class1(controller_name) %>">
+          <div id="products" class="panel-collapse collapse <%= flash[:products] ? flash[:products] : '' %>">
             <div class="panel-body">
               <%= link_to product_units_path do %>
                 <i class="fa fa-balance-scale" aria-hidden="true"></i> Unidades <i class="fa fa-cog fa-fw pull-right"></i>
@@ -52,16 +52,88 @@
             </div>
           </div>
         </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#tools">
+                <i class="fa fa-wrench" aria-hidden="true"></i> Taller
+                <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+              </a>
+            </h1>
+          </div>
+          <div id="tools" class="panel-collapse collapse  <%= flash[:tools] ? flash[:tools ] : '' %>">
+            <div class="panel-body">
+              <%= link_to tools_path do %>
+                  <i class="fa fa-book" aria-hidden="true"></i> Catalogo de herramientas <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to incoming_tool_types_path do %>
+                  <i class="fa fa-share" aria-hidden="true"></i> Tipos de entrada <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to outgoing_tool_types_path do %>
+                  <i class="fa fa-reply" aria-hidden="true"></i> Tipos de salida <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to '#' do %>
+                  <i class="fa fa-users" aria-hidden="true"></i> Destinatarios <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to incoming_tools_path do %>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Movimiento de entrada
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to outgoing_tools_path do %>
+                  <i class="fa fa-truck" aria-hidden="true"></i> Movimiento de salida
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to borrowed_tools_path do %>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Resguardos
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to returned_tools_path do %>
+                  <i class="fa fa-truck" aria-hidden="true"></i> Devoluciones
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to assets_tool_quantities_path do %>
+                  <i class="fa fa-home" aria-hidden="true"></i> Activos <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to loaned_tools_list_tool_quantities_path do %>
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Pendientes <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to history_report_tool_quantities_path do %>
+                  <i class="fa fa-history" aria-hidden="true"></i> Histórico <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+
+
         <div class="panel panel-default">
           <div class="panel-heading">
             <h6 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+              <a data-toggle="collapse" data-parent="#accordion" href="#aircrafts">
                 <span class="glyphicon glyphicon-book" aria-hidden="true"></span> Catalogo de aeronaves
                 <span class="glyphicon glyphicon-chevron-down pull-right"></span>
               </a>
             </h6>
           </div>
-          <div id="collapse2" class="panel-collapse collapse <%= add_in_class2(controller_name) %>">
+          <div id="aircrafts" class="panel-collapse collapse  <%= flash[:aircrafts] ? flash[:aircrafts ] : '' %>">
             <div class="panel-body">
               <%= link_to aircrafts_path do %>
                   <i class="fa fa-plane" aria-hidden="true"></i> Nueva aeronave
@@ -73,13 +145,34 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h6 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+              <a data-toggle="collapse" data-parent="#accordion" href="#tasks">
+                <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Tareas
+                <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+              </a>
+            </h6>
+          </div>
+          <div id="tasks" class="panel-collapse collapse  <%= flash[:tasks] ? flash[:tasks ] : '' %>">
+            <div class="panel-body">
+              <%= link_to aircrafts_path do %>
+                  <i class="fa fa-plane" aria-hidden="true"></i> Nueva aeronave
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h6 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#fleet">
                 <span class="glyphicon glyphicon-plane" aria-hidden="true"></span> Flota de aeronaves
                 <span class="glyphicon glyphicon-chevron-down pull-right"></span>
               </a>
             </h6>
           </div>
-          <div id="collapse3" class="panel-collapse collapse <%= add_in_class3(controller_name) %>">
+          <div id="fleet" class="panel-collapse collapse  <%= flash[:fleet] ? flash[:fleet] : '' %>">
             <div class="panel-body">
               <%= link_to fleets_path do %>
                   <i class="fa fa-plane" aria-hidden="true"></i> Ingresar aeronave
@@ -97,7 +190,7 @@
               </a>
             </h6>
           </div>
-          <div id="collapse4" class="panel-collapse collapse">
+          <div id="collapse4" class="panel-collapse collapse  <%= flash[:flights] ? flash[:flights] : '' %>">
             <div class="panel-body">
               <%= link_to aircrafts_fleets_path do %>
                   <i class="fa fa-pencil" aria-hidden="true"></i> Registrar vuelo

@@ -1,11 +1,14 @@
 class FleetsController < ApplicationController
   def aircrafts
     @aircrafts  = Fleet.all
+    flash.now[:flights] = 'in'
   end
+
   def index
     @fleet = Fleet.new
     @aircrafts = Aircraft.all
     @fleets = Fleet.all
+    flash.now[:fleet] = 'in'
   end
 
   def show

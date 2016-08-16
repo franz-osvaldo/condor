@@ -1,0 +1,27 @@
+<div class="row table_row" data-tool-quantity-id="<%= tool_quantity.id %>">
+  <div class="col-md-2 item_detail">
+    <%= tool_quantity.tool.part_number %>
+  </div>
+  <div class="col-md-2 item_detail">
+    <%= tool_quantity.tool.description %>
+  </div>
+  <div class="col-md-2 item_detail">
+    <%= tool_quantity.serial_number %>
+  </div>
+  <div class="col-md-2 item_detail">
+    <%= tool_quantity.location %>
+  </div>
+  <div class="col-md-2">
+    <input type="text" name="borrowed_quantity[][expiration_date]" class="form-control datepicker">
+  </div>
+  <input type="hidden" name="borrowed_quantity[][serial_number]" class="form-control" value="<%= tool_quantity.serial_number %>">
+  <input type="hidden" name="borrowed_quantity[][tool_quantity_id]" value="<%= tool_quantity.id %>">
+  <div class="col-md-2">
+    <button type="button" class="btn btn-danger delete_row">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
+</div>
+
+
+

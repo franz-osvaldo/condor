@@ -1,12 +1,15 @@
 class ScheduledInspectionsController < ApplicationController
+
   def index
     # render :text => params.inspect
     @system = System.find(params[:system_id])
     @scheduled_inspections = @system.scheduled_inspections
+    flash.now[:aircrafts] = 'in'
   end
 
   def show
     @scheduled_inspection = ScheduledInspection.find(params[:id])
+    flash.now[:aircrafts] = 'in'
   end
   def new
     @system = System.find(params[:system_id])
@@ -18,6 +21,7 @@ class ScheduledInspectionsController < ApplicationController
         @time_limits.build_over_the_time_limit
       end
     end
+    flash.now[:aircrafts] = 'in'
   end
 
   def edit
@@ -31,6 +35,7 @@ class ScheduledInspectionsController < ApplicationController
           time_limit.build_over_the_time_limit
         end
     end
+    flash.now[:aircrafts] = 'in'
   end
 
   def create

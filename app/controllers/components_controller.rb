@@ -4,6 +4,7 @@ class ComponentsController < ApplicationController
     @system = System.find(params[:system_id])
     @components = @system.components
     @component = Component.new
+    flash.now[:aircrafts] = 'in'
   end
 
   def show

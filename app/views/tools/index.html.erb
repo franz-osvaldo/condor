@@ -3,7 +3,32 @@
     <div class="form_header text-center">
       <i class="fa fa-wrench" aria-hidden="true"></i> Herramientas
     </div>
-    <%= render partial: 'form', locals: {tool: @tool} %>
+    <%= form_for @tool, html: {multipart: true} do |f| %>
+        <div class="form-group">
+          <%= f.label :part_number, 'Numero de parte' %>
+          <%= f.text_field :part_number, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :description, 'Descripción' %>
+          <%= f.text_field :description, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :specification, 'Especificación' %>
+          <%= f.text_area :specification, class: 'form-control' %>
+        </div>
+        <div class="form-group  text-center">
+          <%= f.label :image, id: 'image_label' do %>
+            <span class="glyphicon glyphicon-camera"></span> Elegir una imagen
+          <% end %>
+          <%= f.file_field :image, class: 'input_file' %>
+          <%= image_tag('tool_preview.png', id:'image_preview', alt: 'Herramienta') %>
+
+          <div id="deselect_image"></div>
+
+        </div>
+        <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
+    <% end %>
+
   </div>
   <div class="col-md-8">
     <div class="table_container">
@@ -23,6 +48,30 @@
 <div class="modal_container"></div>
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function () {
-  $(".nano").nanoScroller();
+//  $(".nano").nanoScroller();
+
+  $(".nano").nanoScroller({ scroll: 'bottom' });
+
+  function readURL(input) {
+    if(input.files && input.files[0]){
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#image_preview').attr('src', e.target.result);
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $('.input_file').change(function () {
+    readURL(this);
+    $('#image_label').html('<span class="glyphicon glyphicon-camera"></span>'+' Cambiar imagen');
+    $('#deselect_image').html('<span class="glyphicon glyphicon-trash"></span>');
+  });
+  $('#deselect_image').click(function () {
+    $('#tool_image').replaceWith($('#tool_image').val('').clone(true));
+    $('#image_preview').attr('src', '<%= image_path 'tool_preview.png' %>');
+    $('#deselect_image').html('');
+    $('#image_label').html('<span class="glyphicon glyphicon-camera"></span>  Elegir imagen');
+    $('#file_name').html('');
+  });
 });
 </script>

@@ -1,11 +1,11 @@
-<%= form_for product, remote: true do |f| %>
+<%= form_for product do |f| %>
     <div class="form-group">
-      <%= f.label :part_number, 'Numero de parte' %>
-      <%= f.text_field :part_number, class: 'form-control' %>
+      <%= f.label :part_number, 'Numero de parte'%> <span class="label label-danger">Requerido</span>
+      <%= f.text_field :part_number, class: 'form-control', :required => true %>
     </div>
     <div class="form-group">
-      <%= f.label :description, 'Descripción' %>
-      <%= f.text_field :description, class: 'form-control' %>
+      <%= f.label :description, 'Descripción' %> <span class="label label-danger">Requerido</span>
+      <%= f.text_field :description, class: 'form-control', :required => true  %>
     </div>
     <div class="form-group">
       <%= f.label :specification, 'Especificación' %>
@@ -14,14 +14,14 @@
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <%= f.label :product_unit_id, 'Unidad' %>
+          <%= f.label :product_unit_id, 'Unidad' %> <span class="label label-danger field_required">Requerido</span>
           <%= f.collection_select :product_unit_id, ProductUnit.all, :id, :name, {}, {class: 'form-control'} %>
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
           <%= f.label :procurement_lead_time, 'Procuramiento' %>
-          <%= f.number_field :procurement_lead_time, class: 'form-control' %>
+          <%= f.number_field :procurement_lead_time, class: 'form-control', :placeholder => 'Dias', :min => 1, :step => 1  %>
         </div>
       </div>
     </div>
@@ -29,19 +29,19 @@
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :maximum, 'Maximo' %>
-          <%= f.number_field :maximum, class: 'form-control' %>
+          <%= f.number_field :maximum, class: 'form-control', :min => 1, :step => 1 %>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :minimum, 'Mínimo' %>
-          <%= f.number_field :minimum, class: 'form-control' %>
+          <%= f.number_field :minimum, class: 'form-control', :min => 1, :step => 1  %>
         </div>
       </div>
       <div class="col-md-4">
         <div class="form-group">
           <%= f.label :optimum, 'Optimo' %>
-          <%= f.number_field :optimum, class: 'form-control' %>
+          <%= f.number_field :optimum, class: 'form-control', :min => 1, :step => 1  %>
         </div>
       </div>
     </div>

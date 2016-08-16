@@ -1,0 +1,7 @@
+<%= form_for movement_type, remote: true do |f| %>
+    <div class="form-group">
+      <%= f.label :movement_type, 'Tipo de movimiento' %>
+      <%= f.text_field :movement_type, class: 'form-control' %>
+    </div>
+    <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
+<% end %>

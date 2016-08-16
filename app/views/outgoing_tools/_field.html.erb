@@ -1,0 +1,21 @@
+<div class="row table_row" data-tool-quantity-id="<%= tool_quantity.id %>">
+  <div class="col-md-3 item_detail">
+    <%= tool_quantity.tool.part_number %>
+  </div>
+  <div class="col-md-4 item_detail">
+    <%= tool_quantity.tool.description %>
+  </div>
+  <div class="col-md-3 item_detail">
+    <%= tool_quantity.serial_number %>
+  </div>
+  <input type="hidden" name="outgoing_quantity[][tool_quantity_id]" value="<%= tool_quantity.id %>">
+  <input type="hidden" name="outgoing_quantity[][serial_number]"  value="<%= tool_quantity.serial_number %>">
+  <input type="hidden" name="outgoing_quantity[][tool_id]" value="<%= tool_quantity.tool_id %>">
+  <div class="col-md-2 text-center">
+    <button type="button" class="btn btn-danger delete_row">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
+</div>
+
+

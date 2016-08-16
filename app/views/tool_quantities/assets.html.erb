@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3><%= @assets.count %></h3>
+        <p>Herramientas</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-wrench" aria-hidden="true"></i>
+      </div>
+      <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3><%= @no_available %></h3>
+        <p>En resguardo</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-users" aria-hidden="true"></i>
+      </div>
+      <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3><%= @assets.count - @no_available %></h3>
+        <p>Disponibles</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+      </div>
+      <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-2"><%= sort_by_column 'part_number', 'Parte' %></div>
+        <div class="col-md-3"><%= sort_by_column 'description', 'Descripcion' %></div>
+        <div class="col-md-2"><%= sort_by_column 'serial_number', 'Serie' %></div>
+        <div class="col-md-3"><%= sort_by_column 'created_at', 'Fecha de registro' %></div>
+        <div class="col-md-2"><%= sort_by_column 'asset', 'Resguardo' %></div>
+      </div>
+      <div class="nano">
+        <div class="content" style="font-size: 13px">
+          <% @assets.each do |asset| %>
+              <div class="row">
+                <div class="col-md-2"><%= asset.tool.part_number %></div>
+                <div class="col-md-3"><%= asset.tool.description %></div>
+                <div class="col-md-2"><%= asset.serial_number %></div>
+                <div class="col-md-3"><%= asset.created_at.to_date %></div>
+                <div class="col-md-2"><%= asset.quantity_available > 0 ? 'No' : 'Si' %></div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $(".nano").nanoScroller();
+  });
+</script>

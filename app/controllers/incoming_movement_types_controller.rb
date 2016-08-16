@@ -2,6 +2,7 @@ class IncomingMovementTypesController < ApplicationController
   def index
     @incoming_movement_types = IncomingMovementType.all
     @incoming_movement_type = IncomingMovementType.new
+    flash.now[:products] = 'in'
   end
 
   def show

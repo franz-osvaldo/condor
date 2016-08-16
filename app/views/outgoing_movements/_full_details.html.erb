@@ -6,13 +6,25 @@
 
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
       </div>
-      <div class="modal-body">
-        <strong>Tipo de movimiento: </strong> <%= outgoing_movement.outgoing_movement_type.movement_type %> <br>
-        <strong>Destinatario: </strong> <%= outgoing_movement.receiver.receiver %> <br>
-        <% outgoing_movement.outgoing_details.each do |detail| %>
-            <strong>Cantidad: </strong><%= detail.quantity %> <br>
-
-        <% end %>
+      <div class="modal-body text-center">
+        <br>
+        <strong>Tipo de movimiento</strong>
+        <p><%= outgoing_movement.outgoing_movement_type.movement_type %></p>
+        <strong>Destinatario</strong>
+        <p><%= outgoing_movement.receiver.receiver %></p>
+        <strong>Productos</strong>
+        <div class="table_container">
+          <div class="row table_header">
+            <div class="col-md-6">Producto</div>
+            <div class="col-md-6">Cantidad</div>
+          </div>
+          <% outgoing_movement.outgoing_details.each do |detail| %>
+              <div class="row item">
+                <div class="col-md-6"><%= detail.product.description %></div>
+                <div class="col-md-6"><%= detail.quantity %></div>
+              </div>
+          <% end %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>

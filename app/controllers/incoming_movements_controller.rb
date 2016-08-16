@@ -13,6 +13,7 @@ class IncomingMovementsController < ApplicationController
   def index
     @incoming_movements = IncomingMovement.all
     @incoming_movement = IncomingMovement.new
+    flash.now[:products] = 'in'
   end
 
   def show

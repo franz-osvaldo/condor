@@ -2,6 +2,7 @@ class ProductUnitsController < ApplicationController
   def index
     @product_units = ProductUnit.all
     @product_unit = ProductUnit.new
+    flash.now[:products] = 'in'
   end
 
   def show

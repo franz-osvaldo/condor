@@ -1,5 +1,5 @@
-$('<%= escape_javascript( render @receiver) %>').appendTo('.table_container');
+$('<%= escape_javascript( render @receiver) %>').appendTo('.nano .content');
 $('#new_receiver :input').val('');
-
+$(".nano").nanoScroller({ scroll: 'bottom' });
 
 

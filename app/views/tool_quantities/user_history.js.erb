@@ -1,0 +1,5 @@
+$('.data_info').remove();
+$('<%= escape_javascript( render partial: 'data_info', locals: {borrowed_tools: @borrowed_tools, returned_tools: @returned_tools, user: @user}) %>').appendTo('.data_container');
+$('#search_user').collapse("hide");
+$('.table_striped').html('');
+$('<%= escape_javascript(render partial: 'user_transactions', locals: {history_report: @history_report}) %>').appendTo('.table_striped');

@@ -1,0 +1,33 @@
+<div class="row table_row">
+  <div class="col-md-2 item_detail">
+    <%= tool.part_number %>
+  </div>
+  <div class="col-md-2 item_detail">
+    <%= tool.description %>
+  </div>
+
+
+  <div class="col-md-2 serial_number">
+    <input type="text" name="incoming_quantity[][serial_number]" class="form-control">
+  </div>
+  <div class="col-md-1 location">
+    <input type="text" name="incoming_quantity[][aisle]" class="form-control">
+  </div>
+  <div class="col-md-1 location">
+    <input type="text" name="incoming_quantity[][section]" class="form-control">
+  </div>
+  <div class="col-md-1 location">
+    <input type="text" name="incoming_quantity[][level]" class="form-control">
+  </div>
+  <div class="col-md-1 location">
+    <input type="text" name="incoming_quantity[][position]" class="form-control">
+  </div>
+  <input type="hidden" name="incoming_quantity[][tool_id]" value="<%= tool.id %>">
+  <div class="col-md-2 text-center">
+    <button type="button" class="btn btn-danger delete_row">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
+</div>
+
+

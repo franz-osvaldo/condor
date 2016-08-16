@@ -6,13 +6,27 @@
 
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
       </div>
-      <div class="modal-body">
-        <strong>Tipo de movimiento: </strong> <%= incoming_movement.incoming_movement_type.movement_type %> <br>
-        <strong>Proveedor: </strong> <%= incoming_movement.supplier.supplier %> <br>
-        <% incoming_movement.incoming_details.each do |detail| %>
-          <strong>Cantidad: </strong><%= detail.quantity %> <br>
-          <strong>Fecha de expiración: </strong><%= detail.expiration_date %> <br>
-        <% end %>
+      <div class="modal-body text-center">
+        <br>
+        <strong>Tipo de movimiento</strong>
+        <p><%= incoming_movement.incoming_movement_type.movement_type %></p>
+        <strong>Proveedor</strong>
+        <p><%= incoming_movement.supplier.supplier %></p>
+        <strong>Productos</strong>
+        <div class="table_container">
+          <div class="row table_header">
+            <div class="col-md-4">Producto</div>
+            <div class="col-md-4">Cantidad</div>
+            <div class="col-md-4">Expiración</div>
+          </div>
+          <% incoming_movement.incoming_details.each do |detail| %>
+              <div class="row item">
+                <div class="col-md-4"><%= detail.product.description %></div>
+                <div class="col-md-4"><%= detail.quantity %></div>
+                <div class="col-md-4"><%= detail.expiration_date %></div>
+              </div>
+          <% end %>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>

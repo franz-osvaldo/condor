@@ -3,6 +3,7 @@ class ToolsController < ApplicationController
   def index
     @tool = Tool.new
     @tools = Tool.order(sort_column+' '+sort_direction)
+    flash.now[:tools] = 'in'
   end
 
   def show
@@ -25,6 +26,7 @@ class ToolsController < ApplicationController
     respond_to do |format|
       if @tool.save
         format.js{}
+        format.html{ redirect_to tools_path }
       else
         render :text => 'Algo salio mal!'
       end
@@ -33,9 +35,13 @@ class ToolsController < ApplicationController
 
   def update
     @tool = Tool.find(params[:id])
+    # Si no se a enviado la imagen debido a que se a eliminado
+    if !params.has_key?(:image) && params[:eliminado] == 'si'
+      @tool.image = nil
+    end
     respond_to do |format|
       if @tool.update(tool_params)
-        format.js{}
+        format.html{ redirect_to tools_path }
       else
         render :text => 'Algo salio mal'
       end
@@ -52,7 +58,7 @@ class ToolsController < ApplicationController
 
   private
   def tool_params
-    params.require(:tool).permit(:part_number, :description, :specification,)
+    params.require(:tool).permit(:part_number, :description, :specification, :image)
   end
 
   def sort_column

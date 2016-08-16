@@ -14,6 +14,7 @@ class OutgoingMovementsController < ApplicationController
   def index
     @outgoing_movements = OutgoingMovement.all
     @outgoing_movement = OutgoingMovement.new
+    flash.now[:products] = 'in'
   end
 
   def show

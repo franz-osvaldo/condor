@@ -1,0 +1,8 @@
+$('.modal_container').html('<%= escape_javascript(render partial: 'full_details', locals: {incoming_tool: @incoming_tool}) %>');
+$("#modal").on('shown.bs.modal', function () {
+  $(".nano.body_container").nanoScroller({ alwaysVisible: true });
+});
+$('#modal').modal('show');
+$(".nano").nanoScroller({ scroll: 'top' });
+
+

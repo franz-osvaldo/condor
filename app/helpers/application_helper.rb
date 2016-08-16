@@ -5,31 +5,17 @@ module ApplicationHelper
     link_to title, {sort: column,  direction: direction},{class: css_class}
   end
 
-
-
-
-
-
-  def add_in_class1(class_name)
-    if class_name == 'product_units'           ||
-       class_name == 'products'                ||
-       class_name == 'suppliers'               ||
-       class_name == 'incoming_movement_types' ||
-       class_name == 'outgoing_movement_types' ||
-       class_name == 'receivers'               ||
-       class_name == 'incoming_movements'      ||
-       class_name == 'outgoing_movements'
-      'in'
+  def out_of_date?(date)
+    if date < Date.today
+      return true
     end
+    false
   end
-  def add_in_class2(class_name)
-    if class_name == 'aircrafts'
-      'in'
+
+  def format_date(date)
+    if date == '3000-01-01'.to_date
+      return 'INDEFINIDO'
     end
-  end
-  def add_in_class3(class_name)
-    if class_name == 'fleets'
-      'in'
-    end
+    date
   end
 end

@@ -1,0 +1,44 @@
+<div id="modal" class="modal fade modal_document" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
+      </div>
+      <div class="modal-body text-center">
+        <br>
+        <strong>Numero de folio</strong>
+        <p><%= incoming_tool.folio %></p>
+        <strong>Tipo de movimiento</strong>
+        <p><%= incoming_tool.incoming_tool_type.movement_type %></p>
+        <strong>Fecha de creación</strong>
+        <p><%= incoming_tool.created_at .to_date%></p>
+        <strong>Herramientas</strong>
+        <div class="table_container">
+          <div class="row table_header">
+            <div class="col-md-3">Parte</div>
+            <div class="col-md-3">Descripcion</div>
+            <div class="col-md-3">Serie</div>
+            <div class="col-md-3">Ubicación</div>
+          </div>
+          <div class="nano body_container">
+            <div class="content">
+              <% incoming_tool.incoming_quantities.each do |quantity| %>
+                  <div class="row item">
+                    <div class="col-md-3"><%= quantity.tool.part_number %></div>
+                    <div class="col-md-3"><%= quantity.tool.description %></div>
+                    <div class="col-md-3"><%= quantity.serial_number %></div>
+                    <div class="col-md-3  "><%= quantity.location %></div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

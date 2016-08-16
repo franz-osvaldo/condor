@@ -3,6 +3,7 @@ class FlightsController < ApplicationController
     # render :text => params.inspect
     @aircraft = Fleet.find(params[:fleet_id])
     @flights = @aircraft.flights
+    flash.now[:flights] = 'in'
   end
   def show
     # render :text => params.inspect

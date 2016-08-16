@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-md-3">
+    <div class="small-box bg-green">
+      <div class="inner">
+        <h3><%= @tools.count %></h3>
+        <p>Herramientas</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-wrench" aria-hidden="true"></i>
+      </div>
+      <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+    <div class="small-box bg-yellow">
+      <div class="inner">
+        <h3><%= ToolQuantity.number_of_custodians %></h3>
+        <p>Custodios</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-users" aria-hidden="true"></i>
+      </div>
+      <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+    <div class="small-box bg-red">
+      <div class="inner">
+        <h3><%= ToolQuantity.out_of_date_quantity %></h3>
+        <p>Fuera de limite</p>
+      </div>
+      <div class="icon">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+      </div>
+      <a href="#" class="small-box-footer">Mas informacion <i class="fa fa-arrow-circle-right"></i></a>
+    </div>
+  </div>
+  <div class="col-md-9">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-2"><%= sort_by_column 'part_number', 'Parte' %></div>
+        <div class="col-md-3"><%= sort_by_column 'description', 'Descripcion' %></div>
+        <div class="col-md-2"><%= sort_by_column 'serial_number', 'Serie' %></div>
+        <div class="col-md-2">Expiración</div>
+        <div class="col-md-3">Custodio</div>
+      </div>
+      <div class="nano">
+        <div class="content">
+          <% @tools.each do |tool| %>
+              <div class="row">
+                <div class="col-md-2"><%= tool.tool.part_number %></div>
+                <div class="col-md-3"><%= tool.tool.description %></div>
+                <div class="col-md-2"><%= tool.serial_number %></div>
+                <div class="col-md-2  <%= out_of_date?(tool.expiration)? 'alert-danger' :'alert-success' %>">
+                  <%= format_date(tool.expiration)  %>
+                </div>
+                <div class="col-md-3"><%= tool.user_name %></div>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $(".nano").nanoScroller();
+  });
+</script>

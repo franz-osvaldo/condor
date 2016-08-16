@@ -6,10 +6,14 @@
 
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
       </div>
-      <div class="modal-body">
-        <strong>Numero de parte: </strong><%= tool.part_number %> <br>
-        <strong>Descripcion: </strong><%= tool.description %> <br>
-        <strong>Especificación: </strong><%= tool.specification %> <br>
+      <div class="modal-body text-center">
+        <%= image_tag tool.image(:medium) %> <br>
+        <strong>Numero de parte</strong>
+        <p><%= tool.part_number %></p>
+        <strong>Descripcion</strong>
+        <p><%= tool.description %></p>
+        <strong>Especificación</strong>
+        <p><%= tool.specification %></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
