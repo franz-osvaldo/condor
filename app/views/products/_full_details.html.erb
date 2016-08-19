@@ -7,22 +7,47 @@
         <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
       </div>
       <div class="modal-body text-center">
-        <strong>Numero de parte</strong>
-        <p><%= product.part_number %></p>
-        <strong>Descripcion</strong>
-        <p><%= product.description %></p>
-        <strong>Especificación</strong>
-        <p><%= product.specification %></p>
-        <strong>Unidad</strong>
-        <p><%= product.product_unit.name %></p>
-        <strong>Tiempo de procuramiento</strong>
-        <p><%= product.procurement_lead_time %> Dias</p>
-        <strong>Máximo</strong>
-        <p><%= product.maximum %></p>
-        <strong>Mínimo</strong>
-        <p><%= product.minimum %></p>
-        <strong>Optimo</strong>
-        <p><%= product.optimum %></p>
+        <%= image_tag product.image_product(:medium) %> <br>
+        <div class="table_container">
+          <div class="row item table_head">
+            <div class="col-md-6"><strong>Parte</strong></div>
+            <div class="col-md-6"><strong>Descripcion</strong></div>
+          </div>
+          <div class="row item">
+            <div class="col-md-6"><%= product.part_number %></div>
+            <div class="col-md-6"><%= product.description %></div>
+          </div>
+        </div>
+        <div class="table_container">
+          <div class="row item table_head">
+            <div class="col-md-6"><strong>Unidad</strong></div>
+            <div class="col-md-6"><strong>Procuramiento</strong></div>
+          </div>
+          <div class="row item">
+            <div class="col-md-6"><%= product.product_unit.name %></div>
+            <div class="col-md-6"><%= product.procurement_lead_time %> Dias</div>
+          </div>
+        </div>
+        <div class="table_container">
+          <div class="row item table_head">
+            <div class="col-md-12"><strong>Especificación</strong></div>
+          </div>
+          <div class="row item">
+            <div class="col-md-12"><%= product.specification %></div>
+          </div>
+        </div>
+        <div class="table_container">
+          <div class="row item table_head">
+            <div class="col-md-4"><strong>Maximo</strong></div>
+            <div class="col-md-4"><strong>Minimo</strong></div>
+            <div class="col-md-4"><strong>Optimo</strong></div>
+          </div>
+          <div class="row item">
+            <div class="col-md-4"><%= product.maximum %></div>
+            <div class="col-md-4"><%= product.minimum %></div>
+            <div class="col-md-4"><%= product.optimum %></div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815003351) do
+ActiveRecord::Schema.define(version: 20160816185119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -273,10 +273,14 @@ ActiveRecord::Schema.define(version: 20160815003351) do
     t.integer  "maximum"
     t.integer  "minimum"
     t.integer  "optimum"
-    t.boolean  "obsolete",              default: false
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.boolean  "obsolete",                   default: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "product_unit_id"
+    t.string   "image_product_file_name"
+    t.string   "image_product_content_type"
+    t.integer  "image_product_file_size"
+    t.datetime "image_product_updated_at"
     t.index ["product_unit_id"], name: "index_products_on_product_unit_id", using: :btree
   end
 

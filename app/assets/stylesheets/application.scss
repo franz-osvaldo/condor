@@ -17,6 +17,7 @@
 @import "font-awesome";
 @import "tools";
 @import "tool_quantities";
+@import "products";
 // Estilos para el almacén
 .tools.index,
 .product_units.index,
@@ -39,7 +40,7 @@
   margin-top: 10px;
   .modal_show, .modal_edit, .modal_delete{
     .modal-content{
-      width: 350px;
+      width: 352px;
       margin: 0 auto;
       border-radius: 0;
     }
@@ -64,14 +65,19 @@
       background-color: #4aafcd;
     }
     .modal-body{
+      p{
+        padding: 0 7px!important;
+      }
       .table_container{
         margin-left: 15px;
         margin-right: 15px;
         overflow: hidden;
         margin-bottom: 12px;
         .table_header{
-          padding: 7px 0;
+          padding: 7px 7px;
           margin-top: 0;
+          background-color: #2980b9;
+          color: white;
           &:hover{
             background-color: #4aafcd;
             color: white;

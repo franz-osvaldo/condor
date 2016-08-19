@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-
+  helper_method :sort_column, :sort_direction
   def index
-    @products = Product.all
+    @products = Product.order(sort_column+' '+sort_direction)
     @product = Product.new
     flash.now[:products] = 'in'
   end
@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
     end
   end
   def create
+    # render :text => params.inspect
     @product = Product.new(product_params)
     respond_to do |format|
       if @product.save
@@ -31,10 +32,15 @@ class ProductsController < ApplicationController
   end
 
   def update
+    # render :text => params.inspect
     @product = Product.find(params[:id])
+    # Si no se a enviado la imagen debido a que se a eliminado
+    if !params.has_key?(:image_product) && params[:eliminado] == 'si'
+      @product.image_product = nil
+    end
     respond_to do |format|
       if @product.update(product_params)
-        format.html{ redirect_to products_path}
+        format.html{ redirect_to products_path }
       else
         render :text => 'Algo salio mal'
       end
@@ -57,6 +63,13 @@ class ProductsController < ApplicationController
                                     :procurement_lead_time,
                                     :maximum,
                                     :minimum,
-                                    :optimum)
+                                    :optimum,
+                                    :image_product)
+  end
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : 'asc'
+  end
+  def sort_column
+    Product.column_names.include?(params[:sort]) ? params[:sort] : 'part_number'
   end
 end

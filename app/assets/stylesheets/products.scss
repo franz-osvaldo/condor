@@ -1,3 +1,54 @@
-// Place all the styles related to the Products controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.products.index{
+  .nano{
+    height: 523px;
+    .pane{
+      border-radius: 0;
+      width: 5px;
+      .slider{
+        border-radius: 0;
+        width: 5px;
+      }
+    }
+  }
+  .input_file, .input_file_edit{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  #image_label, #image_label_edit{
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    padding: 7px;
+    border: thin solid rgba(#222, 0.2);
+    &:hover{
+      background-color: #5ab75c;
+      border: thin solid #5ab75c;
+      color: white;
+    }
+  }
+  #image_preview, #image_preview_edit{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    border: thin solid rgba(#222, 0.1);
+  }
+  #deselect_image, #deselect_image_edit{
+
+    span{
+      //background-color: #da4f4a;
+      padding: 7px 15px;
+      //color: white;
+      border: thin solid rgba(#222, 0.2);
+      &:hover{
+        cursor: pointer;
+        background-color: #da4f4a;
+        color: white;
+        border: thin solid #da4f4a;
+      }
+    }
+  }
+}
