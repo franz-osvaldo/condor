@@ -3,6 +3,7 @@ class IncomingMovement < ApplicationRecord
   belongs_to :supplier
   has_many :incoming_details
   has_many :products, through: :incoming_details
+
   before_save :set_number_folio
 
   private

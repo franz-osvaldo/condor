@@ -220,7 +220,6 @@
       background-color: white;
       padding: 15px 15px;
       border: thin solid rgba(#016ecd, 0.3);
-
       input{
         border-radius: 0;
       }
@@ -234,6 +233,9 @@
         margin-left: 0;
         margin-top: 15px;
         margin-right: 0;
+        .short_title{
+          padding: 0 0 0 2px;
+        }
       }
       .nano {
         //background: #bba;

@@ -24,11 +24,19 @@ class IncomingMovementsController < ApplicationController
   end
 
   def create
-    @incoming_movement = IncomingMovement.create(incoming_movement_params)
-    params[:incoming_details].each do |my_params|
-      @incoming_movement.incoming_details.create(incoming_detail_params(my_params))
-    end
+    @invalids = []
+    @index = []
+    @incoming_movement = IncomingMovement.new(incoming_movement_params)
+
     respond_to do |format|
+      params[:incoming_details].each_with_index  do |my_params, index|
+        incoming_detail = @incoming_movement.incoming_details.new(incoming_detail_params(my_params))
+        @invalids.push(incoming_detail) unless incoming_detail.valid?
+        @index.push(index) unless incoming_detail.valid?
+        unless @incoming_movement.save
+          format.js { render 'same_location.js.erb'}
+        end
+      end
       format.js{}
     end
   end
@@ -37,7 +45,7 @@ class IncomingMovementsController < ApplicationController
     params.require(:incoming_movement).permit(:incoming_movement_type_id, :supplier_id)
   end
   def incoming_detail_params(my_params)
-    my_params.permit(:quantity, :expiration_date, :product_id)
+    my_params.permit(:quantity, :expiration_date, :product_id, :serial_number, :aisle, :section, :level, :position)
   end
 end
 

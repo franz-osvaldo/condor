@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816185119) do
+ActiveRecord::Schema.define(version: 20160819031459) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,11 @@ ActiveRecord::Schema.define(version: 20160816185119) do
     t.date     "expiration_date"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "aisle"
+    t.string   "section"
+    t.string   "level"
+    t.string   "position"
+    t.string   "serial_number"
     t.index ["incoming_movement_id"], name: "index_incoming_details_on_incoming_movement_id", using: :btree
     t.index ["product_id"], name: "index_incoming_details_on_product_id", using: :btree
   end
@@ -256,6 +261,12 @@ ActiveRecord::Schema.define(version: 20160816185119) do
     t.date     "expiration_date"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "aisle"
+    t.string   "section"
+    t.string   "level"
+    t.string   "position"
+    t.string   "serial_number"
+    t.string   "part_number"
     t.index ["product_id"], name: "index_product_quantities_on_product_id", using: :btree
   end
 

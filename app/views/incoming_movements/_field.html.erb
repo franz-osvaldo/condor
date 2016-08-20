@@ -1,15 +1,30 @@
 <div class="row table_row">
-  <div class="col-md-4">
+    <div class="col-md-2 location">
     <%= product.description %>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2 serial_number">
+    <input type="text" name="incoming_details[][serial_number]" class="form-control">
+  </div>
+  <div class="col-md-1 location">
     <input type="text" name="incoming_details[][quantity]" class="form-control">
   </div>
-  <div class="col-md-4 date-container">
+  <div class="col-md-2 date-container location">
     <input type="text" name="incoming_details[][expiration_date]" class="form-control datepicker">
   </div>
+  <div class="col-md-1 location">
+    <input type="text" name="incoming_details[][aisle]" class="form-control">
+  </div>
+  <div class="col-md-1 location">
+    <input type="text" name="incoming_details[][section]" class="form-control">
+  </div>
+  <div class="col-md-1 location">
+    <input type="text" name="incoming_details[][level]" class="form-control">
+  </div>
+  <div class="col-md-1 location">
+    <input type="text" name="incoming_details[][position]" class="form-control">
+  </div>
   <input type="hidden" name="incoming_details[][product_id]" value="<%= product.id %>">
-  <div class="col-md-2 text-center">
+  <div class="col-md-1 text-center location">
     <button type="button" class="btn btn-danger delete_row">
       <span class="glyphicon glyphicon-trash"></span>
     </button>

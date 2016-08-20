@@ -1,4 +1,4 @@
-<div id="modal" class="modal fade modal_show" role="dialog">
+<div id="modal" class="modal fade modal_document" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,24 +8,38 @@
       </div>
       <div class="modal-body text-center">
         <br>
+        <strong>Numero de folio</strong>
+        <p><%= incoming_movement.folio %></p>
         <strong>Tipo de movimiento</strong>
         <p><%= incoming_movement.incoming_movement_type.movement_type %></p>
         <strong>Proveedor</strong>
         <p><%= incoming_movement.supplier.supplier %></p>
+        <strong>Fecha de creación</strong>
+        <p><%= incoming_movement.created_at.to_date %></p>
         <strong>Productos</strong>
         <div class="table_container">
           <div class="row table_header">
-            <div class="col-md-4">Producto</div>
-            <div class="col-md-4">Cantidad</div>
-            <div class="col-md-4">Expiración</div>
+            <div class="col-md-2">Parte</div>
+            <div class="col-md-2">Descripcion</div>
+            <div class="col-md-2">Serie</div>
+            <div class="col-md-2">Cantidad</div>
+            <div class="col-md-2">Limite</div>
+            <div class="col-md-2">Ubicación</div>
           </div>
-          <% incoming_movement.incoming_details.each do |detail| %>
-              <div class="row item">
-                <div class="col-md-4"><%= detail.product.description %></div>
-                <div class="col-md-4"><%= detail.quantity %></div>
-                <div class="col-md-4"><%= detail.expiration_date %></div>
-              </div>
-          <% end %>
+          <div class="nano body_container">
+            <div class="content">
+              <% incoming_movement.incoming_details.each do |detail| %>
+                  <div class="row item">
+                    <div class="col-md-2"><%= detail.product.part_number %></div>
+                    <div class="col-md-2"><%= detail.product.description %></div>
+                    <div class="col-md-2"><%= detail.serial_number %></div>
+                    <div class="col-md-2"><%= detail.quantity %></div>
+                    <div class="col-md-2"><%= format_date(detail.expiration_date) %></div>
+                    <div class="col-md-2"><%= detail.quantity %></div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

@@ -1,0 +1,7 @@
+$('.modal_container').html('<%= escape_javascript(render partial: 'error_details', locals: {invalids: @invalids}) %>');
+$('.product_details .table_row').removeClass('alert-danger');
+<% @index.each do |index| %>
+$('.product_details .table_row:nth-child(<%= index + 1 %>)').addClass('alert-danger');
+<% end %>
+$('#modal').modal('show');
+
