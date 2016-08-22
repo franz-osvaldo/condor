@@ -12,7 +12,9 @@ class IncomingDetail < ApplicationRecord
   before_save :set_serial_number
   after_create :update_stock
 
-  # Luego de que la entrada en el almacén se concreta establecemos las cantidades totales
+  def location
+    self.aisle+'-'+self.section+'-'+self.level+'-'+self.position
+  end
   private
   def set_expiration_date
     if self.expiration_date.nil?

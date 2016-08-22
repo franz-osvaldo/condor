@@ -1,3 +1,5 @@
-$('<%= escape_javascript( render @outgoing_movement) %>').appendTo('.nano .content');
+$('<%= escape_javascript( render @outgoing_movement) %>').appendTo('.table_body');
 $('.table_row').remove();
 $(".nano").nanoScroller({ scroll: 'bottom' });
+
+

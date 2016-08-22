@@ -72,6 +72,19 @@ class ProductQuantity < ApplicationRecord
                             v_position).empty?
   end
 
+  def self.take_out_product(v_quantity, v_id)
+    record = self.find(v_id)
+    record.update(:quantity => record.quantity - v_quantity)
+  end
+
+  def location
+    if self.aisle.nil? || self.section.nil? || self.level.nil? || self.position.nil?
+      'ND'
+    else
+      self.aisle+'-'+self.section+'-'+self.level+'-'+self.position
+    end
+  end
+
   # def self.add_quantity(v_product_id, v_expiration_date, v_description, v_quantity)
   #   record = self.where('product_id = ? AND expiration_date = ?', v_product_id, v_expiration_date).first
     # Si el producto no existe -> nuevo registro
@@ -86,8 +99,8 @@ class ProductQuantity < ApplicationRecord
     # end
   # end
 
-  def self.subtract_quantity(v_product_id, v_expiration_date, v_quantity)
-    record = ProductQuantity.where('product_id = ? AND expiration_date = ?', v_product_id, v_expiration_date).first
-    record.update(:quantity=> record.quantity - v_quantity)
-  end
+  # def self.subtract_quantity(v_product_id, v_expiration_date, v_quantity)
+  #   record = ProductQuantity.where('product_id = ? AND expiration_date = ?', v_product_id, v_expiration_date).first
+  #   record.update(:quantity=> record.quantity - v_quantity)
+  # end
 end

@@ -1,13 +1,13 @@
 class OutgoingMovementsController < ApplicationController
   def new_field
-    @product = ProductQuantity.find(params[:id])
+    @product_quantity = ProductQuantity.find(params[:id])
     respond_to do |format|
       format.js{}
     end
   end
   def get_products
     respond_to do |format|
-      format.json{render :json => ProductQuantity.all.to_json(:only=>[:id, :description, :quantity, :expiration_date])}
+      format.json{render :json => ProductQuantity.where('quantity > ?',0).to_json(:only=>[:id, :part_number, :description, :serial_number, :quantity, :expiration_date])}
     end
   end
 
@@ -25,13 +25,20 @@ class OutgoingMovementsController < ApplicationController
   end
 
   def create
-    @outgoing_movement = OutgoingMovement.create(outgoing_movement_params)
-    params[:outgoing_details].each do |my_params|
-      @outgoing_movement.outgoing_details.create(outgoing_detail_params(my_params))
+    @invalids = []
+    @index = []
+    @outgoing_movement = OutgoingMovement.new(outgoing_movement_params)
+    params[:outgoing_details].each_with_index  do |my_params, index|
+      outgoing_detail = @outgoing_movement.outgoing_details.build(outgoing_detail_params(my_params))
+      @invalids.push(outgoing_detail) unless outgoing_detail.valid?
+      @index.push(index) unless outgoing_detail.valid?
     end
     respond_to do |format|
-      format.js{}
-      format.html{ redirect_to outgoing_movements_path}
+      if @outgoing_movement.save
+        format.js{}
+      else
+        format.js{ render 'errors_messages' }
+      end
     end
   end
   private
@@ -40,7 +47,7 @@ class OutgoingMovementsController < ApplicationController
   end
 
   def outgoing_detail_params(my_params)
-    my_params.permit(:quantity, :expiration_date, :product_id)
+    my_params.permit(:quantity, :product_id, :product_quantity_id)
   end
 end
 

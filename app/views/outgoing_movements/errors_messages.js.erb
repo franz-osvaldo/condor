@@ -1,4 +1,4 @@
-$('.modal_container').html('<%= escape_javascript(render partial: 'error_details', locals: {invalids: @invalids}) %>');
+$('.modal_container').html('<%= escape_javascript(render partial: 'errors_details', locals: {invalids: @invalids}) %>');
 $('.product_details .table_row').removeClass('alert-danger');
 
 <% @index.each do |index| %>
@@ -6,4 +6,6 @@ $('.product_details .table_row').removeClass('alert-danger');
 <% end %>
 
 $('#modal').modal('show');
+
+
 

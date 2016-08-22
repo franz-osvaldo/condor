@@ -1,10 +1,13 @@
 class OutgoingDetail < ApplicationRecord
   belongs_to :product
   belongs_to :outgoing_movement
-  after_create :set_total_quantity
+
+  validates :quantity, presence: true
+
+  after_create :update_stock
 
   # Luego de que la salida del almacén se concreta establecemos las cantidades totales
-  def set_total_quantity
-    ProductQuantity.subtract_quantity(self.product_id, self.expiration_date, self.quantity)
+  def update_stock
+    ProductQuantity.take_out_product(self.quantity, self.product_quantity_id)
   end
 end

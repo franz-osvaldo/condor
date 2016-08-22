@@ -1,13 +1,25 @@
-<div class="row table_row">
-  <div class="col-md-4">
-    <%= product.description %>
+  <div class="row table_row <%= dom_id(product_quantity) %>"  data-product-quantity-id="<%= product_quantity.id %>">
+  <div class="col-md-2 center_content">
+    <%= product_quantity.part_number %>
   </div>
-  <div class="col-md-6">
-    <input type="text" name="outgoing_details[][quantity]" class="form-control">
+  <div class="col-md-2 center_content overflowed">
+    <%= product_quantity.description %>
   </div>
-  <input type="hidden" name="outgoing_details[][expiration_date]" value="<%= product.expiration_date %>">
-  <input type="hidden" name="outgoing_details[][product_id]" value="<%= product.product.id %>">
-  <div class="col-md-2 text-center">
+  <div class="col-md-2 center_content">
+    <%= product_quantity.serial_number %>
+  </div>
+  <div class="col-md-2 center_content">
+    <%= product_quantity.location %>
+  </div>
+  <div class="col-md-1 center_content" id="quantity_<%= product_quantity.id %>">
+    <%= product_quantity.quantity %>
+  </div>
+  <div class="col-md-2">
+    <input type="text" name="outgoing_details[][quantity]" class="form-control" data-product-quantity="quantity_<%= product_quantity.id %>">
+  </div>
+  <input type="hidden" name="outgoing_details[][product_quantity_id]" value="<%= product_quantity.id %>">
+  <input type="hidden" name="outgoing_details[][product_id]" value="<%= product_quantity.product.id %>">
+  <div class="col-md-1 text-center location">
     <button type="button" class="btn btn-danger delete_row">
       <span class="glyphicon glyphicon-trash"></span>
     </button>

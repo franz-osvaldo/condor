@@ -1,0 +1,23 @@
+<div id="modal" class="modal fade modal_delete" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span> Validación
+      </div>
+      <div class="modal-body text-center">
+        <br>
+        <p style="color:#da4f4a;"><span class="glyphicon glyphicon-fire" aria-hidden="true"></span></p>
+        <% invalids.each do |invalid| %>
+            <p><strong><%= invalid.tool.description %></strong></p>
+            <% invalid.errors.full_messages.each do |message| %>
+                <p><%= message  %></p>
+            <% end %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

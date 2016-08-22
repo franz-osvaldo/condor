@@ -24,7 +24,7 @@
       </div>
       <div class="row table_header">
         <div class="col-md-2">Descripcion</div>
-        <div class="col-md-2">Serie</div>
+        <div class="col-md-2 short_title">Serie</div>
         <div class="col-md-1 short_title">Cant.</div>
         <div class="col-md-2 short_title">Limite</div>
         <div class="col-md-4 short_title">Ubicación</div>
@@ -91,6 +91,11 @@ $(document).ready(function () {
 
     $('.product_details ').on('click', 'button', function () {
       $(this).parent().parent().remove();
+    });
+
+    $('.product_details').on('click', 'a', function (e) {
+      e.preventDefault();
+      $($(this).attr('href')).modal('show');
     });
 
     $('.product_details ').on('focus', '.datepicker', function () {

@@ -27,17 +27,17 @@ class IncomingMovementsController < ApplicationController
     @invalids = []
     @index = []
     @incoming_movement = IncomingMovement.new(incoming_movement_params)
-
+    params[:incoming_details].each_with_index do |my_params, index|
+      incoming_detail = @incoming_movement.incoming_details.build(incoming_detail_params(my_params))
+      @invalids.push(incoming_detail) unless incoming_detail.valid?
+      @index.push(index) unless incoming_detail.valid?
+    end
     respond_to do |format|
-      params[:incoming_details].each_with_index  do |my_params, index|
-        incoming_detail = @incoming_movement.incoming_details.new(incoming_detail_params(my_params))
-        @invalids.push(incoming_detail) unless incoming_detail.valid?
-        @index.push(index) unless incoming_detail.valid?
-        unless @incoming_movement.save
-          format.js { render 'same_location.js.erb'}
-        end
+      if @incoming_movement.save
+        format.js{}
+      else
+        format.js{ render 'same_location.js.erb'}
       end
-      format.js{}
     end
   end
   private

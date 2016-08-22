@@ -1,6 +1,11 @@
 class IncomingQuantity < ApplicationRecord
   belongs_to :incoming_tool
   belongs_to :tool
+
+  validates_with ToolLocation
+  validates_with ToolSerialNumber
+  validates :serial_number, :aisle, :section, :level, :position,  presence: true
+
   after_create :set_tool_quantity
 
   def set_tool_quantity

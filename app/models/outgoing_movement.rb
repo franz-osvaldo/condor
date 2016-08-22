@@ -3,6 +3,7 @@ class OutgoingMovement < ApplicationRecord
   belongs_to :receiver
   has_many :outgoing_details
   has_many :products, through: :outgoing_details
+
   before_save :set_number_folio
 
   private

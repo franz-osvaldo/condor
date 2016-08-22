@@ -135,7 +135,7 @@
     .modal-footer{
       border-top-color:#da4f4a;
       button{
-        background-color:#4aafcd;
+        background-color:#da4f4a;
       }
       a{
         background-color:#da4f4a;
@@ -220,6 +220,24 @@
       background-color: white;
       padding: 15px 15px;
       border: thin solid rgba(#016ecd, 0.3);
+      .product_details, .tool_details{
+        font-size: 12px;
+        padding-top: 2px;
+        .table_row{
+          margin-bottom: 2px;
+          .center_content{
+            padding-top: 9px;
+            padding-right: 0;
+          }
+
+          .overflowed{
+            overflow:hidden;
+            display:inline-block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
       input{
         border-radius: 0;
       }

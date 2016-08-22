@@ -1,6 +1,8 @@
 <div class="row table_row">
-    <div class="col-md-2 location">
-    <%= product.description %>
+  <div class="col-md-2 center_content overflowed">
+    <%= link_to '#location_'+dom_id(product) do %>
+        <i class="fa fa-map-marker" aria-hidden="true"></i> <%= product.description %>
+    <% end %>
   </div>
   <div class="col-md-2 serial_number">
     <input type="text" name="incoming_details[][serial_number]" class="form-control">
@@ -29,7 +31,22 @@
       <span class="glyphicon glyphicon-trash"></span>
     </button>
   </div>
-
+  <div id="location_<%= dom_id(product) %>" class="modal fade modal_delete" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <i class="fa fa-map-marker" aria-hidden="true"></i> Ubicación
+        </div>
+        <div class="modal-body">
+          <% if product.product_quantities.empty?%>
+              <p>Producto nuevo</p>
+          <% else %>
+              <p><%= product.product_quantities.first.location %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 

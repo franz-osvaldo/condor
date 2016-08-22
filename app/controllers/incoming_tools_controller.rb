@@ -26,12 +26,20 @@ class IncomingToolsController < ApplicationController
 
   def create
     # render :text => params.inspect
-    @incoming_tool = IncomingTool.create(incoming_tool_params)
-    params[:incoming_quantity].each do |my_params|
-      @incoming_tool.incoming_quantities.create(incoming_quantity_params(my_params))
+    @invalids = []
+    @index = []
+    @incoming_tool = IncomingTool.new(incoming_tool_params)
+    params[:incoming_quantity].each_with_index  do |my_params, index|
+      incoming_quantity =  @incoming_tool.incoming_quantities.build(incoming_quantity_params(my_params))
+      @invalids.push(incoming_quantity) unless incoming_quantity.valid?
+      @index.push(index) unless incoming_quantity.valid?
     end
     respond_to do |format|
-      format.js{}
+      if @incoming_tool.save
+        format.js{}
+      else
+        format.js{ render 'errors_messages.js.erb'}
+      end
     end
   end
   private

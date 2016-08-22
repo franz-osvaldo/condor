@@ -1,4 +1,4 @@
-<div id="modal" class="modal fade modal_show" role="dialog">
+<div id="modal" class="modal fade modal_document" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -8,22 +8,34 @@
       </div>
       <div class="modal-body text-center">
         <br>
+        <strong>Numero de folio</strong>
+        <p><%= outgoing_movement.folio %></p>
         <strong>Tipo de movimiento</strong>
         <p><%= outgoing_movement.outgoing_movement_type.movement_type %></p>
         <strong>Destinatario</strong>
         <p><%= outgoing_movement.receiver.receiver %></p>
+        <strong>Fecha de creación</strong>
+        <p><%= outgoing_movement.created_at.to_date %></p>
         <strong>Productos</strong>
         <div class="table_container">
           <div class="row table_header">
-            <div class="col-md-6">Producto</div>
-            <div class="col-md-6">Cantidad</div>
+            <div class="col-md-3">PN</div>
+            <div class="col-md-3">Descripcion</div>
+            <div class="col-md-3">SN</div>
+            <div class="col-md-3">Cantidad</div>
           </div>
-          <% outgoing_movement.outgoing_details.each do |detail| %>
-              <div class="row item">
-                <div class="col-md-6"><%= detail.product.description %></div>
-                <div class="col-md-6"><%= detail.quantity %></div>
-              </div>
-          <% end %>
+          <div class="nano body_container">
+            <div class="content">
+              <% outgoing_movement.outgoing_details.each do |detail| %>
+                  <div class="row item">
+                    <div class="col-md-3"><%= detail.product.part_number %></div>
+                    <div class="col-md-3"><%= detail.product.description %></div>
+                    <div class="col-md-3"><%= ProductQuantity.find(detail.product_quantity_id).serial_number %></div>
+                    <div class="col-md-3"><%= detail.quantity %></div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">

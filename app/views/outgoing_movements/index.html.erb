@@ -1,29 +1,37 @@
 <div class="row">
-  <div class="col-md-6 form_container">
+  <div class="col-md-8 form_container">
     <div class="form_header text-center">
       <i class="fa fa-shopping-cart" aria-hidden="true"></i> Movimiento de salida
     </div>
-    <%= form_for @outgoing_movement do |f| %>
+    <%= form_for @outgoing_movement, remote: true do |f| %>
         <div class="row">
           <div class="col-md-6">
-            <%= f.label :outgoing_movement_type_id, 'Tipo de movimiento' %>
-            <%= f.collection_select :outgoing_movement_type_id, OutgoingMovementType.all, :id, :movement_type, {}, {class: 'form-control'} %>
+            <div class="form-group">
+              <%= f.label :outgoing_movement_type_id, 'Tipo de movimiento' %>
+              <%= f.collection_select :outgoing_movement_type_id, OutgoingMovementType.all, :id, :movement_type, {}, {class: 'form-control'} %>
+            </div>
           </div>
           <div class="col-md-6">
-            <%= f.label :receiver_id, 'Destinatario' %>
-            <%= f.collection_select :receiver_id, Receiver.all, :id, :receiver, {}, {class: 'form-control'} %>
+            <div class="form-group">
+              <%= f.label :receiver_id, 'Destinatario' %>
+              <%= f.collection_select :receiver_id, Receiver.all, :id, :receiver, {}, {class: 'form-control'} %>
+            </div>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 form-group">
             <label for="search_input">Buscar producto</label> <br>
-            <input class="typeahead form-control" type="text" id="search_input">
+            <input class="typeahead form-control" type="text" id="search_input" placeholder="Numero de parte o descripcion">
           </div>
         </div>
         <div class="row table_header">
-          <div class="col-md-4">Descripcion</div>
-          <div class="col-md-6">Cantidad</div>
-          <div class="col-md-2 text-center"><span class="glyphicon glyphicon-cog"></span></div>
+          <div class="col-md-2">PN</div>
+          <div class="col-md-2 ">Descripcion</div>
+          <div class="col-md-2">SN</div>
+          <div class="col-md-2">Ubicación</div>
+          <div class="col-md-1">Disp.</div>
+          <div class="col-md-1">Cantidad</div>
+          <div class="col-md-2"></div>
         </div>
 
         <div class="nano">
@@ -34,15 +42,14 @@
         <%= f.submit 'Guardar', class:'btn btn-primary' %>
     <% end %>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-4">
     <div class="table_container">
       <div class="row table_head">
-        <div class="col-md-4">Documento</div>
-        <div class="col-md-5">Movimiento</div>
-        <div class="col-md-3">Administrar</div>
+        <div class="col-md-7">Documento</div>
+        <div class="col-md-5">Administrar</div>
       </div>
       <div class="nano">
-        <div class="content">
+        <div class="content table_body">
           <%= render @outgoing_movements %>
         </div>
       </div>
@@ -51,13 +58,100 @@
 </div>
 <div class="modal_container"></div>
 
+
+
+<div id="modal_too_many" class="modal fade modal_delete" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Cuidado
+      </div>
+      <div class="modal-body text-center">
+        <p>Estas intentando retirar una cantidad superior a la que existe en el almacén</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal_nan" class="modal fade modal_delete" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Cuidado
+      </div>
+      <div class="modal-body text-center">
+        <p>Por favor ingrese solamente números</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="modal_gtz" class="modal fade modal_delete" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Cuidado
+      </div>
+      <div class="modal-body text-center">
+        <p>Por favor ingrese una cantidad mayor a cero</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function () {
-    var motor = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['description']),
-      queryTokenizer: Bloodhound.tokenizers.whitespace,
-      prefetch: { url: '/outgoing_movements/get_products.json', ttl: 0, cache: false}
+
+
+
+    $('#search_input').on('typeahead:render', function () {
+      $('.table_row').each(function () {
+        $('.'+$(this).data('product-quantity-id')).remove();
+      });
     });
+
+    $('.product_details.content').on('focusout', 'input:text', function () {
+      // Validar que el numero ingresado sea un numero
+      if(!$.isNumeric($(this).val()) && $(this).val() != ''){
+        $(this).val('');
+        $('#modal_nan').modal('show');
+      }
+      // Validar que la cantidad ingresada sea menor o igual a la que existe en almacén
+      if (parseFloat($(this).val()) > parseFloat($('#'+$(this).data('product-quantity')).text())){
+        $(this).val('');
+        $('#modal_too_many').modal('show');
+      }
+      // Validar que la cantidad ingresada sea mayor a cero
+      if (parseFloat($(this).val()) <= 0){
+        $(this).val('');
+        $('#modal_gtz').modal('show');
+      }
+    });
+
+    $('#new_outgoing_movement').ajaxComplete(function () {
+      alert('form enviado');
+    });
+    var motor = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace(['part_number', 'description']),
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: { ttl: 1, url: '/outgoing_movements/get_products.json', cache: false}
+    });
+
+    $('form').on('ajax:complete', function() {
+      motor.clear();
+      motor.initialize(true);
+    });
+
     $('.typeahead').typeahead({
           highlight: true,
           minLength: 1
@@ -67,10 +161,22 @@
           source: motor.ttAdapter(),
           templates: {
             suggestion: function (data) {
-              return "<div class='row'><div class='col-md-4'>"+data.description+"</div><div class='col-md-4'>"+data.quantity+"</div><div class='col-md-4'>"+data.expiration_date+"</div></div>"
+              return "<div class='row "+data.id+"'>" +
+                        "<div class='col-md-3'>"+data.part_number+"</div>" +
+                        "<div class='col-md-3'>"+data.description+"</div>" +
+                        "<div class='col-md-3'>"+data.serial_number+"</div>" +
+                        "<div class='col-md-1'>"+data.quantity+"</div>" +
+                        "<div class='col-md-2'>"+data.expiration_date+"</div>" +
+                     "</div>"
             },
             header: function () {
-              return "<div class='row data_header'><div class='col-md-4'>Descripcion</div><div class='col-md-4'>Cantidad</div><div class='col-md-4'>Expiracion</div></div>"
+              return "<div class='row data_header'>" +
+                       "<div class='col-md-3'>PN</div>" +
+                       "<div class='col-md-3'>Descripcion</div>" +
+                       "<div class='col-md-3'>SN</div>" +
+                       "<div class='col-md-1' style='padding: 0'>Cantidad</div>" +
+                       "<div class='col-md-2' >Limite</div>" +
+                      "</div>"
             },
             notFound: function () {
               return "<div class='row text-center data_not_found'><span class='glyphicon glyphicon-exclamation-sign'></span> Producto no encontrado</div> "

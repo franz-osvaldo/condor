@@ -3,9 +3,19 @@ es:
   activerecord:
     models:
       model: incoming_detail
+      model: outgoing_detail
+      model: incoming_quantity
     attributes:
       incoming_detail:
         quantity: 'Cantidad'
+        aisle: 'Pasillo'
+        section: 'Sección'
+        level: 'Nivel'
+        position: 'Posición'
+      outgoing_detail:
+        quantity: 'Cantidad'
+      incoming_quantity:
+        serial_number: 'Numero de serie'
         aisle: 'Pasillo'
         section: 'Sección'
         level: 'Nivel'
