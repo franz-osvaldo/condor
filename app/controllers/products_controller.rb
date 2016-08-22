@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
       if @product.save
         format.html{ redirect_to products_path}
       else
-        render :text => 'Algo salio mal!'
+        format.html{ redirect_to products_path }
       end
     end
   end
@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
       if @product.update(product_params)
         format.html{ redirect_to products_path }
       else
-        render :text => 'Algo salio mal'
+        format.html{ redirect_to products_path}
       end
     end
   end

@@ -25,7 +25,7 @@ class IncomingToolTypesController < ApplicationController
       if @movement_type.save
         format.js{}
       else
-        render :text => 'Algo salio mal'
+        format.js{ render 'errors_messages' }
       end
     end
   end
@@ -36,7 +36,7 @@ class IncomingToolTypesController < ApplicationController
       if @movement_type.update(incoming_tool_type_params)
         format.js {}
       else
-        render :text => 'Algo salio mal'
+        format.js{ render 'errors_messages' }
       end
     end
   end

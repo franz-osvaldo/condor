@@ -5,6 +5,11 @@ class Product < ApplicationRecord
   has_many :outgoing_details
   has_many :outgoing_movements, through: :outgoing_details
   has_many :product_quantities
+
+  validates :part_number, presence: true
+  validates :description, presence: true
+  validates :part_number, uniqueness: {scope: :description, case_sensitive: false}
+
   has_attached_file :image_product, styles: { medium: '350x216>', thumb: '100x100>' }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :image_product, content_type: /\Aimage\/.*\Z/
 

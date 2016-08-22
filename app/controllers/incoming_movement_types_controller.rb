@@ -24,7 +24,7 @@ class IncomingMovementTypesController < ApplicationController
       if @incoming_movement_type.save
         format.js {}
       else
-        render :text => 'Algo salio mal'
+        format.js{ render 'errors_messages'}
       end
     end
   end
@@ -35,7 +35,7 @@ class IncomingMovementTypesController < ApplicationController
       if @incoming_movement_type.update(incoming_movement_type_params)
         format.js {}
       else
-        render :text => 'Algo salio mal'
+        format.js{ render 'errors_messages'}
       end
     end
   end

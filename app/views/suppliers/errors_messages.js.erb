@@ -1,0 +1,11 @@
+<% if !@supplier.new_record? %>
+  $('#modal').modal('hide');
+  $('#modal').on('hidden.bs.modal', function () {
+    $('.modal_container').html('<%= escape_javascript(render partial: 'errors_details', locals: {supplier: @supplier}) %>');
+    $('#modal').modal('show');
+  });
+<% else %>
+  $('.modal_container').html('<%= escape_javascript(render partial: 'errors_details', locals: {supplier: @supplier}) %>');
+  $('#modal').modal('show');
+<% end %>
+

@@ -28,7 +28,7 @@ class ToolsController < ApplicationController
         format.js{}
         format.html{ redirect_to tools_path }
       else
-        render :text => 'Algo salio mal!'
+        format.html{ redirect_to tools_path }
       end
     end
   end
@@ -43,7 +43,7 @@ class ToolsController < ApplicationController
       if @tool.update(tool_params)
         format.html{ redirect_to tools_path }
       else
-        render :text => 'Algo salio mal'
+        format.html{ redirect_to tools_path }
       end
     end
   end

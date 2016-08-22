@@ -24,7 +24,7 @@ class ProductUnitsController < ApplicationController
       if @product_unit.save
         format.js{}
       else
-        render :text => 'Algo salio mal'
+        format.js{ render 'errors_messages'}
       end
     end
   end
@@ -35,7 +35,7 @@ class ProductUnitsController < ApplicationController
       if @product_unit.update(product_unit_params)
         format.js{ }
       else
-        render :text => 'Algo salio mal'
+        format.js{ render 'errors_messages'}
       end
     end
   end
