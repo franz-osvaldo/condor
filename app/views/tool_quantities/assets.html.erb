@@ -44,11 +44,11 @@
         <div class="content" style="font-size: 13px">
           <% @assets.each do |asset| %>
               <div class="row">
-                <div class="col-md-2"><%= asset.tool.part_number %></div>
-                <div class="col-md-3"><%= asset.tool.description %></div>
-                <div class="col-md-2"><%= asset.serial_number %></div>
-                <div class="col-md-3"><%= asset.created_at.to_date %></div>
-                <div class="col-md-2"><%= asset.quantity_available > 0 ? 'No' : 'Si' %></div>
+                <div class="col-md-2 item_crud overflowed"><%= asset.tool.part_number %></div>
+                <div class="col-md-3 item_crud overflowed"><%= asset.tool.description %></div>
+                <div class="col-md-2 item_crud overflowed"><%= asset.serial_number %></div>
+                <div class="col-md-3 item_crud overflowed"><%= asset.created_at.to_date %></div>
+                <div class="col-md-2 item_crud overflowed"><%= asset.quantity_available > 0 ? 'No' : 'Si' %></div>
               </div>
           <% end %>
         </div>

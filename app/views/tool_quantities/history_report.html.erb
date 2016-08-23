@@ -38,7 +38,7 @@
   <div class="col-md-9">
     <div class="table_container">
       <div class="row table_head">
-        <div class="col-md-2">Folio</div>
+        <div class="col-md-3">Folio</div>
         <div class="col-md-2">Fecha</div>
         <div class="col-md-5">
           <div class="row" style="padding: 0; margin: 0">
@@ -46,7 +46,7 @@
             <div class="col-md-6">Descripcion</div>
           </div>
         </div>
-        <div class="col-md-3 " data-toggle="collapse" data-target="#search_user" style="position: relative">
+        <div class="col-md-2 " data-toggle="collapse" data-target="#search_user" style="position: relative">
           <i class="fa fa-filter" aria-hidden="true"></i> Responsable
         </div>
         <div id="search_user" class="collapse" style="position: absolute; right: 18px; top: 34px">
@@ -59,27 +59,27 @@
         <div class="content table_striped">
           <% @history_report.each do |history_report| %>
             <div class="row">
-              <div class="col-md-2"><%= history_report.folio %></div>
-              <div class="col-md-2"><%= history_report.created_at.to_date %></div>
+              <div class="col-md-3 item_crud overflowed"><%= history_report.folio %></div>
+              <div class="col-md-2 item_crud overflowed"><%= history_report.created_at.to_date %></div>
               <div class="col-md-5">
                 <% if history_report.class == BorrowedTool %>
                     <% history_report.borrowed_quantities.each do |detail| %>
                         <div class="row inner_row">
-                          <div class="col-md-6"><%= detail.serial_number %></div>
-                          <div class="col-md-6"><%= detail.tool_quantity.tool.description %></div>
+                          <div class="col-md-6 overflowed"><%= detail.serial_number %></div>
+                          <div class="col-md-6 overflowed"><%= detail.tool_quantity.tool.description %></div>
 
                         </div>
                     <% end %>
                 <% else %>
                     <% history_report.returned_quantities.each do |detail| %>
                         <div class="row inner_row">
-                          <div class="col-md-6"><%= detail.serial_number %></div>
-                          <div class="col-md-6"><%= detail.tool_quantity.tool.description %></div>
+                          <div class="col-md-6 overflowed"><%= detail.serial_number %></div>
+                          <div class="col-md-6 overflowed"><%= detail.tool_quantity.tool.description %></div>
                         </div>
                     <% end %>
                 <% end %>
               </div>
-              <div class="col-md-3"><%= User.find(history_report.user_id).name %></div>
+              <div class="col-md-2 item_crud overflowed"><%= User.find(history_report.user_id).name %></div>
             </div>
           <% end %>
         </div>

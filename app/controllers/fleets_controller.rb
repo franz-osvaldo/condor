@@ -32,6 +32,7 @@ class FleetsController < ApplicationController
       if @fleet.save
         format.js{}
       else
+        format.js{}
       end
     end
   end

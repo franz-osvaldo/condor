@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820074942) do
+ActiveRecord::Schema.define(version: 20160822100737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -352,6 +352,24 @@ ActiveRecord::Schema.define(version: 20160820074942) do
     t.index ["aircraft_id"], name: "index_systems_on_aircraft_id", using: :btree
   end
 
+  create_table "task_products", force: :cascade do |t|
+    t.integer  "task_id"
+    t.integer  "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_task_products_on_product_id", using: :btree
+    t.index ["task_id"], name: "index_task_products_on_task_id", using: :btree
+  end
+
+  create_table "task_tools", force: :cascade do |t|
+    t.integer  "tool_id"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_tools_on_task_id", using: :btree
+    t.index ["tool_id"], name: "index_task_tools_on_tool_id", using: :btree
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.integer  "system_id"
     t.string   "name"
@@ -450,6 +468,10 @@ ActiveRecord::Schema.define(version: 20160820074942) do
   add_foreign_key "roles", "flights"
   add_foreign_key "scheduled_inspections", "systems"
   add_foreign_key "systems", "aircrafts"
+  add_foreign_key "task_products", "products"
+  add_foreign_key "task_products", "tasks"
+  add_foreign_key "task_tools", "tasks"
+  add_foreign_key "task_tools", "tools"
   add_foreign_key "tasks", "systems"
   add_foreign_key "time_limits", "actions"
   add_foreign_key "time_limits", "inspections"

@@ -87,7 +87,16 @@ Rails.application.routes.draw do
       get 'user_history'
     end
   end
+  resources :systems, only: [] do
+    resources :tasks, shallow: true do
+      member do
+        get 'new_field'
+        get 'new_product_field'
+      end
+    end
+  end
 end
+
 
 
 

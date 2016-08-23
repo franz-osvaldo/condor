@@ -1,0 +1,14 @@
+<div class="row table_row">
+  <div class="col-md-5 item_detail overflowed ">
+    <%= tool.part_number %>
+  </div>
+  <div class="col-md-5 item_detail overflowed ">
+    <%= tool.description %>
+  </div>
+  <input type="hidden" name="task[tool_ids][]" value="<%= tool.id %>">
+  <div class="col-md-2 text-center location">
+    <button type="button" class="btn btn-danger delete_row">
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </div>
+</div>

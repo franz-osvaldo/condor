@@ -1,5 +1,5 @@
 <div class="row" id="<%= dom_id(outgoing_movement) %>">
-  <div class="col-md-7"><%= outgoing_movement.folio %></div>
+  <div class="col-md-7 item_crud overflowed"><%= outgoing_movement.folio %></div>
   <div class="col-md-5">
     <%= link_to outgoing_movement, remote: true, class:'btn btn-info btn-sm' do %>
         <span class="glyphicon glyphicon-search"></span> Mostrar

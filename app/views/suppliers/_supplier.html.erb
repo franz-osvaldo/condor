@@ -1,5 +1,5 @@
 <div class="row" id="<%= dom_id(supplier) %>">
-  <div class="col-md-6"><%= supplier.supplier %></div>
+  <div class="col-md-6 item_crud overflowed"><%= supplier.supplier %></div>
   <div class="col-md-2">
     <%= link_to supplier, class: 'btn btn-info btn-sm', remote: true do  %>
         <span class="glyphicon glyphicon-search"></span> Mostrar

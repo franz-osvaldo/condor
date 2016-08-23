@@ -18,6 +18,7 @@
 @import "tools";
 @import "tool_quantities";
 @import "products";
+@import "tasks";
 // Estilos para el almacén
 .tools.index,
 .product_units.index,
@@ -36,7 +37,8 @@
 .returned_tools.index,
 .tool_quantities.assets,
 .tool_quantities.loaned_tools_list,
-.tool_quantities.history_report{
+.tool_quantities.history_report,
+.tasks.index{
   margin-top: 10px;
   .modal_show, .modal_edit, .modal_delete{
     .modal-content{
@@ -240,6 +242,7 @@
       }
       input{
         border-radius: 0;
+        font-size: 12px;
       }
       .btn{
         width: 100%;
@@ -274,7 +277,7 @@
               padding: 0 2px;
             }
             .location, .serial_number{
-              padding: 0 0 0 2px;
+              padding: 0 1px 0 2px;
             }
           }
         }
@@ -301,22 +304,17 @@
   }
 
   .table_container{
+    .small_btn{
+      padding: 0;
+      .btn{
+        width: 30%!important;
+      }
+    }
     border: thin solid rgba(#016ecd, 0.3);
     padding: 0;
     .table_striped{
       .row:nth-child(even):not(.inner_row){
         background-color: rgba(#2980b9, 0.3);
-      }
-    }
-    .nano{
-      height: 523px;
-      .pane{
-        border-radius: 0;
-        width: 5px;
-        .slider{
-          border-radius: 0;
-          width: 5px;
-        }
       }
     }
     .table_head{
@@ -357,6 +355,31 @@
         margin-right: 3px;
       }
     }
+    .nano{
+      height: 507px;
+      .content{
+        .row{
+          .item_crud {
+            padding-top: 6px;
+          }
+          .overflowed{
+            overflow:hidden;
+            display:inline-block;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+      .pane{
+        border-radius: 0;
+        width: 5px;
+        .slider{
+          border-radius: 0;
+          width: 5px;
+        }
+      }
+    }
+
     .row{
       padding: 5px 15px;
       &:hover:not(.table_head){
@@ -428,6 +451,7 @@ $width_sidebar: 250px;
   width: $width_sidebar;
   height: 100%;
   position: fixed;
+  top: 50px;
   border-radius: 0;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   background-color: white;

@@ -4,6 +4,9 @@ class Tool < ApplicationRecord
   has_many :tool_quantities
   has_many :outgoing_quantities
   has_many :outgoing_tools, through: :outgoing_quantities
+  has_many :task_tools
+  has_many :tasks, through: :task_tools
+
 
   validates :part_number, presence: true
   validates :description, presence: true

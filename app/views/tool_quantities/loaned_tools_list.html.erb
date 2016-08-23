@@ -44,13 +44,13 @@
         <div class="content">
           <% @tools.each do |tool| %>
               <div class="row">
-                <div class="col-md-2"><%= tool.tool.part_number %></div>
-                <div class="col-md-3"><%= tool.tool.description %></div>
-                <div class="col-md-2"><%= tool.serial_number %></div>
-                <div class="col-md-2  <%= out_of_date?(tool.expiration)? 'alert-danger' :'alert-success' %>">
+                <div class="col-md-2 item_crud overflowed"><%= tool.tool.part_number %></div>
+                <div class="col-md-3 item_crud overflowed"><%= tool.tool.description %></div>
+                <div class="col-md-2 item_crud overflowed"><%= tool.serial_number %></div>
+                <div class="col-md-2 item_crud overflowed  <%= out_of_date?(tool.expiration)? 'alert-danger' :'alert-success' %>">
                   <%= format_date(tool.expiration)  %>
                 </div>
-                <div class="col-md-3"><%= tool.user_name %></div>
+                <div class="col-md-3 item_crud overflowed"><%= tool.user_name %></div>
               </div>
           <% end %>
         </div>

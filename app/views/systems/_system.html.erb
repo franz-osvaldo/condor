@@ -32,6 +32,11 @@
           <% end %>
         </li>
         <li>
+          <%= link_to system_tasks_path(system)do %>
+              <i class="fa fa-list" aria-hidden="true"></i> Tareas
+          <% end %>
+        </li>
+        <li>
           <%= link_to system_scheduled_inspections_path(system)do %>
               <i class="fa fa-clock-o" aria-hidden="true"></i> Inspecciones programadas
           <% end %>

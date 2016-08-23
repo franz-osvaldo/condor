@@ -5,6 +5,8 @@ class Product < ApplicationRecord
   has_many :outgoing_details
   has_many :outgoing_movements, through: :outgoing_details
   has_many :product_quantities
+  has_many :task_products
+  has_many :tasks, through: :task_products
 
   validates :part_number, presence: true
   validates :description, presence: true
