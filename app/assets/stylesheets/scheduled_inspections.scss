@@ -56,6 +56,16 @@
         border-radius: 0;
       }
     }
+    .inspeccion-previa, .tiempo-limite-unidad, .tiempo-excedente-unidad{
+      padding: 15px 15px;
+      font-size: 12px;
+      color: #666666;
+      .selectpicker{
+        border-radius: 0;
+        font-size: 10px;
+      }
+
+    }
     .referencia{
       //border:  2px solid purple;
       padding: 15px 15px;

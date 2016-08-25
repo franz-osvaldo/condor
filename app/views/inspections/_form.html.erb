@@ -1,0 +1,7 @@
+<%= form_for inspection, remote: true do |f| %>
+    <div class="form-group">
+      <%= f.label :name, 'Nombre' %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
+<% end %>

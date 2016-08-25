@@ -1,0 +1,5 @@
+$('<%= escape_javascript(render @inspection) %>').appendTo('.nano .content');
+$('#new_inspection :input').val('');
+$(".nano").nanoScroller({ scroll: 'bottom' });
+
+

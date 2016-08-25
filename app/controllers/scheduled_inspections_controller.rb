@@ -14,7 +14,7 @@ class ScheduledInspectionsController < ApplicationController
   def new
     @system = System.find(params[:system_id])
     @scheduled_inspection = ScheduledInspection.new
-    3.times do
+    10.times do
       @actions = @scheduled_inspection.actions.build
       (5 - @actions.time_limits.count).times do
         @time_limits = @actions.time_limits.build
@@ -25,8 +25,9 @@ class ScheduledInspectionsController < ApplicationController
   end
 
   def edit
+    @priority_inspections = Inspection.where('name != ?', 'Nuevo')
     @scheduled_inspection = ScheduledInspection.find(params[:id])
-    (3 - @scheduled_inspection.actions.count).times do
+    (10 - @scheduled_inspection.actions.count).times do
       @action = @scheduled_inspection.actions.build
     end
     @scheduled_inspection.actions.each do |action|

@@ -29,10 +29,14 @@
           DATOS GENERALES
         </div>
         <div class="general_data">
-          <%= f.label :name, 'Nombre de la inspección' %>
-          <%= f.collection_select(:name, Inspection.all, :name, :name, {}, class: 'form-control') %>
-          <%= f.label :inspection_ids, 'Inspecciones previas' %>
-          <%= f.collection_select('inspection_ids',  Inspection.all, :id, :name, {}, {multiple: true, class: 'form-control selectpicker'}) %>
+          <div class="form-group">
+            <%= f.label :name, 'Nombre de la inspección' %>
+            <%= f.collection_select(:name, @priority_inspections, :name, :name, {}, class: 'form-control selectpicker show-tick') %>
+          </div>
+          <div class="form-group">
+            <%= f.label :inspection_ids, 'Inspecciones previas' %>
+            <%= f.collection_select('inspection_ids',  Inspection.where('name != ? ', 'Nuevo'), :id, :name, {}, {multiple: true, class: 'form-control selectpicker '}) %>
+          </div>
         </div>
       </div>
     </div>
@@ -51,32 +55,32 @@
               </div>
               <div class="col-md-2 referencia">
                 <%= actions_form.label :task_ids, 'Referencia' %>
-                <%= actions_form.collection_select('task_ids',  Task.all, :id, :name, {}, {multiple: true, class: 'form-control selectpicker'}) %>
+                <%= actions_form.collection_select('task_ids',  Task.all, :id, :task_number, {}, {multiple: true, class: 'form-control selectpicker'}) %>
               </div>
               <div class="col-md-7 contenedor-tiempo-limite">
                 <%= actions_form.fields_for :time_limits do |time_limits_form| %>
                     <div class="time-limit-container">
                       <div class="tiempo-limite">
                         <%= time_limits_form.label :time, 'Limite' %>
-                        <%= time_limits_form.number_field :time, class:'form-control' %>
+                        <%= time_limits_form.text_field :time, class:'form-control' %>
                       </div>
                       <div class="tiempo-limite-unidad">
                         <%= time_limits_form.label :unit_id, 'Unidad' %>
-                        <%= time_limits_form.collection_select(:unit_id, Unit.all, :id, :name, {}, class:'form-control') %>
+                        <%= time_limits_form.collection_select(:unit_id, Unit.all, :id, :name, {}, {class:'form-control selectpicker show-tick'}) %>
                       </div>
                       <%= time_limits_form.fields_for :over_the_time_limit do |over| %>
                           <div class="tiempo-excedente">
                             <%= over.label :time, 'Excedente' %>
-                            <%= over.number_field :time, class: 'form-control' %>
+                            <%= over.text_field :time, class: 'form-control' %>
                           </div>
                           <div class="tiempo-excedente-unidad">
                             <%= over.label :unit_id, 'Unidad' %>
-                            <%= over.collection_select(:unit_id, Unit.all, :id, :name, {}, class:'form-control') %>
+                            <%= over.collection_select(:unit_id, Unit.all, :id, :name, {}, {class:'form-control selectpicker show-tick'}) %>
                           </div>
                       <% end %>
                       <div class="inspeccion-previa">
-                        <%= time_limits_form.label :inspection_id, 'Inspección previa' %>
-                        <%= time_limits_form.collection_select(:inspection_id, Inspection.all, :id, :name, {}, class:'form-control') %>
+                        <%= time_limits_form.label :inspection_id, 'Condición previa' %>
+                        <%= time_limits_form.collection_select(:inspection_id, Inspection.all, :id, :name, {}, {class:'form-control selectpicker show-tick pull-right'}) %>
                       </div>
                       <div class="administrar-tiempo text-center">
                         <span id="add-time-limit" class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>

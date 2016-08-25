@@ -1,4 +1,7 @@
 $('<%= escape_javascript( render @task) %>').appendTo('.table_body');
 // Quitamos las filas creadas dinámicamente en el formulario
+$('#task_name').val('');
+$('#task_task_number').val('');
 $('.table_row').remove();
+
 

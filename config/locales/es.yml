@@ -6,6 +6,7 @@ es:
       model: outgoing_detail
       model: incoming_quantity
       model: product_unit
+      model: inspection
     attributes:
       incoming_detail:
         quantity: 'Cantidad'
@@ -22,6 +23,8 @@ es:
         level: 'Nivel'
         position: 'Posición'
       product_unit:
+        name: 'Nombre'
+      inspection:
         name: 'Nombre'
     errors:
       messages:
