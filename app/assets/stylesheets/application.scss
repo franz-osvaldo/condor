@@ -39,7 +39,8 @@
 .tool_quantities.loaned_tools_list,
 .tool_quantities.history_report,
 .tasks.index,
-.inspections.index{
+.inspections.index,
+.fleets.scheduled_inspections{
   margin-top: 10px;
   .modal_show, .modal_edit, .modal_delete{
     .modal-content{
@@ -773,3 +774,4 @@ $width_sidebar: 250px;
   font-size: 18px;
 }
 
+//*********************************************************************************************

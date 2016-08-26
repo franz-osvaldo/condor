@@ -4,6 +4,9 @@ class FleetsController < ApplicationController
     flash.now[:flights] = 'in'
   end
 
+  def scheduled_inspections
+    @fleet = Fleet.find(params[:id])
+  end
   def index
     @fleet = Fleet.new
     @aircrafts = Aircraft.all

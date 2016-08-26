@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     collection do
       get 'aircrafts'
     end
+    member do
+      get 'scheduled_inspections'
+    end
     resources :flights, shallow: true
   end
   resources :product_units

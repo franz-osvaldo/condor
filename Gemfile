@@ -6,9 +6,12 @@ gem 'twitter-typeahead-rails', '~> 0.11.1'
 gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
 gem 'font-awesome-sass', '~> 4.6', '>= 4.6.2'
 gem 'paperclip', '~> 5.0.0'
+gem 'chartkick', '~> 2.0'
+gem 'groupdate', '~> 2.5', '>= 2.5.2'
 
 group :development do
   gem 'rails-erd', '~> 1.4', '>= 1.4.7'
+  gem 'table_print', '~> 1.5', '>= 1.5.6'
 end
 
 

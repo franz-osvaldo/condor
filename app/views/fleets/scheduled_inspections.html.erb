@@ -1,0 +1,56 @@
+<div class="row">
+  <div class="col-md-4 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-list-ol" aria-hidden="true"></i> Inspecciones programadas
+    </div>
+    <%= form_for Fleet.new  do |f| %>
+        <div class="form-group">
+          <%= f.label 'Sistema' %>
+
+        </div>
+
+        <%= f.submit 'Mostrar', class: 'btn btn-primary btn-sm' %>
+    <% end %>
+
+  </div>
+  <div class="col-md-8">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-12">Inspecciones futuras</div>
+      </div>
+      <div class="nano">
+        <div class="content">
+          <%= column_chart [
+                             {name: 'Supplementary Check 50 Fh', data: ScheduledInspection.keep_top_priority(1, 3600, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Supplementary Check 50 Fh'}.map{|row|[row[1],row[2]]}},
+                             {name: 'Supplementary Check 100 Fh', data: ScheduledInspection.keep_top_priority(1, 3600, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Supplementary Check 100 Fh'}.map{|row|[row[1],row[2]]}},
+                             {name: 'Intermediate Inspection', data: ScheduledInspection.keep_top_priority(1, 3600, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Intermediate Inspection'}.map{|row|[row[1],row[2]]}},
+                             {name: 'Periodical Inspection', data: ScheduledInspection.keep_top_priority(1, 3600, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Periodical Inspection'}.map{|row|[row[1],row[2]]}},
+                             {name: 'Supplementary Inspections according to Flight Hour and / or Calendar Time', data: ScheduledInspection.keep_top_priority(1, 3600, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Supplementary Inspections according to Flight Hour and / or Calendar Time'}.map{|row|[row[1],row[2]]}}
+                         ], stacked: true%>
+          <%= line_chart [
+                               {name: 'Supplementary Check 50 Fh', data: ScheduledInspection.keep_top_priority(1, 1200, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Supplementary Check 50 Fh'}.map{|row|[row[1],row[2]]}},
+                               {name: 'Supplementary Check 100 Fh', data: ScheduledInspection.keep_top_priority(1, 1200, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Supplementary Check 100 Fh'}.map{|row|[row[1],row[2]]}},
+                               {name: 'Intermediate Inspection', data: ScheduledInspection.keep_top_priority(1, 1200, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Intermediate Inspection'}.map{|row|[row[1],row[2]]}},
+                               {name: 'Periodical Inspection', data: ScheduledInspection.keep_top_priority(1, 1200, 1, 'Flight hours').map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!='Periodical Inspection'}.map{|row|[row[1],row[2]]}}
+                           ] %>
+          <%= column_chart [{
+                                name: 'Year 1800',
+                                data: [[107,1], [31,1], [635,1], [203,1], [2,1]]
+                            }, {
+                                name: 'Year 1900',
+                                data: [[133, 2], [156, 2], [947, 2], [408, 2], [6, 2]]
+                            }, {
+                                name: 'Year 2012',
+                                data: [[1052,3], [954,3], [4250,3], [740,3], [38,3]]
+                            }]%>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal_container"></div>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function () {
+    $(".nano").nanoScroller({ scroll: 'bottom' });
+  });
+</script>
