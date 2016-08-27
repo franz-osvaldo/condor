@@ -5,7 +5,30 @@ class FleetsController < ApplicationController
   end
 
   def scheduled_inspections
-    @fleet = Fleet.find(params[:id])
+    @fleets = Fleet.all
+    flash.now[:future_inspections] = 'in'
+  end
+
+  def get_systems
+    @systems = Fleet.find(params[:id]).aircraft.systems
+    @units = Unit.all
+    respond_to do |format|
+      format.js{}
+    end
+  end
+
+  def get_graph
+    total_flight_hours = Fleet.find(params[:fleet][:fleet_id]).total_flight_hours
+    system_id = params[:fleet][:system_id].to_i
+    unit_name = Unit.find(params[:fleet][:unit_id]).name
+    time = params[:fleet][:time].to_i
+    @data = []
+    ScheduledInspection.inspection_names(system_id, unit_name).each do |inspection_name|
+      @data.push({name: inspection_name,data: ScheduledInspection.keep_top_priority(total_flight_hours, total_flight_hours + time, system_id, unit_name).map{|row| [row[4],row[1],row[2]]}.reject{|a| a[0]!=inspection_name}.map{|row|[row[1],row[2]]}})
+    end
+    respond_to do |format|
+      format.js{  }
+    end
   end
   def index
     @fleet = Fleet.new

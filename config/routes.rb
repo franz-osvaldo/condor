@@ -18,9 +18,11 @@ Rails.application.routes.draw do
   resources :fleets do
     collection do
       get 'aircrafts'
+      get 'scheduled_inspections'
+      post 'get_graph'
     end
     member do
-      get 'scheduled_inspections'
+      get 'get_systems'
     end
     resources :flights, shallow: true
   end

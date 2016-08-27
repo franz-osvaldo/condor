@@ -1,0 +1,13 @@
+<div class="form-group aircrafts">
+  <%= label_tag :fleet_system_id, 'Sistema' %>
+  <%= collection_select :fleet, :system_id, systems, :id, :title, {}, {class: 'form-control'} %>
+</div>
+<div class="row">
+  <div class="div col-md-6 form-group">
+    <%= text_field_tag 'fleet[time]', '' ,class: 'form-control' %>
+  </div>
+  <div class="div col-md-6 form-group">
+    <%= collection_select :fleet, :unit_id, units, :id, :name, {}, {class: 'form-control'} %>
+  </div>
+</div>
+<%= submit_tag 'Consultar', class: 'btn btn-primary btn-sm' %>

@@ -15,10 +15,10 @@ class ScheduledInspection < ApplicationRecord
 
   # Todas las inspecciones sin tomar en cuenta prioritarias ni condiciones
   # [[#<TimeLimit...>, current_time, time_limit, condition_name, inspection_name], []... ]
-  def self.all_inspections(init_time, end_time, system_id, unit_name)
+  def self.all_inspections(end_time, system_id, unit_name)
     arreglo = []
     scheduled_inspections = ScheduledInspection.where('system_id = ?', system_id)
-    (init_time..end_time).each do |i|
+    (1..end_time).each do |i|
       scheduled_inspections.each do |scheduled_inspection|
         scheduled_inspection.actions.each do |action|
           action.time_limits.each do |time_limit|
@@ -40,20 +40,20 @@ class ScheduledInspection < ApplicationRecord
     (condition_name == 'No requerido')
   end
 
-  def self.inspection_was_accomplished?(system_id, unit_name)
-    # Un arreglo de las horas de las inspecciones junto con sus condiciones de un determinado sistema
+  # def self.inspection_was_accomplished?(system_id, unit_name)
+  #   Un arreglo de las horas de las inspecciones junto con sus condiciones de un determinado sistema
     # [[2400.0, "No requerido"], ...]
-    TimeLimit.joins(action: :scheduled_inspection).
-              where('scheduled_inspections.system_id' => system_id).
-              joins(:unit).
-              where('units.name' => unit_name).pluck(:time, :inspection_id).
-              map{|row| [row[0], Inspection.find(row[1]).name]}
-  end
+    # TimeLimit.joins(action: :scheduled_inspection).
+    #           where('scheduled_inspections.system_id' => system_id).
+    #           joins(:unit).
+    #           where('units.name' => unit_name).pluck(:time, :inspection_id).
+    #           map{|row| [row[0], Inspection.find(row[1]).name]}
+  # end
 
   # Eliminamos aquellos que no cumplen las condiciones
-  def self.remove_invalids(init_time, end_time, system_id, unit_name)
+  def self.remove_invalids(end_time, system_id, unit_name)
     depurados = []
-    arreglo = self.all_inspections(init_time, end_time, system_id, unit_name)
+    arreglo = self.all_inspections(end_time, system_id, unit_name)
     arreglo.each do |elemento|
       if self.condition_accomplished?(depurados, elemento[1], elemento[2], elemento[3])
         depurados.push(elemento)
@@ -67,7 +67,7 @@ class ScheduledInspection < ApplicationRecord
   # [...[#<TimeLimit id: 1 ...">, 100, 50.0, "No requerido", "Supplementary Check 50 Fh"]...]
   def self.keep_top_priority(init_time, end_time, system_id, unit_name)
     valid_items = []
-    availables = self.remove_invalids(init_time, end_time, system_id, unit_name)
+    availables = self.remove_invalids(end_time, system_id, unit_name)
     availables.each do |element|
       # si no tiene inspecciones prioritarias
       if element[0].action.scheduled_inspection.inspections.empty?
@@ -76,7 +76,8 @@ class ScheduledInspection < ApplicationRecord
         valid_items.push(element) unless self.por_lo_menos_uno(element[0].action.scheduled_inspection.inspections, system_id, element[1], unit_name) && self.prioritaria_presente?(availables, element)
       end
     end
-    valid_items.uniq
+    var = valid_items.reject { |a| a[1] < init_time }
+    var.uniq
   end
 
   # Alguna inspección prioritaria debería ejecutarse?
@@ -111,7 +112,9 @@ class ScheduledInspection < ApplicationRecord
   end
 
 
-
+  def self.inspection_names(system_id, unit_name)
+    ScheduledInspection.where('system_id = ?',system_id).joins(actions: [{time_limits: :unit}]).where('units.name' => unit_name).distinct.pluck(:name)
+  end
 
 
 
