@@ -112,6 +112,8 @@ class ScheduledInspection < ApplicationRecord
   end
 
 
+  # Los nombres de inspecciones de un determinado sistema
+
   def self.inspection_names(system_id, unit_name)
     ScheduledInspection.where('system_id = ?',system_id).joins(actions: [{time_limits: :unit}]).where('units.name' => unit_name).distinct.pluck(:name)
   end

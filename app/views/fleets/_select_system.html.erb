@@ -4,9 +4,11 @@
 </div>
 <div class="row">
   <div class="div col-md-6 form-group">
+    <%= label_tag :fleet_time, 'Tiempo' %>
     <%= text_field_tag 'fleet[time]', '' ,class: 'form-control' %>
   </div>
   <div class="div col-md-6 form-group">
+    <%= label_tag :fleet_unit_id, 'Unidad' %>
     <%= collection_select :fleet, :unit_id, units, :id, :name, {}, {class: 'form-control'} %>
   </div>
 </div>

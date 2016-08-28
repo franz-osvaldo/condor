@@ -18,6 +18,9 @@
 //= require twitter/typeahead
 //= require bootstrap-datepicker
 //= require highcharts
+//= require highcharts-more
+//= require solid-gauge
+
 //= require chartkick
 //= require_tree .
 
