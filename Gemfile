@@ -12,6 +12,7 @@ gem 'groupdate', '~> 2.5', '>= 2.5.2'
 group :development do
   gem 'rails-erd', '~> 1.4', '>= 1.4.7'
   gem 'table_print', '~> 1.5', '>= 1.5.6'
+  gem 'better_errors', '~> 2.1', '>= 2.1.1'
 end
 
 

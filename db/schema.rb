@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822100737) do
+ActiveRecord::Schema.define(version: 20160828055209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -379,6 +379,21 @@ ActiveRecord::Schema.define(version: 20160822100737) do
     t.index ["system_id"], name: "index_tasks_on_system_id", using: :btree
   end
 
+  create_table "time_details", force: :cascade do |t|
+    t.integer  "part_id"
+    t.integer  "fleet_id"
+    t.float    "fhsn"
+    t.integer  "dsn"
+    t.float    "fhso"
+    t.integer  "dso"
+    t.string   "overhaul_state"
+    t.datetime "overhaul_date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["fleet_id"], name: "index_time_details_on_fleet_id", using: :btree
+    t.index ["part_id"], name: "index_time_details_on_part_id", using: :btree
+  end
+
   create_table "time_limits", force: :cascade do |t|
     t.integer  "action_id"
     t.integer  "unit_id"
@@ -473,6 +488,8 @@ ActiveRecord::Schema.define(version: 20160822100737) do
   add_foreign_key "task_tools", "tasks"
   add_foreign_key "task_tools", "tools"
   add_foreign_key "tasks", "systems"
+  add_foreign_key "time_details", "fleets"
+  add_foreign_key "time_details", "parts"
   add_foreign_key "time_limits", "actions"
   add_foreign_key "time_limits", "inspections"
   add_foreign_key "time_limits", "units"

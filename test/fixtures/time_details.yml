@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  part: one
+  fleet: one
+  fhsn: 1.5
+  dsn: 1
+  fhso: 1.5
+  dso: 1
+  overhaul_state: MyString
+  overhaul_date: 2016-08-28 01:52:09
+
+two:
+  part: two
+  fleet: two
+  fhsn: 1.5
+  dsn: 1
+  fhso: 1.5
+  dso: 1
+  overhaul_state: MyString
+  overhaul_date: 2016-08-28 01:52:09
