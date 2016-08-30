@@ -101,6 +101,11 @@ Rails.application.routes.draw do
     end
   end
   resources :inspections
+  resources :tbos do
+    member do
+      get 'get_parts'
+    end
+  end
 end
 
 

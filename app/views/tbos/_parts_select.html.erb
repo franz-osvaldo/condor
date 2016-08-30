@@ -1,0 +1,3 @@
+<%= label_tag :tbo_part_id, 'Parte' %>
+<%= collection_select :tbo, :part_id, parts, :id, :description, {prompt: true}, {class: 'form-control'} %>
+
