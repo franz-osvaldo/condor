@@ -1,0 +1,4 @@
+$('.modal_container').html('<%= escape_javascript(render partial: 'form', locals: {life_time_limit: @life_time_limit, parts: @parts, aircraft: @aircraft}) %>');
+$('#modal').modal('show');
+
+

@@ -1,4 +1,26 @@
 class FleetsController < ApplicationController
+  def tbos
+    @fleets = Fleet.all
+    flash.now[:tasks] = 'in'
+  end
+
+  def get_tbos
+    @fleet = Fleet.find(params[:id])
+    @alert_tbos = @fleet.alert_tbos.where('state != ?', 'accomplished')
+    respond_to do |format|
+      format.js{}
+    end
+  end
+
+  def after_tbo
+    part_id = Tbo.find(params[:tbo_id]).part.id
+    TimeDetail.after_tbo(params[:option], params[:fleet_id], part_id)
+    AlertTbo.find(params[:id]).update(state: 'accomplished')
+    @alert_tbo = AlertTbo.find(params[:id])
+    respond_to do |format|
+      format.js{}
+    end
+  end
   def aircrafts
     @aircrafts  = Fleet.all
     flash.now[:flights] = 'in'

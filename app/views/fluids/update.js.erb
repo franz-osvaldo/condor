@@ -1,0 +1,4 @@
+$('#<%= dom_id(@fluid) %>').replaceWith('<%= escape_javascript(render partial: 'fluid', locals:{fluid: @fluid, aircraft: @aircraft}) %>');
+$('#modal').modal('hide');
+
+

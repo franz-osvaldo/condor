@@ -1,0 +1,10 @@
+$("<%= escape_javascript(render partial: 'fluid', locals:{fluid: @fluid, aircraft: @aircraft}) %>").appendTo('.nano .content');
+$('#fluid_time_limit').val('');
+$('#fluid_over_the_time_limit').val('');
+$('#fluid_alert_before').val('');
+$('#fluid_part_id').val($('#fluid_part_id option:first').val());
+$('#fluid_unit_id').val($('#fluid_unit_id option:first').val());
+$('#fluid_condition_id').val($('#fluid_condition_id option:first').val());
+
+$(".nano").nanoScroller();
+$(".nano").nanoScroller({ scroll: 'bottom' });

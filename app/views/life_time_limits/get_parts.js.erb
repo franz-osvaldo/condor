@@ -1,0 +1,4 @@
+$('.parts').html("<%= escape_javascript(render partial: 'parts_select', locals: {parts: @parts}) %>");
+$('.nano .content').html("<%= escape_javascript(render partial: 'life_time_limit', collection: @life_time_limits,locals: {aircraft: @aircraft}) %>");
+$(".nano").nanoScroller();
+$(".nano").nanoScroller({ scroll: 'bottom' });

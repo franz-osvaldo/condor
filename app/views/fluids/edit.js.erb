@@ -1,0 +1,4 @@
+$('.modal_container').html('<%= escape_javascript(render partial: 'form', locals: {fluid: @fluid, parts: @parts, aircraft: @aircraft}) %>');
+$('#modal').modal('show');
+
+

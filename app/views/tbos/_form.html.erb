@@ -36,6 +36,16 @@
                 <p class="over_time_unit_edit"><%= tbo.unit.name %></p>
               </div>
             </div>
+            <div class="row">
+              <div class="form-group col-md-6">
+                <%= f.label :alert_before, 'Alerta' %>
+                <%= f.text_field :alert_before, class: 'form-control' %>
+              </div>
+              <div class="col-md-6">
+                <%= f.label 'Unidad' %>
+                <p class="over_time_unit_edit"><%= tbo.unit.name %></p>
+              </div>
+            </div>
             <div class="form-group">
               <%= f.label :condition_id, 'Condiciones' %>
               <%= collection_select :tbo, :condition_id, Condition.all, :id, :name, {prompt: true}, {class: 'form-control'} %>

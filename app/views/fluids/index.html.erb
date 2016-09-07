@@ -1,0 +1,85 @@
+<div class="row">
+  <div class="col-md-4 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-bell-o" aria-hidden="true"></i> FLUIDOS-LUBRICACIÓN
+    </div>
+    <%= form_for @fluid, remote: true do |f| %>
+        <div class="form-group aircrafts">
+          <%= label_tag :aircraft_id, 'Aeronave' %>
+          <%= collection_select :aircraft, :id, @aircrafts, :id, :trade_name, {prompt: true}, {class: 'form-control'} %>
+        </div>
+        <div class="form-group parts">
+          <!--Contenido añadido dinámicamente-->
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <%= f.label :time_limit, 'Tiempo' %>
+            <%= f.text_field :time_limit, class: 'form-control' %>
+          </div>
+          <div class="form-group col-md-6 over_time">
+            <%= f.label :fluid_unit_id, 'Unidad' %>
+            <%= collection_select :fluid, :unit_id, Unit.all, :id, :name, {prompt: 'Seleccione'}, {class:'form-control'} %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <%= f.label :over_the_time_limit, 'Excedente' %>
+            <%= f.text_field :over_the_time_limit, class: 'form-control' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.label 'Unidad' %>
+            <p class="over_time_unit"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <%= f.label :alert_before, 'Alerta' %>
+            <%= f.text_field :alert_before, class: 'form-control' %>
+          </div>
+          <div class="col-md-6">
+            <%= f.label 'Unidad' %>
+            <p class="over_time_unit"></p>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :condition_id, 'Condiciones' %>
+          <%= collection_select :fluid, :condition_id, Condition.all, :id, :name, {prompt: true}, {class: 'form-control'} %>
+        </div>
+        <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
+    <% end %>
+  </div>
+  <div class="col-md-8">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-3">Parte</div>
+        <div class="col-md-3">Limite</div>
+        <div class="col-md-6">Administrar</div>
+      </div>
+      <div class="nano">
+        <div class="content">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal_container"></div>
+<script>
+  $(document).ready(function () {
+
+    $('.aircrafts').on('change', 'select', function () {
+      if($(this).val().length != 0){
+        $.ajax({
+          method: 'GET',
+          url: '/fluids/'+$(this).val()+'/get_parts',
+          dataType: 'script'
+        });
+      }
+    });
+
+    $('.over_time').on('change', 'select', function () {
+      $('.over_time_unit').html($('#fluid_unit_id option:selected').text());
+    });
+
+  });
+</script>

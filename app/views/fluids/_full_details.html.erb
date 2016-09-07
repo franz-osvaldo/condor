@@ -1,0 +1,29 @@
+<div id="modal" class="modal fade modal_show" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Mostrar
+      </div>
+      <div class="modal-body text-center">
+        <br>
+        <strong>Descripcion</strong>
+        <p><%= fluid.part.description %></p>
+        <strong>Numero de parte</strong>
+        <p><%= fluid.part.part_number %></p>
+        <strong>Tiempo limite</strong>
+        <p><%= fluid.time_limit %> <%= fluid.unit.name %> </p>
+        <strong>Excedente permitido</strong>
+        <p><%= fluid.over_the_time_limit %> <%= fluid.unit.name %> </p>
+        <strong>Alerta</strong>
+        <p><%= fluid.alert_before %> <%= fluid.unit.name %> </p>
+        <strong>Condición</strong>
+        <p><%= fluid.condition.name %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module GraphReportsHelper
+end

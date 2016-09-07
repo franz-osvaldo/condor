@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  part: one
+  condition: one
+  unit: one
+  time_limit: 1.5
+  alert_before: 1.5
+  over_the_time_limit: 1.5
+
+two:
+  part: two
+  condition: two
+  unit: two
+  time_limit: 1.5
+  alert_before: 1.5
+  over_the_time_limit: 1.5

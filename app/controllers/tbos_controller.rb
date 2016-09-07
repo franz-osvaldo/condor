@@ -13,7 +13,7 @@ class TbosController < ApplicationController
   def index
     @tbo = Tbo.new
     @aircrafts = Aircraft.all
-    flash[:aircrafts] = 'in'
+    flash.now[:aircrafts] = 'in'
   end
 
   def show
@@ -68,6 +68,6 @@ class TbosController < ApplicationController
   end
   private
   def tbo_params
-    params.require(:tbo).permit(:part_id, :condition_id, :unit_id, :time_limit, :over_the_time_limit)
+    params.require(:tbo).permit(:part_id, :condition_id, :unit_id, :time_limit, :over_the_time_limit, :alert_before)
   end
 end

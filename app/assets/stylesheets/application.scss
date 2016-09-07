@@ -41,7 +41,10 @@
 .tasks.index,
 .inspections.index,
 .fleets.scheduled_inspections,
-.tbos.index{
+.tbos.index,
+.fleets.tbos,
+.fluids.index,
+.life_time_limits.index{
   margin-top: 10px;
   .modal_show, .modal_edit, .modal_delete{
     .modal-content{
@@ -385,7 +388,7 @@
 
     .row{
       padding: 5px 15px;
-      &:hover:not(.table_head){
+      &:hover:not(.table_head, .tbo_row){
         background-color: rgba(#4aafcd, 0.2);
         .inner_row:hover{
           background-color: transparent;
@@ -776,3 +779,8 @@ $width_sidebar: 250px;
 }
 
 //*********************************************************************************************
+
+svg > text[text-anchor="end"] {
+  display: none;
+}
+

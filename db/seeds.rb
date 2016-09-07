@@ -10,6 +10,10 @@ Unit.create(:name => 'Years')
 Unit.create(:name => 'Months')
 Unit.create(:name => 'Days')
 
+Condition.create(:name => 'TSN')
+Condition.create(:name => 'TSO')
+Condition.create(:name => 'No requerido')
+
 FlightCrew.create(:name => 'Franz Beltran')
 FlightCrew.create(:name => 'Abel Lopez')
 FlightCrew.create(:name => 'Fabian Pardo')
@@ -68,8 +72,27 @@ Tool.create(:part_number => 'XYZ123', :description => '90° Angle Block', :speci
 Tool.create(:part_number => '105-31702 W24', :description => 'Check Device', :specification => 'Sin especificación')
 Tool.create(:part_number => '105-31803 W2', :description => 'Measuring Device', :specification => 'Sin especificación')
 
-@aircraft = Aircraft.create(:manufacturer => 'EUROCOPTER', :trade_name => 'EC 145')
-@system = @aircraft.systems.create(:title => 'TAIL ROTOR DRIVE', :chapter_number => '65')
+@aircraft1 = Aircraft.create(:manufacturer => 'EUROCOPTER', :trade_name => 'EC 145')
+@system1 = @aircraft1.systems.create(:title => 'TAIL ROTOR DRIVE', :chapter_number => '65')
+
+@component1 = @system1.components.create(:name => 'Componente')
+
+@parts1 = @component1.parts.create([{description: 'parte 1', part_number: 'ABC1'},
+                                   {description: 'parte 2', part_number: 'ABC2'},
+                                   {description: 'parte 3', part_number: 'ABC3'},
+                                   {description: 'parte 4', part_number: 'ABC4'},
+                                   {description: 'parte 5', part_number: 'ABC5'},
+                                   {description: 'parte 6', part_number: 'ABC6'},
+                                   {description: 'parte 7', part_number: 'ABC7'},
+                                   {description: 'parte 8', part_number: 'ABC8'}])
 
 
+@aircraft2 = Aircraft.create(:manufacturer => 'EUROCOPTER', :trade_name => 'ASB 310')
+@system2 = @aircraft2.systems.create(:title => 'GENERAL', :chapter_number => '1')
+
+@component2 = @system2.components.create(:name => 'Componente')
+
+@parts2 = @component2.parts.create([{description: 'parte 1', part_number: 'XYZ1'},
+                                    {description: 'parte 2', part_number: 'XYZ2'},
+                                    ])
 

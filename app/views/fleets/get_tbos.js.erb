@@ -1,0 +1,182 @@
+$('.content').html("<%= escape_javascript(render partial:  'drawn_tbos', collection: @alert_tbos, as: 'alert_tbo') %>");
+
+<% @alert_tbos.each do |alert_tbo| %>
+  $('#<%= dom_id(alert_tbo) %>').highcharts({
+    <% if alert_tbo.tbo.unit.name == 'Flight hours'%>
+      chart: {
+        type: 'gauge',
+        plotBackgroundColor: null,
+        plotBackgroundImage: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+      },
+      title: {
+        text: 'TBO'
+      },
+      pane: {
+        startAngle: -150,
+        endAngle: 150,
+        background: [{
+          backgroundColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, '#FFF'],
+              [1, '#333']
+            ]
+          },
+          borderWidth: 0,
+          outerRadius: '109%'
+        }, {
+          backgroundColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, '#333'],
+              [1, '#FFF']
+            ]
+          },
+          borderWidth: 1,
+          outerRadius: '107%'
+        }, {
+          // default background
+        }, {
+          backgroundColor: '#DDD',
+          borderWidth: 0,
+          outerRadius: '105%',
+          innerRadius: '103%'
+        }]
+      },
+      yAxis: {
+        min: 0,
+        max: <%= Tbo.find(alert_tbo.tbo_id).alert_before*2 + Tbo.find(alert_tbo.tbo_id).over_the_time_limit %>,
+
+        minorTickInterval: 'auto',
+        minorTickWidth: 1,
+        minorTickLength: 10,
+        minorTickPosition: 'inside',
+        minorTickColor: '#666',
+
+        tickPixelInterval: 30,
+        tickWidth: 2,
+        tickPosition: 'inside',
+        tickLength: 10,
+        tickColor: '#666',
+        labels: {
+          step: 2,
+          rotation: 'auto'
+        },
+        title: {
+          text: 'flight hours'
+        },
+        plotBands: [{
+          from: 0,
+          to: <%= Tbo.find(alert_tbo.tbo_id).alert_before %>,
+          color: '#55BF3B' // green
+        }, {
+          from: <%= Tbo.find(alert_tbo.tbo_id).alert_before %>,
+          to: <%= Tbo.find(alert_tbo.tbo_id).alert_before + Tbo.find(alert_tbo.tbo_id).over_the_time_limit %>,
+          color: '#DDDF0D' // yellow
+        }, {
+          from: <%= Tbo.find(alert_tbo.tbo_id).alert_before + Tbo.find(alert_tbo.tbo_id).over_the_time_limit %>,
+          to: <%= Tbo.find(alert_tbo.tbo_id).alert_before*2 + Tbo.find(alert_tbo.tbo_id).over_the_time_limit %> ,
+          color: '#DF5353' // red
+        }]
+      },
+      series: [{
+        name: 'Actual',
+        data: [<%= TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.fhso - ( alert_tbo.tbo.time_limit  - alert_tbo.tbo.alert_before) %>],
+        tooltip: {
+          valueSuffix: 'Flight hours'
+        }
+      }],
+    <% else %>
+      chart: {
+        type: 'gauge',
+        plotBackgroundColor: null,
+        plotBackgroundImage: null,
+        plotBorderWidth: 0,
+        plotShadow: false
+      },
+      title: {
+        text: 'TBO'
+      },
+      pane: {
+        startAngle: -150,
+        endAngle: 150,
+        background: [{
+          backgroundColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, '#FFF'],
+              [1, '#333']
+            ]
+          },
+          borderWidth: 0,
+          outerRadius: '109%'
+        }, {
+          backgroundColor: {
+            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+            stops: [
+              [0, '#333'],
+              [1, '#FFF']
+            ]
+          },
+          borderWidth: 1,
+          outerRadius: '107%'
+        }, {
+          // default background
+        }, {
+          backgroundColor: '#DDD',
+          borderWidth: 0,
+          outerRadius: '105%',
+          innerRadius: '103%'
+        }]
+      },
+      yAxis: {
+        min: 0,
+        max: <%= Tbo.find(alert_tbo.tbo_id).alert_before_in_days*2 + Tbo.find(alert_tbo.tbo_id).over_the_time_limit_in_days %>,
+
+        minorTickInterval: 'auto',
+        minorTickWidth: 1,
+        minorTickLength: 10,
+        minorTickPosition: 'inside',
+        minorTickColor: '#666',
+
+        tickPixelInterval: 30,
+        tickWidth: 2,
+        tickPosition: 'inside',
+        tickLength: 10,
+        tickColor: '#666',
+        labels: {
+          step: 2,
+          rotation: 'auto'
+        },
+        title: {
+          text: 'Days'
+        },
+        plotBands: [{
+          from: 0,
+          to: <%= Tbo.find(alert_tbo.tbo_id).alert_before_in_days %>,
+          color: '#55BF3B' // green
+        }, {
+          from: <%= Tbo.find(alert_tbo.tbo_id).alert_before_in_days %>,
+          to: <%= Tbo.find(alert_tbo.tbo_id).alert_before_in_days + Tbo.find(alert_tbo.tbo_id).over_the_time_limit_in_days %>,
+          color: '#DDDF0D' // yellow
+        }, {
+          from: <%= Tbo.find(alert_tbo.tbo_id).alert_before_in_days + Tbo.find(alert_tbo.tbo_id).over_the_time_limit_in_days %>,
+          to: <%= Tbo.find(alert_tbo.tbo_id).alert_before_in_days*2 + Tbo.find(alert_tbo.tbo_id).over_the_time_limit_in_days %> ,
+          color: '#DF5353' // red
+        }]
+      },
+      series: [{
+        name: 'Actual',
+        data: [<%= TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.dso - ( alert_tbo.tbo.time_limit_in_days  - alert_tbo.tbo.alert_before_in_days) %>],
+        tooltip: {
+          valueSuffix: 'Days'
+        }
+      }]
+    <% end%>
+
+
+  });
+<% end %>
+

@@ -20,9 +20,12 @@ Rails.application.routes.draw do
       get 'aircrafts'
       get 'scheduled_inspections'
       post 'get_graph'
+      get 'tbos'
+      post 'after_tbo'
     end
     member do
       get 'get_systems'
+      get 'get_tbos'
     end
     resources :flights, shallow: true
   end
@@ -102,6 +105,17 @@ Rails.application.routes.draw do
   end
   resources :inspections
   resources :tbos do
+    member do
+      get 'get_parts'
+    end
+  end
+  resources :graph_reports
+  resources :fluids do
+    member do
+      get 'get_parts'
+    end
+  end
+  resources :life_time_limits do
     member do
       get 'get_parts'
     end

@@ -3,6 +3,7 @@ class OutgoingDetail < ApplicationRecord
   belongs_to :outgoing_movement
 
   validates :quantity, presence: true
+  validates :quantity, numericality: {greater_than: 0}
 
   after_create :update_stock
 

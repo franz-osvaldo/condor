@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160829071915) do
+ActiveRecord::Schema.define(version: 20160907224826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20160829071915) do
     t.string   "trade_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "alert_tbos", force: :cascade do |t|
+    t.integer  "fleet_id"
+    t.integer  "tbo_id"
+    t.string   "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fleet_id"], name: "index_alert_tbos_on_fleet_id", using: :btree
+    t.index ["tbo_id"], name: "index_alert_tbos_on_tbo_id", using: :btree
   end
 
   create_table "borrowed_quantities", force: :cascade do |t|
@@ -95,6 +105,20 @@ ActiveRecord::Schema.define(version: 20160829071915) do
     t.index ["fleet_id"], name: "index_flights_on_fleet_id", using: :btree
   end
 
+  create_table "fluids", force: :cascade do |t|
+    t.integer  "part_id"
+    t.integer  "condition_id"
+    t.integer  "unit_id"
+    t.float    "time_limit"
+    t.float    "alert_before"
+    t.float    "over_the_time_limit"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.index ["condition_id"], name: "index_fluids_on_condition_id", using: :btree
+    t.index ["part_id"], name: "index_fluids_on_part_id", using: :btree
+    t.index ["unit_id"], name: "index_fluids_on_unit_id", using: :btree
+  end
+
   create_table "incoming_details", force: :cascade do |t|
     t.integer  "incoming_movement_id"
     t.integer  "product_id"
@@ -159,6 +183,17 @@ ActiveRecord::Schema.define(version: 20160829071915) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "life_time_limits", force: :cascade do |t|
+    t.integer  "part_id"
+    t.integer  "unit_id"
+    t.float    "life_limit"
+    t.float    "alert_before"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["part_id"], name: "index_life_time_limits_on_part_id", using: :btree
+    t.index ["unit_id"], name: "index_life_time_limits_on_unit_id", using: :btree
   end
 
   create_table "outgoing_details", force: :cascade do |t|
@@ -393,6 +428,7 @@ ActiveRecord::Schema.define(version: 20160829071915) do
     t.float    "over_the_time_limit"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.float    "alert_before"
     t.index ["condition_id"], name: "index_tbos_on_condition_id", using: :btree
     t.index ["part_id"], name: "index_tbos_on_part_id", using: :btree
     t.index ["unit_id"], name: "index_tbos_on_unit_id", using: :btree
@@ -465,12 +501,17 @@ ActiveRecord::Schema.define(version: 20160829071915) do
   end
 
   add_foreign_key "actions", "scheduled_inspections"
+  add_foreign_key "alert_tbos", "fleets"
+  add_foreign_key "alert_tbos", "tbos"
   add_foreign_key "borrowed_quantities", "borrowed_tools"
   add_foreign_key "borrowed_quantities", "tool_quantities"
   add_foreign_key "borrowed_tools", "users"
   add_foreign_key "components", "systems"
   add_foreign_key "fleets", "aircrafts"
   add_foreign_key "flights", "fleets"
+  add_foreign_key "fluids", "conditions"
+  add_foreign_key "fluids", "parts"
+  add_foreign_key "fluids", "units"
   add_foreign_key "incoming_details", "incoming_movements"
   add_foreign_key "incoming_details", "products"
   add_foreign_key "incoming_movements", "incoming_movement_types"
@@ -478,6 +519,8 @@ ActiveRecord::Schema.define(version: 20160829071915) do
   add_foreign_key "incoming_quantities", "incoming_tools"
   add_foreign_key "incoming_quantities", "tools"
   add_foreign_key "incoming_tools", "incoming_tool_types"
+  add_foreign_key "life_time_limits", "parts"
+  add_foreign_key "life_time_limits", "units"
   add_foreign_key "outgoing_details", "outgoing_movements"
   add_foreign_key "outgoing_details", "products"
   add_foreign_key "outgoing_movements", "outgoing_movement_types"

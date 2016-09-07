@@ -1,0 +1,39 @@
+<div class="row tbo_row" id="row_<%= dom_id(alert_tbo)%>">
+  <div class="col-md-6">
+    <div id="<%= dom_id(alert_tbo) %>" style="min-width: 310px; max-width: 400px; height: 300px;"></div>
+  </div>
+  <div class="col-md-3">
+    <strong>Aeronave</strong> <br>
+    <%= Fleet.find(alert_tbo.fleet_id).name %> <br>
+    <strong>Numero de registro</strong> <br>
+    <%= Fleet.find(alert_tbo.fleet_id).aircraft_registration %> <br>
+    <strong>Descripcion</strong> <br>
+    <%= Tbo.find(alert_tbo.tbo_id).part.description %> <br>
+    <strong>Numero de parte</strong> <br>
+    <%= Tbo.find(alert_tbo.tbo_id).part.part_number %> <br>
+  </div>
+  <div class="col-md-3 form-group">
+    <%= form_tag '/fleets/after_tbo', remote: true do %>
+      <div class="form-group">
+        <%= select_tag(:option, options_for_select([%w(Nuevo new), %w(Overhaul overhauled)]), class: 'form-control', prompt: 'Seleccionar' )%>
+      </div>
+      <input type="hidden" value="<%= alert_tbo.tbo_id %>" name="tbo_id">
+      <input type="hidden" value="<%= alert_tbo.fleet_id %>" name="fleet_id">
+      <input type="hidden" value="<%= alert_tbo.id %>" name="id">
+      <div class="form-group">
+        <input type="submit" class="btn btn-sm btn-primary form-control" value="Confirmar">
+      </div>
+
+    <% end %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

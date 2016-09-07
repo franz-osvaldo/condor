@@ -1,6 +1,7 @@
 $("<%= escape_javascript(render partial: 'tbo', locals:{tbo: @tbo, aircraft: @aircraft}) %>").appendTo('.nano .content');
 $('#tbo_time_limit').val('');
 $('#tbo_over_the_time_limit').val('');
+$('#tbo_alert_before').val('');
 $('#tbo_part_id').val($('#tbo_part_id option:first').val());
 $('#tbo_unit_id').val($('#tbo_unit_id option:first').val());
 $('#tbo_condition_id').val($('#tbo_condition_id option:first').val());

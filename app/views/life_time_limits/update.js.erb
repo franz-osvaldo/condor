@@ -1,0 +1,4 @@
+$('#<%= dom_id(@life_time_limit) %>').replaceWith('<%= escape_javascript(render partial: 'life_time_limit', locals:{life_time_limit: @life_time_limit, aircraft: @aircraft}) %>');
+$('#modal').modal('hide');
+
+

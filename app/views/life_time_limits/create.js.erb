@@ -1,0 +1,9 @@
+$("<%= escape_javascript(render partial: 'life_time_limit', locals:{life_time_limit: @life_time_limit, aircraft: @aircraft}) %>").appendTo('.nano .content');
+$('#life_time_limit_life_limit').val('');
+$('#life_time_limit_alert_before').val('');
+$('#life_time_limit_part_id').val($('#life_time_limit_part_id option:first').val());
+$('#life_time_limit_unit_id').val($('#life_time_limit_unit_id option:first').val());
+
+$(".nano").nanoScroller();
+$(".nano").nanoScroller({ scroll: 'bottom' });
+
