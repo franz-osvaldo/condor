@@ -236,10 +236,19 @@
           <div id="tareas" class="panel-collapse collapse  <%= flash[:tasks] ? flash[:tasks] : '' %>">
             <div class="panel-body">
               <%= link_to tbos_fleets_path do %>
-                  <i class="fa fa-list-ol" aria-hidden="true"></i> TBO  <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+                  <i class="fa fa-list-ol" aria-hidden="true"></i> Tbos  <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
               <% end %>
             </div>
-
+            <div class="panel-body">
+              <%= link_to tbos_fleets_path do %>
+                  <i class="fa fa-list-ol" aria-hidden="true"></i> Cambio de aceites  <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to tbos_fleets_path do %>
+                  <i class="fa fa-list-ol" aria-hidden="true"></i> Tiempo de vida limite  <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+              <% end %>
+            </div>
           </div>
         </div>
 
