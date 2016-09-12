@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root    'sessions#new'
+  post    'login'  => 'sessions#create'
+  delete  'logout' => 'sessions#destroy'
   resources :aircrafts do
     resources :systems, shallow: true
     collection do
@@ -120,6 +123,13 @@ Rails.application.routes.draw do
       get 'get_parts'
     end
   end
+  resources :users do
+    member do
+      post 'update_role'
+    end
+  end
+
+
 end
 
 

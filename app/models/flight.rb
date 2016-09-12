@@ -5,8 +5,10 @@ class Flight < ApplicationRecord
   has_many :flight_crews, through: :roles
   accepts_nested_attributes_for :passengers
   before_save :set_flight_time, :set_block_time, :mark_passengers_for_removal
+
   after_create :update_time_details
   before_update :re_update_time_details
+
   after_save :find_out_tbos
 
   private
@@ -33,8 +35,6 @@ class Flight < ApplicationRecord
   def update_time_details
     self.fleet.time_details.each do |time_detail|
       time_detail.update(fhsn: time_detail.fhsn + self.flight_time, fhso: time_detail.fhso + self.flight_time)
-      time_detail.update_dso
-      time_detail.update_dsn
     end
   end
 
@@ -43,6 +43,7 @@ class Flight < ApplicationRecord
       time_detail.update(fhsn: time_detail.fhsn - Flight.find(self.id).flight_time + self.flight_time, fhso: time_detail.fhso - Flight.find(self.id).flight_time + self.flight_time)
     end
   end
+
 
   def find_out_tbos
     self.fleet.find_out_tbos

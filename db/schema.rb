@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907224826) do
+ActiveRecord::Schema.define(version: 20160912143216) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20160907224826) do
     t.string   "trade_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "alert_life_limits", force: :cascade do |t|
+    t.integer  "life_time_limit_id"
+    t.integer  "fleet_id"
+    t.string   "state"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["fleet_id"], name: "index_alert_life_limits_on_fleet_id", using: :btree
+    t.index ["life_time_limit_id"], name: "index_alert_life_limits_on_life_time_limit_id", using: :btree
   end
 
   create_table "alert_tbos", force: :cascade do |t|
@@ -194,6 +204,12 @@ ActiveRecord::Schema.define(version: 20160907224826) do
     t.datetime "updated_at",   null: false
     t.index ["part_id"], name: "index_life_time_limits_on_part_id", using: :btree
     t.index ["unit_id"], name: "index_life_time_limits_on_unit_id", using: :btree
+  end
+
+  create_table "occupations", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "outgoing_details", force: :cascade do |t|
@@ -461,6 +477,13 @@ ActiveRecord::Schema.define(version: 20160907224826) do
     t.index ["unit_id"], name: "index_time_limits_on_unit_id", using: :btree
   end
 
+  create_table "tips", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "tool_quantities", force: :cascade do |t|
     t.integer  "tool_id"
     t.integer  "quantity_available"
@@ -496,11 +519,22 @@ ActiveRecord::Schema.define(version: 20160907224826) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "occupation_id"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["occupation_id"], name: "index_users_on_occupation_id", using: :btree
   end
 
   add_foreign_key "actions", "scheduled_inspections"
+  add_foreign_key "alert_life_limits", "fleets"
+  add_foreign_key "alert_life_limits", "life_time_limits"
   add_foreign_key "alert_tbos", "fleets"
   add_foreign_key "alert_tbos", "tbos"
   add_foreign_key "borrowed_quantities", "borrowed_tools"
@@ -559,4 +593,5 @@ ActiveRecord::Schema.define(version: 20160907224826) do
   add_foreign_key "time_limits", "inspections"
   add_foreign_key "time_limits", "units"
   add_foreign_key "tool_quantities", "tools"
+  add_foreign_key "users", "occupations"
 end

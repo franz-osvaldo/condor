@@ -1,15 +1,15 @@
 .products.index{
-  .nano{
-    height: 523px;
-    .pane{
-      border-radius: 0;
-      width: 5px;
-      .slider{
-        border-radius: 0;
-        width: 5px;
-      }
-    }
-  }
+  //.nano{
+    //height: 655px;
+    //.pane{
+    //  border-radius: 0;
+    //  width: 5px;
+    //  .slider{
+    //    border-radius: 0;
+    //    width: 5px;
+    //  }
+    //}
+  //}
   .input_file, .input_file_edit{
     width: 0.1px;
     height: 0.1px;
@@ -30,12 +30,17 @@
       color: white;
     }
   }
-  #image_preview, #image_preview_edit{
+  #image_preview_edit{
     margin-top: 10px;
     margin-bottom: 10px;
     width: 80%;
     border: thin solid rgba(#222, 0.1);
   }
+  #image_preview{
+    width: 270px;
+
+  }
+
   #deselect_image, #deselect_image_edit{
 
     span{

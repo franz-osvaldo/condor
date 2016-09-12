@@ -1,0 +1,23 @@
+<%= form_for user, remote: true do |f| %>
+    <div class="form-group">
+      <%= f.label :name, 'Nombre' %>
+      <%= f.text_field :name, class: 'form-control', :autocomplete => :off %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email, 'Correo electrónico' %>
+      <%= f.text_field :email, class: 'form-control', :autocomplete => :off %>
+    </div>
+    <div class="form-group">
+      <%= f.label :occupation_id, 'Rol' %>
+      <%= collection_select :user, :occupation_id, Occupation.all, :id, :name, {}, {class: 'form-control'} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password, 'Contraseña' %>
+      <%= f.password_field :password, class: 'form-control', :autocomplete => :off %>
+    </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation, 'Repetir contraseña' %>
+      <%= f.password_field :password_confirmation, class: 'form-control', :autocomplete => :off %>
+    </div>
+    <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
+<% end %>

@@ -1,17 +1,17 @@
 <div class="row" id="<%= dom_id(product) %>">
   <div class="col-md-2 item_crud overflowed"><%= product.part_number %></div>
   <div class="col-md-4 item_crud overflowed"><%= product.description %></div>
-  <div class="col-md-2">
+  <div class="col-md-2"  style="padding: 0 10px">
     <%= link_to product, class: 'btn btn-info btn-sm', remote: true do  %>
       <span class="glyphicon glyphicon-search"></span> Mostrar
     <% end %>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2"  style="padding: 0 10px">
     <%= link_to edit_product_path(product), class: 'btn btn-warning btn-sm', remote: true  do %>
       <span class="glyphicon glyphicon-pencil"></span> Editar
     <% end %>
   </div>
-  <div class="col-md-2">
+  <div class="col-md-2"  style="padding: 0 10px">
     <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target = "#modal-<%= dom_id(product) %>">
       <span class="glyphicon glyphicon-trash"></span> Eliminar
     </button>

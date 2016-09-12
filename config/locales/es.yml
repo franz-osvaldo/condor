@@ -7,6 +7,7 @@ es:
       model: incoming_quantity
       model: product_unit
       model: inspection
+      model: user
     attributes:
       incoming_detail:
         quantity: 'Cantidad'
@@ -26,6 +27,11 @@ es:
         name: 'Nombre'
       inspection:
         name: 'Nombre'
+      user:
+        email: 'Correo Electrónico'
+        name: 'Nombre'
+        password: 'Contraseña'
+        password_confirmation: 'Repetir Contraseña'
     errors:
       messages:
         record_invalid: "La validación falló: %{errors}"

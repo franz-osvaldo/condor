@@ -1,5 +1,36 @@
 <div class="side_navbar navbar">
       <div class="panel-group" id="accordion">
+
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#users">
+                <span class="glyphicon glyphicon-user"></span> Usuarios
+                <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+              </a>
+            </h1>
+          </div>
+          <div id="users" class="panel-collapse collapse <%= flash[:users] ? flash[:users] : '' %>">
+            <div class="panel-body">
+              <%= link_to users_path do %>
+                  <i class="fa fa-book" aria-hidden="true"></i> Catalogo de usuarios <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
         <div class="panel panel-default">
           <div class="panel-heading">
             <h1 class="panel-title">

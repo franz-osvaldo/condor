@@ -1,19 +1,26 @@
 <div class="row">
-  <div class="col-md-4 form_container">
+  <div class="col-md-5 form_container">
     <div class="form_header text-center">
       <i class="fa fa-book" aria-hidden="true"></i> Productos
     </div>
-    <div class="nano">
-      <div class="content">
+    <!--<div class="nano">-->
+      <!--<div class="content">-->
         <%= form_for @product, html: {multipart: true} do |f| %>
-            <div class="form-group">
-              <%= f.label :part_number, 'Numero de parte'%> <span class="label label-danger">Requerido</span>
-              <%= f.text_field :part_number, class: 'form-control', :required => true %>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= f.label :part_number, 'Numero de parte'%> <span class="label label-danger">R</span>
+                  <%= f.text_field :part_number, class: 'form-control', :required => true %>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <%= f.label :description, 'Descripción' %> <span class="label label-danger">R</span>
+                  <%= f.text_field :description, class: 'form-control', :required => true  %>
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <%= f.label :description, 'Descripción' %> <span class="label label-danger">Requerido</span>
-              <%= f.text_field :description, class: 'form-control', :required => true  %>
-            </div>
+
             <div class="form-group">
               <%= f.label :specification, 'Especificación' %>
               <%= f.text_area :specification, class: 'form-control' %>
@@ -21,7 +28,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
-                  <%= f.label :product_unit_id, 'Unidad' %> <span class="label label-danger field_required">Requerido</span>
+                  <%= f.label :product_unit_id, 'Unidad' %> <span class="label label-danger field_required">R</span>
                   <%= f.collection_select :product_unit_id, ProductUnit.all, :id, :name, {}, {class: 'form-control'} %>
                 </div>
               </div>
@@ -62,10 +69,10 @@
             </div>
             <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
         <% end %>
-      </div>
-    </div>
+      <!--</div>-->
+    <!--</div>-->
   </div>
-  <div class="col-md-8">
+  <div class="col-md-7">
     <div class="table_container">
       <div class="row table_head">
         <div class="col-md-2"><%= sortable 'part_number', 'PN' %></div>

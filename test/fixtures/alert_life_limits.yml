@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  life_time_limit: one
+  fleet: one
+  state: MyString
+
+two:
+  life_time_limit: two
+  fleet: two
+  state: MyString

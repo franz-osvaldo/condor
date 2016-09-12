@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-4 text-center">
+    <div class="user_container">
+      <%= image_tag current_user.avatar.url(:thumb), class: 'img-circle' %>
+      <p><%= current_user.name %></p>
+      <p><%= current_user.email %></p>
+      <%= link_to edit_user_path(current_user) do %>
+          <i class="fa fa-pencil" aria-hidden="true"></i> Actualizar informacion
+    <% end %>
+    </div>
+  </div>
+  <div class="col-md-8 text-center">
+    <div class="tip_container">
+      <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <%= image_tag('logo_header.png')  %>
+            <h3><strong>Bienvenido</strong></h3>
+            <p>En este recuadro encontraras consejos rápidos que te permitirán manejar y entender mejor el sistema</p>
+          </div>
+          <% Tip.order('RANDOM()').limit(4).each do |record| %>
+           <div class="item">
+             <strong><%= record.title %></strong>
+             <p><%= record.body %></p>
+           </div>
+          <% end %>
+        </div>
+        <!-- Left and right controls -->
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
