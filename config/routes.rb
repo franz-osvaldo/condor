@@ -20,15 +20,18 @@ Rails.application.routes.draw do
   end
   resources :fleets do
     collection do
+      get 'life_time_limits'
       get 'aircrafts'
       get 'scheduled_inspections'
       post 'get_graph'
       get 'tbos'
       post 'after_tbo'
+      post 'after_change_item'
     end
     member do
       get 'get_systems'
       get 'get_tbos'
+      get 'alert_life_limits'
     end
     resources :flights, shallow: true
   end

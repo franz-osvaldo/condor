@@ -6,7 +6,15 @@ class Fleet < ApplicationRecord
   has_many :alert_tbos
   has_many :tbos, through: :alert_tbos
 
+  has_many :alert_life_limits
+  has_many :life_time_limits, through: :alert_life_limits
+
   after_create :set_time_details
+
+  def find_out_alert_life_limits
+    self.alert_life_limits.where('state = ?', 'pending')
+  end
+
   def total_flight_hours
     self.flights.sum(:flight_time)
   end

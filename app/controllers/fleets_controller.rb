@@ -1,4 +1,25 @@
 class FleetsController < ApplicationController
+
+  def life_time_limits
+    @fleets = Fleet.all
+    flash.now[:tasks] = 'in'
+  end
+
+  def alert_life_limits
+    @fleet = Fleet.find(params[:id])
+    @alert_life_limits = @fleet.find_out_alert_life_limits
+    respond_to do |format|
+      format.js{}
+    end
+  end
+
+  def after_change_item
+    @alert_life_limit = AlertLifeLimit.find(params[:id])
+    @alert_life_limit.update_state('accomplished')
+    respond_to do |format|
+      format.js{}
+    end
+  end
   def tbos
     @fleets = Fleet.all
     flash.now[:tasks] = 'in'
@@ -38,6 +59,8 @@ class FleetsController < ApplicationController
       format.js{}
     end
   end
+
+
 
   def get_graph
     total_flight_hours = Fleet.find(params[:fleet][:fleet_id]).total_flight_hours

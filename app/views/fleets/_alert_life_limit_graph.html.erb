@@ -1,0 +1,27 @@
+<div class="row alert_life_limit_row" id="row_<%= dom_id(alert_life_limit)%>">
+  <div class="col-md-6">
+    <div id="<%= dom_id(alert_life_limit) %>" style="min-width: 310px; max-width: 400px; height: 300px;"></div>
+  </div>
+  <div class="col-md-3">
+    <strong>Aeronave</strong> <br>
+    <%= alert_life_limit.fleet.name %> <br>
+    <strong>Numero de registro</strong> <br>
+    <%= alert_life_limit.fleet.aircraft_registration %> <br>
+    <strong>Descripcion</strong> <br>
+    <%= alert_life_limit.life_time_limit.part.description %> <br>
+    <strong>Numero de parte</strong> <br>
+    <%= alert_life_limit.life_time_limit.part.part_number %> <br>
+  </div>
+  <div class="col-md-3 form-group">
+    <%= form_tag '/fleets/after_change_item', remote: true do %>
+        <div class="form-group">
+          <%= select_tag(:option, options_for_select([%w(Nuevo new)]), class: 'form-control', prompt: 'Seleccionar' )%>
+        </div>
+        <input type="hidden" value="<%= alert_life_limit.id %>" name="id">
+        <div class="form-group">
+          <input type="submit" class="btn btn-sm btn-primary form-control" value="Confirmar">
+        </div>
+
+    <% end %>
+  </div>
+</div>

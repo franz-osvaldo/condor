@@ -1,0 +1,3 @@
+<% AlertLifeLimit.joins(life_time_limit: :part).where('parts.id = ?', @alert_life_limit.life_time_limit.part.id).last(2).each do |alert_life_limit| %>
+  $('#row_<%= dom_id(alert_life_limit)%>').remove();
+<% end %>

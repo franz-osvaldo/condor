@@ -1,0 +1,165 @@
+$('.nano .content').html("<%= escape_javascript(render partial: 'alert_life_limit_graph', collection: @alert_life_limits, as: 'alert_life_limit') %>");
+
+<% @alert_life_limits.each do |alert_life_limit| %>
+$('#<%= dom_id(alert_life_limit) %>').highcharts({
+  <% if alert_life_limit.life_time_limit.is_in_flight_hours? %>
+  chart: {
+    type: 'gauge',
+    plotBackgroundColor: null,
+    plotBackgroundImage: null,
+    plotBorderWidth: 0,
+    plotShadow: false
+  },
+  title: {
+    text: 'TIEMPO DE VIDA LIMITE'
+  },
+  pane: {
+    startAngle: -150,
+    endAngle: 150,
+    background: [{
+      backgroundColor: {
+        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+        stops: [
+          [0, '#FFF'],
+          [1, '#333']
+        ]
+      },
+      borderWidth: 0,
+      outerRadius: '109%'
+    }, {
+      backgroundColor: {
+        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+        stops: [
+          [0, '#333'],
+          [1, '#FFF']
+        ]
+      },
+      borderWidth: 1,
+      outerRadius: '107%'
+    }, {
+      // default background
+    }, {
+      backgroundColor: '#DDD',
+      borderWidth: 0,
+      outerRadius: '105%',
+      innerRadius: '103%'
+    }]
+  },
+  yAxis: {
+    min: <%= alert_life_limit.life_time_limit.life_limit - alert_life_limit.life_time_limit.alert_before %>,
+    max: <%= alert_life_limit.life_time_limit.life_limit %>,
+
+    minorTickInterval: 'auto',
+    minorTickWidth: 1,
+    minorTickLength: 10,
+    minorTickPosition: 'inside',
+    minorTickColor: '#666',
+
+    tickPixelInterval: 30,
+    tickWidth: 2,
+    tickPosition: 'inside',
+    tickLength: 10,
+    tickColor: '#666',
+    labels: {
+      step: 2,
+      rotation: 'auto'
+    },
+    title: {
+      text: 'flight hours'
+    },
+    plotBands: [{
+      from: 0,
+      to: <%= alert_life_limit.life_time_limit.life_limit %>,
+      color: '#DDDF0D' // green
+    }]
+  },
+  series: [{
+    name: 'Actual',
+    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_life_limit.life_time_limit.part.id, alert_life_limit.fleet.id).first.fhsn %>],
+    tooltip: {
+      valueSuffix: 'Flight hours'
+    }
+  }],
+  <% else %>
+  chart: {
+    type: 'gauge',
+    plotBackgroundColor: null,
+    plotBackgroundImage: null,
+    plotBorderWidth: 0,
+    plotShadow: false
+  },
+  title: {
+    text: 'TIEMPO DE VIDA LIMITE'
+  },
+  pane: {
+    startAngle: -150,
+    endAngle: 150,
+    background: [{
+      backgroundColor: {
+        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+        stops: [
+          [0, '#FFF'],
+          [1, '#333']
+        ]
+      },
+      borderWidth: 0,
+      outerRadius: '109%'
+    }, {
+      backgroundColor: {
+        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+        stops: [
+          [0, '#333'],
+          [1, '#FFF']
+        ]
+      },
+      borderWidth: 1,
+      outerRadius: '107%'
+    }, {
+      // default background
+    }, {
+      backgroundColor: '#DDD',
+      borderWidth: 0,
+      outerRadius: '105%',
+      innerRadius: '103%'
+    }]
+  },
+  yAxis: {
+    min: <%= alert_life_limit.life_time_limit.life_limit_in_days - alert_life_limit.life_time_limit.alert_before_in_days %>,
+    max: <%= alert_life_limit.life_time_limit.life_limit_in_days %>,
+
+    minorTickInterval: 'auto',
+    minorTickWidth: 1,
+    minorTickLength: 10,
+    minorTickPosition: 'inside',
+    minorTickColor: '#666',
+
+    tickPixelInterval: 30,
+    tickWidth: 2,
+    tickPosition: 'inside',
+    tickLength: 10,
+    tickColor: '#666',
+    labels: {
+      step: 2,
+      rotation: 'auto'
+    },
+    title: {
+      text: 'Dias'
+    },
+    plotBands: [{
+      from: 0,
+      to: <%= alert_life_limit.life_time_limit.life_limit_in_days %>,
+      color: '#DDDF0D' // green
+    }]
+  },
+  series: [{
+    name: 'Actual',
+    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_life_limit.life_time_limit.part.id, alert_life_limit.fleet.id).first.dsn %>],
+    tooltip: {
+      valueSuffix: 'Dias'
+    }
+  }],
+  <% end%>
+
+
+});
+<% end %>

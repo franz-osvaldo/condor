@@ -46,7 +46,8 @@
 .fleets.tbos,
 .fluids.index,
 .life_time_limits.index,
-.users.index{
+.users.index,
+.fleets.life_time_limits{
   margin-top: 10px;
   .modal_show, .modal_edit, .modal_delete{
     .modal-content{
@@ -226,7 +227,7 @@
       padding: 7px 0;
       color: white;
     }
-    form{
+    form, .field_container{
       background-color: white;
       padding: 15px 15px;
       border: thin solid rgba(#016ecd, 0.3);
