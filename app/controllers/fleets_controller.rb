@@ -20,6 +20,29 @@ class FleetsController < ApplicationController
       format.js{}
     end
   end
+
+  def fluids
+    @fleets = Fleet.all
+    flash.now[:tasks] = 'in'
+  end
+
+  def alert_fluids
+    @fleet = Fleet.find(params[:id])
+    @alert_fluids = @fleet.find_out_alert_fluids
+    respond_to do |format|
+      format.js{}
+    end
+  end
+
+  def after_change_fluid
+    # render :text => params.inspect
+    @alert_fluid = AlertFluid.find(params[:id])
+    @alert_fluid.update_attribute(:state,'accomplished')
+    respond_to do |format|
+      format.js{}
+    end
+  end
+
   def tbos
     @fleets = Fleet.all
     flash.now[:tasks] = 'in'

@@ -45,6 +45,10 @@
           <%= f.label :condition_id, 'Condiciones' %>
           <%= collection_select :fluid, :condition_id, Condition.all, :id, :name, {prompt: true}, {class: 'form-control'} %>
         </div>
+        <div class="form-group">
+          <%= f.label :tbo_id, 'Remplazado por el overhaul' %>
+          <%= f.select(:tbo_id, options_for_select(Tbo.all.map{|e|[e.part.description, e.id]}), {prompt: true}, {class: 'form-control'})  %>
+        </div>
         <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
     <% end %>
   </div>

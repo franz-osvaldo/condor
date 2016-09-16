@@ -9,10 +9,17 @@ class Fleet < ApplicationRecord
   has_many :alert_life_limits
   has_many :life_time_limits, through: :alert_life_limits
 
+  has_many :alert_fluids
+  has_many :fluids, through: :alert_fluids
+
   after_create :set_time_details
 
   def find_out_alert_life_limits
     self.alert_life_limits.where('state = ?', 'pending')
+  end
+
+  def find_out_alert_fluids
+    self.alert_fluids.where('state = ?', 'pending')
   end
 
   def total_flight_hours
@@ -32,7 +39,8 @@ class Fleet < ApplicationRecord
                         fhso: 0,
                         dso: 0,
                         overhaul_state: 'new',
-                        overhaul_date: DateTime.now)
+                        overhaul_date: DateTime.now,
+                        date_since_new: DateTime.now)
     end
   end
 

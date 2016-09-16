@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160912143216) do
+ActiveRecord::Schema.define(version: 20160915220546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20160912143216) do
     t.string   "trade_name"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "alert_fluids", force: :cascade do |t|
+    t.integer  "fleet_id"
+    t.integer  "fluid_id"
+    t.string   "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fleet_id"], name: "index_alert_fluids_on_fleet_id", using: :btree
+    t.index ["fluid_id"], name: "index_alert_fluids_on_fluid_id", using: :btree
   end
 
   create_table "alert_life_limits", force: :cascade do |t|
@@ -124,8 +134,10 @@ ActiveRecord::Schema.define(version: 20160912143216) do
     t.float    "over_the_time_limit"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.integer  "tbo_id"
     t.index ["condition_id"], name: "index_fluids_on_condition_id", using: :btree
     t.index ["part_id"], name: "index_fluids_on_part_id", using: :btree
+    t.index ["tbo_id"], name: "index_fluids_on_tbo_id", using: :btree
     t.index ["unit_id"], name: "index_fluids_on_unit_id", using: :btree
   end
 
@@ -461,6 +473,7 @@ ActiveRecord::Schema.define(version: 20160912143216) do
     t.datetime "overhaul_date"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.datetime "date_since_new"
     t.index ["fleet_id"], name: "index_time_details_on_fleet_id", using: :btree
     t.index ["part_id"], name: "index_time_details_on_part_id", using: :btree
   end
@@ -533,6 +546,8 @@ ActiveRecord::Schema.define(version: 20160912143216) do
   end
 
   add_foreign_key "actions", "scheduled_inspections"
+  add_foreign_key "alert_fluids", "fleets"
+  add_foreign_key "alert_fluids", "fluids"
   add_foreign_key "alert_life_limits", "fleets"
   add_foreign_key "alert_life_limits", "life_time_limits"
   add_foreign_key "alert_tbos", "fleets"
@@ -545,6 +560,7 @@ ActiveRecord::Schema.define(version: 20160912143216) do
   add_foreign_key "flights", "fleets"
   add_foreign_key "fluids", "conditions"
   add_foreign_key "fluids", "parts"
+  add_foreign_key "fluids", "tbos"
   add_foreign_key "fluids", "units"
   add_foreign_key "incoming_details", "incoming_movements"
   add_foreign_key "incoming_details", "products"

@@ -4,6 +4,7 @@ class Tbo < ApplicationRecord
   belongs_to :unit
   has_many :alert_tbos
   has_many :fleets, through:  :alert_tbos
+  has_one :fluid
 
   # si los tiempos están en años
   def alert_before_in_days

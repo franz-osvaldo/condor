@@ -27,11 +27,14 @@ Rails.application.routes.draw do
       get 'tbos'
       post 'after_tbo'
       post 'after_change_item'
+      get 'fluids'
+      post 'after_change_fluid'
     end
     member do
       get 'get_systems'
       get 'get_tbos'
       get 'alert_life_limits'
+      get 'alert_fluids'
     end
     resources :flights, shallow: true
   end

@@ -47,7 +47,8 @@
 .fluids.index,
 .life_time_limits.index,
 .users.index,
-.fleets.life_time_limits{
+.fleets.life_time_limits,
+.fleets.fluids{
   margin-top: 10px;
   .modal_show, .modal_edit, .modal_delete{
     .modal-content{

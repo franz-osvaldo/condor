@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fleet: one
+  fluid: one
+  state: MyString
+
+two:
+  fleet: two
+  fluid: two
+  state: MyString

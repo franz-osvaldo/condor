@@ -66,6 +66,6 @@ class FluidsController < ApplicationController
 
   private
   def fluid_params
-    params.require(:fluid).permit(:part_id, :time_limit, :unit_id, :over_the_time_limit, :alert_before, :condition_id)
+    params.require(:fluid).permit(:part_id, :time_limit, :unit_id, :tbo_id, :over_the_time_limit, :alert_before, :condition_id)
   end
 end

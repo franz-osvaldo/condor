@@ -1,0 +1,26 @@
+<div class="row alert_fluid_row" id="row_<%= dom_id(alert_fluid)%>">
+  <div class="col-md-6">
+    <div id="<%= dom_id(alert_fluid) %>" style="min-width: 310px; max-width: 400px; height: 300px;"></div>
+  </div>
+  <div class="col-md-3">
+    <strong>Aeronave</strong> <br>
+    <%= alert_fluid.fleet.name %> <br>
+    <strong>Numero de registro</strong> <br>
+    <%= alert_fluid.fleet.aircraft_registration %> <br>
+    <strong>Descripcion</strong> <br>
+    <%= alert_fluid.fluid.part.description %> <br>
+    <strong>Numero de parte</strong> <br>
+    <%= alert_fluid.fluid.part.part_number %> <br>
+  </div>
+  <div class="col-md-3 form-group">
+    <%= form_tag '/fleets/after_change_fluid', remote: true do %>
+        <div class="form-group">
+          <%= select_tag(:option, options_for_select([%w(Cambio change),%w(Lubricación lubrication)]), class: 'form-control', prompt: 'Seleccionar' )%>
+        </div>
+        <input type="hidden" value="<%= alert_fluid.id %>" name="id">
+        <div class="form-group">
+          <input type="submit" class="btn btn-sm btn-primary form-control" value="Confirmar">
+        </div>
+    <% end %>
+  </div>
+</div>
