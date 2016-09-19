@@ -16,6 +16,7 @@ class FleetsController < ApplicationController
   def after_change_item
     @alert_life_limit = AlertLifeLimit.find(params[:id])
     @alert_life_limit.update_state('accomplished')
+    TimeDetail.after_change_item('new', @alert_life_limit.fleet.id, @alert_life_limit.life_time_limit.part)
     respond_to do |format|
       format.js{}
     end

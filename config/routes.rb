@@ -135,7 +135,12 @@ Rails.application.routes.draw do
     end
   end
 
-
+  resources :tests, only: [:index] do
+    collection do
+      post 'create_flight'
+      post 'create_days'
+    end
+  end
 end
 
 

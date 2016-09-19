@@ -45,9 +45,9 @@ Receiver.create(:receiver => 'Juan Perez')
 Receiver.create(:receiver => 'Gian Luca')
 Receiver.create(:receiver => 'Cat Stevens')
 
-User.create(:name => 'Armando Guerra')
-User.create(:name => 'Federico De Los Palotes')
-User.create(:name => 'Juan Tenorio')
+occupation = Occupation.create(name: 'Admin')
+User.create(:name => 'Administrador', email: 'admin@gmail.com', password: '12345678', password_confirmation: '12345678', occupation_id: occupation.id)
+
 
 
 IncomingMovementType.create(:movement_type => 'Compra')
@@ -96,3 +96,19 @@ Tool.create(:part_number => '105-31803 W2', :description => 'Measuring Device', 
                                     {description: 'parte 2', part_number: 'XYZ2'},
                                     ])
 
+Tbo.create(part_id: 1, condition_id: 3, unit_id: 1, time_limit: 24, over_the_time_limit: 2, alert_before: 2)
+Tbo.create(part_id: 2, condition_id: 3, unit_id: 1, time_limit: 16, over_the_time_limit: 2, alert_before: 6)
+Tbo.create(part_id: 3, condition_id: 3, unit_id: 1, time_limit: 30, over_the_time_limit: 6, alert_before: 6)
+Tbo.create(part_id: 4, condition_id: 3, unit_id: 1, time_limit: 30, over_the_time_limit: 6, alert_before: 6)
+Tbo.create(part_id: 5, condition_id: 3, unit_id: 1, time_limit: 8, over_the_time_limit: 2, alert_before: 2)
+Tbo.create(part_id: 6, condition_id: 1, unit_id: 2, time_limit: 2, over_the_time_limit: 1, alert_before: 0.5)
+
+
+Fluid.create(part_id: 1, condition_id: 1, unit_id: 1, time_limit: 4, over_the_time_limit: 2, alert_before: 2)
+Fluid.create(part_id: 1, condition_id: 3, unit_id: 1, time_limit: 10, over_the_time_limit: 2, alert_before: 2)
+Fluid.create(part_id: 2, condition_id: 1, unit_id: 1, time_limit: 20, over_the_time_limit: 4, alert_before: 4)
+Fluid.create(part_id: 2, condition_id: 2, unit_id: 1, time_limit: 20, over_the_time_limit: 4, alert_before: 4)
+Fluid.create(part_id: 2, condition_id: 3, unit_id: 1, time_limit: 30, over_the_time_limit: 6, alert_before: 6)
+Fluid.create(part_id: 5, condition_id: 1, unit_id: 1, time_limit: 30, over_the_time_limit: 4, alert_before: 4, tbo_id: 5)
+
+LifeTimeLimit.create(part_id: 1, unit_id: 1, life_limit: 10,  alert_before: 2)

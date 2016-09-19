@@ -11,6 +11,10 @@
     <%= alert_fluid.fluid.part.description %> <br>
     <strong>Numero de parte</strong> <br>
     <%= alert_fluid.fluid.part.part_number %> <br>
+    <strong>Datos de prueba</strong> <br>
+    <i>Condición: </i>
+    <%= alert_fluid.fluid.condition.name %> <br>
+
   </div>
   <div class="col-md-3 form-group">
     <%= form_tag '/fleets/after_change_fluid', remote: true do %>
