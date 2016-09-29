@@ -12,10 +12,28 @@ class AlertFluid < ApplicationRecord
     if self.is_not_there_a_record?(fleet_id, fluid_id)
       return true
     end
-    self.where('fleet_id = ? AND fluid_id = ?', fleet_id, fluid_id).last.state == 'accomplished'
-    # ||
-    #     !Unit.joins(fluid: :alert_fluid)
-    #          .where('fleet_id = ? AND fluid_id = ?', fleet_id, fluid_id)
-    #          .pluck(:name).include?(Fluid.find(fluid_id).unit.name)
+    if Fluid.find(fluid_id).unit.name == 'Flight hours'
+      if Fluid.find(fluid_id).condition.name == 'TSN'
+        return true
+      end
+      if Fluid.find(fluid_id).condition.name == 'TSO'
+        return true
+      end
+      if Fluid.find(fluid_id).condition.name == 'No requerido'
+        return true
+      end
+    end
+    if Fluid.find(fluid_id).unit.name == 'Months'
+      if Fluid.find(fluid_id).condition.name == 'TSN'
+        return true
+      end
+      if Fluid.find(fluid_id).condition.name == 'TSO'
+        return true
+      end
+      if Fluid.find(fluid_id).condition.name == 'No requerido'
+        return true
+      end
+    end
+    false
   end
 end

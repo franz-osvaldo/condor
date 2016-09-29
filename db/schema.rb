@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160915220546) do
+ActiveRecord::Schema.define(version: 20160922010444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160915220546) do
     t.string   "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "limit"
     t.index ["fleet_id"], name: "index_alert_fluids_on_fleet_id", using: :btree
     t.index ["fluid_id"], name: "index_alert_fluids_on_fluid_id", using: :btree
   end

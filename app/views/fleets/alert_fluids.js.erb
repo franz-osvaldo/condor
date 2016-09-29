@@ -89,13 +89,13 @@ $('#<%= dom_id(alert_fluid) %>').highcharts({
     data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhsn + alert_fluid.fluid.alert_before - (((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhsn + alert_fluid.fluid.alert_before)/ alert_fluid.fluid.time_limit).to_i * alert_fluid.fluid.time_limit) %>],
     <% end %>
     <% if alert_fluid.fluid.condition.name == 'TSO' %>
-    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhso + alert_fluid.fluid.alert_before - (((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhsn + alert_fluid.fluid.alert_before)/ alert_fluid.fluid.time_limit).to_i * alert_fluid.fluid.time_limit) %>],
+    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhso + alert_fluid.fluid.alert_before - (((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhso + alert_fluid.fluid.alert_before)/ alert_fluid.fluid.time_limit).to_i * alert_fluid.fluid.time_limit) %>],
     <% end %>
     <% if alert_fluid.fluid.condition.name == 'No requerido' %>
-      <% if !Condition.joins(fluids: :part).where('parts.id = ?', alert_fluid.fluid.part.id).empty?%>
-        data: [<%= (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhsn % alert_fluid.fluid.time_limit + alert_fluid.fluid.alert_before) % alert_fluid.fluid.time_limit - alert_fluid.fluid.part.fluids.joins(:condition).where('conditions.name = ?', 'TSN').first.time_limit%>],
+      <% if alert_fluid.fluid.part.time_details.first.date_since_new > alert_fluid.fluid.part.time_details.first.overhaul_date %>
+        data: [<%=  alert_fluid.fluid.part.time_details.first.fhsn - (alert_fluid.limit - alert_fluid.fluid.over_the_time_limit - alert_fluid.fluid.alert_before)  %>],
       <% else %>
-        data: [<%= (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhsn % alert_fluid.fluid.time_limit + alert_fluid.fluid.alert_before) % alert_fluid.fluid.time_limit %>],
+        data: [<%=  alert_fluid.fluid.part.time_details.first.fhso - (alert_fluid.limit - alert_fluid.fluid.over_the_time_limit - alert_fluid.fluid.alert_before) %>],
       <% end %>
     <% end %>
     tooltip: {
@@ -147,8 +147,21 @@ $('#<%= dom_id(alert_fluid) %>').highcharts({
     }]
   },
   yAxis: {
-    min: <%= alert_fluid.fluid.time_limit - alert_fluid.fluid.alert_before %>,
-    max: <%= alert_fluid.fluid.time_limit + alert_fluid.fluid.over_the_time_limit + alert_fluid.fluid.alert_before %>,
+    min: 0,
+    max: <%= ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months) -
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months-alert_fluid.fluid.alert_before.to_i.months)).to_i / (60*60*24) +
+              ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months + alert_fluid.fluid.over_the_time_limit.to_i.months)-
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months)).to_i / (60*60*24) +
+
+
+              ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months + alert_fluid.fluid.over_the_time_limit.to_i.months + alert_fluid.fluid.alert_before.to_i.months) -
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months + alert_fluid.fluid.over_the_time_limit.to_i.months)).to_i / (60*60*24)%>,
 
     minorTickInterval: 'auto',
     minorTickWidth: 1,
@@ -166,29 +179,90 @@ $('#<%= dom_id(alert_fluid) %>').highcharts({
       rotation: 'auto'
     },
     title: {
-      text: 'flight hours'
+      text: 'Days'
     },
+
     plotBands: [{
-      from: <%= alert_fluid.fluid.time_limit - alert_fluid.fluid.alert_before %>,
-      to: <%= alert_fluid.fluid.time_limit %>,
+      from: 0,
+      to: <%= ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months) -
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months-alert_fluid.fluid.alert_before.to_i.months)).to_i / (60*60*24)%>,
       color: '#55BF3B' // green
     },{
-      from: <%= alert_fluid.fluid.time_limit %>,
-      to: <%= alert_fluid.fluid.time_limit + alert_fluid.fluid.over_the_time_limit %>,
+      from: <%= ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months) -
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months-alert_fluid.fluid.alert_before.to_i.months)).to_i / (60*60*24)%>,
+      to: <%= ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months) -
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months-alert_fluid.fluid.alert_before.to_i.months)).to_i / (60*60*24) +
+              ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months + alert_fluid.fluid.over_the_time_limit.to_i.months)-
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months)).to_i / (60*60*24)%>,
       color: '#DDDF0D' // yellow
     },{
-      from: <%= alert_fluid.fluid.time_limit + alert_fluid.fluid.over_the_time_limit %>,
-      to: <%= alert_fluid.fluid.time_limit + alert_fluid.fluid.over_the_time_limit + alert_fluid.fluid.alert_before %>,
+      from: <%= ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months) -
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months-alert_fluid.fluid.alert_before.to_i.months)).to_i / (60*60*24) +
+              ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months + alert_fluid.fluid.over_the_time_limit.to_i.months)-
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months)).to_i / (60*60*24)%>,
+      to: <%= ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months) -
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months-alert_fluid.fluid.alert_before.to_i.months)).to_i / (60*60*24) +
+              ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months + alert_fluid.fluid.over_the_time_limit.to_i.months)-
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months)).to_i / (60*60*24) +
+
+
+              ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months + alert_fluid.fluid.over_the_time_limit.to_i.months + alert_fluid.fluid.alert_before.to_i.months) -
+              (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+              alert_fluid.fluid.time_limit.to_i.months + alert_fluid.fluid.over_the_time_limit.to_i.months)).to_i / (60*60*24)%>,
       color: '#DF5353' // red
     }]
+
   },
 
 
   series: [{
     name: 'Actual',
-    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.fhsn % alert_fluid.fluid.time_limit%>],
+    <% if alert_fluid.fluid.condition.name == 'TSN' %>
+      data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.dsn -
+            ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+            alert_fluid.fluid.time_limit.to_i.months - alert_fluid.fluid.alert_before.to_i.months) -
+            ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new))).to_i / (60*60*24)  %>],
+    <% end %>
+    <% if alert_fluid.fluid.condition.name == 'TSO' %>
+      data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.dso -
+            ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.overhaul_date +
+            alert_fluid.fluid.time_limit.to_i.months - alert_fluid.fluid.alert_before.to_i.months) -
+            ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.overhaul_date))).to_i / (60*60*24)  %>],
+    <% end %>
+    <% if alert_fluid.fluid.condition.name == 'No requerido' %>
+      <% if alert_fluid.fluid.part.time_details.first.date_since_new > alert_fluid.fluid.part.time_details.first.overhaul_date %>
+        data: [<%= ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new + TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.dsn.days) -
+                   (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.date_since_new +
+                   alert_fluid.limit.days -
+                   alert_fluid.fluid.over_the_time_limit.to_i.months -
+                   alert_fluid.fluid.alert_before.to_i.months))/ (60*60*24)%>],
+      <% else %>
+        data: [<%= ((TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.overhaul_date + TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.dso.days) -
+                   (TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_fluid.fluid.part.id, alert_fluid.fleet.id).first.overhaul_date +
+                   alert_fluid.limit.days -
+                   alert_fluid.fluid.over_the_time_limit.to_i.months -
+                   alert_fluid.fluid.alert_before.to_i.months))/ (60*60*24)%>],
+      <% end %>
+    <% end %>
     tooltip: {
-      valueSuffix: 'Flight hours'
+      valueSuffix: 'Days'
     }
   }],
 

@@ -81,13 +81,30 @@ $('.content').html("<%= escape_javascript(render partial:  'drawn_tbos', collect
           color: '#DF5353' // red
         }]
       },
-      series: [{
-        name: 'Actual',
-        data: [<%= TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.fhso - ( alert_tbo.tbo.time_limit  - alert_tbo.tbo.alert_before) %>],
-        tooltip: {
-          valueSuffix: 'Flight hours'
-        }
-      }],
+      <% if TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.date_since_new > TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.overhaul_date %>
+        <% if alert_tbo.tbo.condition.name == 'No requerido'%>
+          series: [{
+            name: 'Actual',
+            data: [<%= TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.fhsn -
+                  ( ((TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.fhsn + alert_tbo.tbo.alert_before)/alert_tbo.tbo.time_limit).to_i*alert_tbo.tbo.time_limit  - alert_tbo.tbo.alert_before) %>],
+            tooltip: {
+              valueSuffix: 'Flight hours'
+            }
+          }],
+        <% end %>
+      <% else %>
+        <% if alert_tbo.tbo.condition.name == 'No requerido'%>
+        series: [{
+          name: 'Actual',
+          data: [<%= TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.fhso -
+                    (((TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.fhso + alert_tbo.tbo.alert_before)/alert_tbo.tbo.time_limit).to_i*alert_tbo.tbo.time_limit  - alert_tbo.tbo.alert_before) %>],
+          tooltip: {
+            valueSuffix: 'Flight hours'
+          }
+        }],
+        <% end %>
+      <% end %>
+
     <% else %>
       chart: {
         type: 'gauge',
@@ -167,13 +184,61 @@ $('.content').html("<%= escape_javascript(render partial:  'drawn_tbos', collect
           color: '#DF5353' // red
         }]
       },
-      series: [{
-        name: 'Actual',
-        data: [<%= TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.dso - ( alert_tbo.tbo.time_limit_in_days  - alert_tbo.tbo.alert_before_in_days) %>],
-        tooltip: {
-          valueSuffix: 'Days'
-        }
-      }]
+    <% if Tbo.find(alert_tbo.tbo_id).condition.name == 'TSN'%>
+    series: [{
+      name: 'Actual',
+      data: [<%= ((TimeDetail.where('part_id = ?' , alert_tbo.tbo.part.id).first.date_since_new +
+                   TimeDetail.where('part_id = ?' , alert_tbo.tbo.part.id).first.dsn.days) -
+                  (TimeDetail.where('part_id = ?' , alert_tbo.tbo.part.id).first.date_since_new +
+                  (alert_tbo.tbo.time_limit).to_i.years -
+                  (alert_tbo.tbo.alert_before*365).to_i.days)) / (60*60*24)  %>],
+
+      tooltip: {
+        valueSuffix: 'Days'
+      }
+    }],
+    <% end %>
+    <% if Tbo.find(alert_tbo.tbo_id).condition.name == 'TSO'%>
+    series: [{
+      name: 'Actual',
+      data: [<%= ((TimeDetail.where('part_id = ?' , alert_tbo.tbo.part.id).first.overhaul_date +
+                   TimeDetail.where('part_id = ?' , alert_tbo.tbo.part.id).first.dso.days) -
+                  (TimeDetail.where('part_id = ?' , alert_tbo.tbo.part.id).first.overhaul_date +
+                  (alert_tbo.tbo.time_limit).to_i.years -
+                  (alert_tbo.tbo.alert_before*365).to_i.days)) / (60*60*24)  %>],
+
+      tooltip: {
+        valueSuffix: 'Days'
+      }
+    }],
+    <% end %>
+    <% if Tbo.find(alert_tbo.tbo_id).condition.name == 'No requerido'%>
+      <% if TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.date_since_new > TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.overhaul_date %>
+        series: [{
+          name: 'Actual',
+          data: [<%= ((TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.date_since_new +
+                       TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.dsn.days) -
+                      (TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.date_since_new +
+                      (alert_tbo.tbo.time_limit).to_i.years -
+                      (alert_tbo.tbo.alert_before*365).to_i.days)) / (60*60*24)  %>],
+          tooltip: {
+            valueSuffix: 'Days'
+          }
+        }],
+      <% else %>
+        series: [{
+          name: 'Actual',
+          data: [<%= ((TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.overhaul_date +
+                           TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.dso.days) -
+                          (TimeDetail.where('part_id = ?' , alert_tbo.tbo.id).first.overhaul_date +
+                          (alert_tbo.tbo.time_limit).to_i.years -
+                          (alert_tbo.tbo.alert_before*365).to_i.days)) / (60*60*24) %>],
+          tooltip: {
+            valueSuffix: 'Days'
+          }
+        }],
+      <% end %>
+    <% end %>
     <% end%>
 
 

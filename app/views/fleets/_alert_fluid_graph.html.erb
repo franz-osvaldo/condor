@@ -14,7 +14,8 @@
     <strong>Datos de prueba</strong> <br>
     <i>Condición: </i>
     <%= alert_fluid.fluid.condition.name %> <br>
-
+    <i>Unidad: </i>
+    <%= alert_fluid.fluid.unit.name %>
   </div>
   <div class="col-md-3 form-group">
     <%= form_tag '/fleets/after_change_fluid', remote: true do %>

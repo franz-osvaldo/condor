@@ -11,6 +11,11 @@
     <%= Tbo.find(alert_tbo.tbo_id).part.description %> <br>
     <strong>Numero de parte</strong> <br>
     <%= Tbo.find(alert_tbo.tbo_id).part.part_number %> <br>
+    <strong><i>Datos de prueba:</i></strong> <br>
+    <strong>Condición: </strong>
+    <%= Tbo.find(alert_tbo.tbo_id).condition.name %> <br>
+    <strong>Unidad:</strong>
+    <%= Tbo.find(alert_tbo.tbo_id).unit.name %> <br>
   </div>
   <div class="col-md-3 form-group">
     <%= form_tag '/fleets/after_tbo', remote: true do %>
