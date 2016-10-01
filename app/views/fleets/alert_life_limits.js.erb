@@ -46,8 +46,8 @@ $('#<%= dom_id(alert_life_limit) %>').highcharts({
     }]
   },
   yAxis: {
-    min: <%= alert_life_limit.life_time_limit.life_limit - alert_life_limit.life_time_limit.alert_before %>,
-    max: <%= alert_life_limit.life_time_limit.life_limit %>,
+    min: 0,
+    max: <%= alert_life_limit.life_time_limit.alert_before %>,
 
     minorTickInterval: 'auto',
     minorTickWidth: 1,
@@ -75,7 +75,7 @@ $('#<%= dom_id(alert_life_limit) %>').highcharts({
   },
   series: [{
     name: 'Actual',
-    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_life_limit.life_time_limit.part.id, alert_life_limit.fleet.id).first.fhsn %>],
+    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_life_limit.life_time_limit.part.id, alert_life_limit.fleet.id).first.fhsn - (alert_life_limit.life_time_limit.life_limit - alert_life_limit.life_time_limit.alert_before)  %>],
     tooltip: {
       valueSuffix: 'Flight hours'
     }
@@ -124,8 +124,8 @@ $('#<%= dom_id(alert_life_limit) %>').highcharts({
     }]
   },
   yAxis: {
-    min: <%= alert_life_limit.life_time_limit.life_limit_in_days - alert_life_limit.life_time_limit.alert_before_in_days %>,
-    max: <%= alert_life_limit.life_time_limit.life_limit_in_days %>,
+    min: 0,
+    max: <%= alert_life_limit.life_time_limit.alert_before_in_days %>,
 
     minorTickInterval: 'auto',
     minorTickWidth: 1,
@@ -153,7 +153,7 @@ $('#<%= dom_id(alert_life_limit) %>').highcharts({
   },
   series: [{
     name: 'Actual',
-    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_life_limit.life_time_limit.part.id, alert_life_limit.fleet.id).first.dsn %>],
+    data: [<%= TimeDetail.where('part_id = ? AND fleet_id = ?' , alert_life_limit.life_time_limit.part.id, alert_life_limit.fleet.id).first.dsn - (alert_life_limit.life_time_limit.life_limit_in_days - alert_life_limit.life_time_limit.alert_before_in_days) %>],
     tooltip: {
       valueSuffix: 'Dias'
     }

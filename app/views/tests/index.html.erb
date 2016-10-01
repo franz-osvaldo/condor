@@ -3,9 +3,7 @@
     <h3 class="">PRUEBAS</h3>
     <h5>CREAR UN VUELO</h5>
   </div>
-  <div class="col-md-12">
-    <div class="row">
-      <div class="col-md-4">
+  <div class="col-md-4">
         <%= form_tag create_flight_tests_path do %>
           <div class="form-group">
             <%= label_tag :test_fleet_id, 'Aeronave' %>
@@ -23,16 +21,7 @@
             <%= submit_tag 'Confirmar' %>
           </div>
         <% end %>
-      </div>
-    </div>
-  </div>
-  <hr>
-  <div class="col-md-12">
-    <h5>VIAJAR EN EL TIEMPO</h5>
-  </div>
-  <div class="col-md-12">
-    <div class="row">
-      <div class="col-md-4">
+        <h5>VIAJAR EN EL TIEMPO</h5>
         <%= form_tag create_days_tests_path do %>
             <div class="form-group">
               <%= label_tag :test_fleet_id, 'Aeronave' %>
@@ -46,7 +35,24 @@
               <%= submit_tag 'Confirmar' %>
             </div>
         <% end %>
-      </div>
-    </div>
   </div>
+  <div class="col-md-8">
+    <div class="row">
+      <div class="col-md-2"><strong>Numero de parte</strong></div>
+      <div class="col-md-2"><strong>fhsn</strong></div>
+      <div class="col-md-2"><strong>dsn</strong></div>
+      <div class="col-md-2"><strong>fhso</strong></div>
+      <div class="col-md-2"><strong>dso</strong></div>
+    </div>
+    <% @time_details.each do |time_detail| %>
+      <div class="row">
+        <div class="col-md-2"><%= time_detail.part.part_number %></div>
+        <div class="col-md-2"><%= time_detail.fhsn %></div>
+        <div class="col-md-2"><%= time_detail.dsn %></div>
+        <div class="col-md-2"><%= time_detail.fhso %></div>
+        <div class="col-md-2"><%= time_detail.dso %></div>
+      </div>
+    <% end %>
+  </div>
+
 </div>

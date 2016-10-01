@@ -1,6 +1,7 @@
 class TestsController < ApplicationController
   def index
     @fleets = Fleet.all
+    @time_details = TimeDetail.all.order(:fleet_id)
   end
 
   def create_flight

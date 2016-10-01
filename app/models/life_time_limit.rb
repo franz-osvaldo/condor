@@ -29,4 +29,5 @@ class LifeTimeLimit < ApplicationRecord
     end
     self.alert_before
   end
+
 end

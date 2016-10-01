@@ -20,7 +20,7 @@ class TimeDetail < ApplicationRecord
           new_alert_life_time(life_time_limit)
         end
       else
-        if life_time_limit.calendar_time_alert?(self.dsn)
+        if life_time_limit.is_there_an_alert?(self.dsn)
           new_alert_life_time(life_time_limit)
         end
       end
@@ -146,7 +146,7 @@ class TimeDetail < ApplicationRecord
   def self.after_change_item(new_state, v_fleet_id, v_part_id)
     record = self.where('fleet_id = ? AND part_id = ?', v_fleet_id, v_part_id).first
     if new_state == 'new'
-      record.update(overhaul_state: new_state, fhsn: 0, fhso: 0, dsn: 0, dso: 0, overhaul_date: Time.zone.today, date_since_new: Time.zone.today)
+      record.update(overhaul_state: new_state, fhsn: 0, fhso: -876000, dsn: 0, dso: -36500, overhaul_date: DateTime.now - 100.years , date_since_new: DateTime.now)
     end
   end
 
