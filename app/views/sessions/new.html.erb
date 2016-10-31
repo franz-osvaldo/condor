@@ -1,22 +1,72 @@
-<div class="row login_form">
-  <div class="col-md-9"></div>
-  <div class="col-md-2">
+<div class="row login_page">
+  <div class="col-md-8 panel_1">
+
+  </div>
+  <div class="col-md-4 panel_2">
+        <div class="tip_container text-center">
+          <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
+            <ol class="carousel-indicators">
+              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+              <li data-target="#myCarousel" data-slide-to="1"></li>
+              <li data-target="#myCarousel" data-slide-to="2"></li>
+              <li data-target="#myCarousel" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+              <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                  <%= image_tag('logo_condor3.png') %>
+                  <h2><strong>Control y administración del mantenimiento</strong></h2>
+                  <h3>Reduzca paros imprevistos y costos de mantenimiento</h3>
+                </div>
+                <div class="item">
+                  <%= image_tag('logo_condor3.png') %>
+                  <h2><strong>Calculo automático de los calendarios</strong></h2>
+                  <h3>El sistema CÓNDOR marca las fechas cuando deben realizarse los diferentes trabajos de mantenimiento.</h3>
+                </div>
+                <div class="item">
+                  <%= image_tag('logo_condor3.png') %>
+                  <h2><strong>Catalogo de herramientas</strong></h2>
+                  <h3>Administre las herramientas de su taller y conozca wn todo momento las herramientas disponibles y aquellas que están en resguardo</h3>
+                </div>
+                <div class="item">
+                  <%= image_tag('logo_condor3.png') %>
+                  <h2><strong>Catalogo de productos</strong></h2>
+                  <h3>Reciba notificaciones oportunas de reposición del inventario de partes y
+                    consumibles.</h3>
+                </div>
+
+              </div>
+            </div>
+            <!-- Left and right controls -->
+            <!--<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">-->
+            <!--<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>-->
+            <!--<span class="sr-only">Previous</span>-->
+            <!--</a>-->
+            <!--<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">-->
+            <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
+            <!--<span class="sr-only">Next</span>-->
+            <!--</a>-->
+          </div>
+      </div>
+  </div>
+  <div class="col-md-4 panel_3">
+    <h2>Ingrese a su cuenta</h2>
     <%= form_for :session, url: login_path do |f| %>
         <div class="row">
             <div class="form-group">
-
+              <%= f.label :email_field, 'Correo electrónico' %>
               <%= f.email_field :email, class: 'form-control', placeholder: 'Correo electrónico' %>
             </div>
         </div>
         <div class="row">
             <div class="form-group">
-
+              <%= f.label :password_field, 'Contraseña' %>
               <%= f.password_field :password, class: 'form-control', placeholder: 'Contraseña' %>
             </div>
         </div>
         <div class="row">
           <div class="form-group">
-            <%= f.submit 'Iniciar sesión', class: 'btn' %>
+            <%= f.submit 'Iniciar sesión', class: 'btn ' %>
           </div>
         </div>
     <% end %>

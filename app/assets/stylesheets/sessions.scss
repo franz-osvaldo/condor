@@ -14,7 +14,7 @@
 //}
 
 .sessions.new {
-  background: image_url('img_login.jpg') no-repeat center center fixed;
+  background: image_url('prueba5.png') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -22,21 +22,22 @@
   .login_form{
     margin-left: -260px;
     form{
-      background-color: rgba(0,0,0,0.3);
 
       label{
-        color: white;
+
       }
       #session_email, #session_password, input[type=submit]{
         border-radius: 0;
         background-color: rgba(0,0,0,0.4);
-        color: white;
+        //color: white;
       }
       input[type=submit]{
-        border: 1px solid white;
+        border: 1px solid #222222;
         width: 100%;
-        background-color: rgba(0,0,0,0.1);
-        color: #DADADA;
+        background-color: white;
+        color: #222;
+        //background-color: rgb(0,0,0);
+        //color: #DADADA;
         font-weight: bold;
         &:hover{
           background-color: rgba(255,255,255,0.4);
@@ -47,3 +48,41 @@
   }
 }
 
+.sessions.new{
+  //border: 1px solid green;
+  .login_page{
+    margin-top: -50px;
+    margin-left: -250px;
+    .panel_2{
+      margin-right: 15px;
+      //border: 1px solid red;
+      position: absolute;
+      left: 33%;
+      height: 100%;
+      margin-right: 8px;
+      background: rgba(0,0,0,0.6);
+      #myCarousel{
+        padding-bottom: 10%;
+      }
+      img{
+        width: 30%;
+        margin: 0 auto;
+      }
+      h3, h2{
+        color: white;
+      }
+      h3{
+        margin-top: 20%;
+      }
+
+    }
+    .panel_3{
+      h2{
+        //color: white;
+        margin: 15px -15px;
+
+      }
+      padding: 25px 55px;
+    }
+  }
+}
