@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-4 form_container">
+    <div class="form_header text-center">
+      <i class="fa fa-user" aria-hidden="true"></i> Roles
+    </div>
+    <%= form_for @occupation, remote: true do |f| %>
+        <div class="form-group">
+          <%= f.label :name, 'Rol' %>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <%= f.submit 'Guardar', class: 'btn btn-primary bt-sm' %>
+    <% end %>
+  </div>
+  <div class="col-md-8">
+    <div class="table_container">
+      <div class="row table_head">
+        <div class="col-md-6">Rol</div>
+        <div class="col-md-6">Administrar</div>
+      </div>
+      <div class="nano">
+        <div class="content">
+          <%= render @occupations %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal_container"></div>

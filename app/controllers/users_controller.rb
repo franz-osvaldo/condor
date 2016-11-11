@@ -58,6 +58,7 @@ class UsersController < ApplicationController
     # render :text => params.inspect
     @user = User.find(params[:id])
     @user.update_attribute(:occupation_id, params[:user][:occupation_id])
+    @user.update_attribute(:receiver, params[:user][:receiver])
     respond_to do |format|
       format.js{}
     end
@@ -73,7 +74,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :email, :occupation_id, :password, :password_confirmation, :avatar)
+    params.require(:user).permit(:name, :email, :occupation_id, :password, :password_confirmation, :avatar, :receiver)
   end
 
 end

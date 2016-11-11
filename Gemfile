@@ -9,7 +9,7 @@ gem 'paperclip', '~> 5.0.0'
 gem 'chartkick', '~> 2.0'
 gem 'groupdate', '~> 2.5', '>= 2.5.2'
 gem 'bcrypt', '~> 3.1', '>= 3.1.11'
-
+gem 'sendgrid'
 group :development do
   gem 'rails-erd', '~> 1.4', '>= 1.4.7'
   gem 'table_print', '~> 1.5', '>= 1.5.6'

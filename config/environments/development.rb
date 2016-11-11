@@ -28,6 +28,15 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
+  ActionMailer::Base.smtp_settings = {
+      address: 'smtp.sendgrid.net',
+      port: 587,
+      domain: 'localhost:3000',
+      authentication: :plain,
+      user_name: 'franzbel',
+      password: 'fab-123456'
+  }
+
 
   config.action_mailer.perform_caching = false
 

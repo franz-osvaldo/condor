@@ -1,0 +1,11 @@
+<% if !@occupation.new_record? %>
+  $('#modal').modal('hide');
+  $('#modal').on('hidden.bs.modal', function () {
+    $('.modal_container').html('<%= escape_javascript(render partial: 'errors_details', locals: {occupation: @occupation}) %>');
+    $('#modal').modal('show');
+  });
+<% else %>
+  $('.modal_container').html('<%= escape_javascript(render partial: 'errors_details', locals: {occupation: @occupation}) %>');
+  $('#modal').modal('show');
+<% end %>
+

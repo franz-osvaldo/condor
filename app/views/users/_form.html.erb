@@ -19,5 +19,10 @@
       <%= f.label :password_confirmation, 'Repetir contraseña' %>
       <%= f.password_field :password_confirmation, class: 'form-control', :autocomplete => :off %>
     </div>
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :receiver, {}, true, false %> Recibir notificaciones de correo
+      </label>
+    </div>
     <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
 <% end %>

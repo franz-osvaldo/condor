@@ -1,7 +1,17 @@
 class AlertLifeLimit < ApplicationRecord
   belongs_to :life_time_limit
   belongs_to :fleet
-  after_update :update_time_details
+  after_update :update_time_details, :send_accomplished
+  after_create :send_warning
+
+
+  def send_warning
+    UserMailer.limit_warning(User.where(receiver: true).map{|e| e.email}, self).deliver_now
+  end
+
+  def send_accomplished
+    UserMailer.limit_accomplished(User.where(receiver: true).map{|e| e.email}, self).deliver_now
+  end
 
   def self.is_not_there_a_record?(fleet_id, life_time_limit_id)
     self.where('fleet_id = ? AND life_time_limit_id = ?', fleet_id, life_time_limit_id).empty?

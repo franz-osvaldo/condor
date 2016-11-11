@@ -3,5 +3,10 @@
       <%= label_tag :user_occupation_id, 'Rol' %>
       <%= collection_select :user, :occupation_id, Occupation.all, :id, :name, {}, {class: 'form-control'} %>
     </div>
+    <div class="checkbox">
+      <label>
+        <%= check_box :user, :receiver %> Recibir notificaciones de correo
+      </label>
+    </div>
     <%= submit_tag 'Guardar', class: 'btn btn-primary btn-sm' %>
 <% end %>

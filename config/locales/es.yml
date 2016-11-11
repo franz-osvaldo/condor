@@ -8,7 +8,10 @@ es:
       model: product_unit
       model: inspection
       model: user
+      model: occupation
     attributes:
+      occupation:
+        name: 'Rol'
       incoming_detail:
         quantity: 'Cantidad'
         aisle: 'Pasillo'

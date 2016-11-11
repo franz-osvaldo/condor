@@ -141,6 +141,8 @@ Rails.application.routes.draw do
       post 'create_days'
     end
   end
+  resources :occupations
+
 end
 
 

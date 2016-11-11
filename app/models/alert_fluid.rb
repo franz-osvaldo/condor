@@ -1,6 +1,17 @@
 class AlertFluid < ApplicationRecord
   belongs_to :fleet
   belongs_to :fluid
+  after_create :send_warning
+  after_update :send_accomplished
+
+  def send_warning
+    UserMailer.fluid_warning(User.where(receiver: true).map{|e| e.email}, self).deliver_now
+  end
+
+  def send_accomplished
+    UserMailer.fluid_accomplished(User.where(receiver: true).map{|e| e.email}, self).deliver_now
+  end
+
 
   def self.is_not_there_a_record?(fleet_id, fluid_id)
     self.where('fleet_id = ? AND fluid_id = ?', fleet_id, fluid_id).empty?
