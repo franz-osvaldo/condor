@@ -33,8 +33,8 @@ Rails.application.configure do
       port: 587,
       domain: 'localhost:3000',
       authentication: :plain,
-      user_name: 'franzbel',
-      password: 'fab-123456'
+      user_name: '',
+      password: ''
   }
 
 

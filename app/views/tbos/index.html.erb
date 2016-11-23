@@ -5,7 +5,7 @@
     </div>
     <%= form_for @tbo, remote: true do |f| %>
       <div class="form-group aircrafts">
-        <%= label_tag :aircraft_id, 'Aeronave' %>
+        <%= label_tag :aircraft_id, 'Aeronave' %> <span class="label label-danger">R</span>
         <%= collection_select :aircraft, :id, @aircrafts, :id, :trade_name, {prompt: true}, {class: 'form-control'} %>
       </div>
       <div class="form-group parts">
@@ -13,31 +13,31 @@
       </div>
         <div class="row">
           <div class="form-group col-md-6">
-            <%= f.label :time_limit, 'Tiempo' %>
-            <%= f.text_field :time_limit, class: 'form-control' %>
+            <%= f.label :time_limit, 'Tiempo' %> <span class="label label-danger">R</span>
+            <%= f.text_field :time_limit, class: 'form-control' , require: true%>
           </div>
           <div class="form-group col-md-6 over_time">
-            <%= f.label :tbo_unit_id, 'Unidad' %>
+            <%= f.label :tbo_unit_id, 'Unidad' %> <span class="label label-danger">R</span>
             <%= collection_select :tbo, :unit_id, Unit.all, :id, :name, {prompt: 'Seleccione'}, {class:'form-control'} %>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-md-6">
-            <%= f.label :over_the_time_limit, 'Excedente' %>
+            <%= f.label :over_the_time_limit, 'Excedente' %> <span class="label label-danger">R</span>
             <%= f.text_field :over_the_time_limit, class: 'form-control' %>
           </div>
           <div class="col-md-6">
-            <%= f.label 'Unidad' %>
+            <%= f.label 'Unidad' %> <span class="label label-danger">R</span>
             <p class="over_time_unit"></p>
           </div>
         </div>
         <div class="row">
           <div class="form-group col-md-6">
-            <%= f.label :alert_before, 'Alerta' %>
+            <%= f.label :alert_before, 'Alerta' %> <span class="label label-danger">R</span>
             <%= f.text_field :alert_before, class: 'form-control' %>
           </div>
           <div class="col-md-6">
-            <%= f.label 'Unidad' %>
+            <%= f.label 'Unidad' %> <span class="label label-danger">R</span>
             <p class="over_time_unit"></p>
           </div>
         </div>

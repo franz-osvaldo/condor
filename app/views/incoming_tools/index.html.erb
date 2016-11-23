@@ -6,7 +6,7 @@
     <%= form_for @incoming_tool, remote: true do |f| %>
         <div class="row">
           <div class="col-md-12">
-            <%= f.label :incoming_tool_type_id, 'Movimiento' %>
+            <%= f.label :incoming_tool_type_id, 'Movimiento' %><span class="label label-danger">R</span>
             <%= f.collection_select :incoming_tool_type_id, IncomingToolType.all, :id, :movement_type, {}, {class: 'form-control'} %>
           </div>
         </div>

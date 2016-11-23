@@ -34,6 +34,71 @@
 
 
 
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#tools">
+                <i class="fa fa-wrench" aria-hidden="true"></i> Taller
+                <span class="glyphicon glyphicon-chevron-down pull-right"></span>
+              </a>
+            </h1>
+          </div>
+          <div id="tools" class="panel-collapse collapse  <%= flash[:tools] ? flash[:tools ] : '' %>">
+            <div class="panel-body">
+              <%= link_to tools_path do %>
+                  <i class="fa fa-book" aria-hidden="true"></i> Catalogo de herramientas <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to incoming_tool_types_path do %>
+                  <i class="fa fa-share" aria-hidden="true"></i> Tipos de entrada <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to outgoing_tool_types_path do %>
+                  <i class="fa fa-reply" aria-hidden="true"></i> Tipos de salida <i class="fa fa-cog fa-fw pull-right"></i>
+              <% end %>
+            </div>
+
+            <div class="panel-body">
+              <%= link_to incoming_tools_path do %>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Movimiento de entrada
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to outgoing_tools_path do %>
+                  <i class="fa fa-truck" aria-hidden="true"></i> Movimiento de salida
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to borrowed_tools_path do %>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Resguardos
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to returned_tools_path do %>
+                  <i class="fa fa-truck" aria-hidden="true"></i> Devoluciones
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to assets_tool_quantities_path do %>
+                  <i class="fa fa-home" aria-hidden="true"></i> Activos <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to loaned_tools_list_tool_quantities_path do %>
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Pendientes <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+              <% end %>
+            </div>
+            <div class="panel-body">
+              <%= link_to history_report_tool_quantities_path do %>
+                  <i class="fa fa-history" aria-hidden="true"></i> Histórico <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
+              <% end %>
+            </div>
+
+          </div>
+        </div>
+
 
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -88,75 +153,6 @@
           </div>
         </div>
 
-
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h1 class="panel-title">
-              <a data-toggle="collapse" data-parent="#accordion" href="#tools">
-                <i class="fa fa-wrench" aria-hidden="true"></i> Taller
-                <span class="glyphicon glyphicon-chevron-down pull-right"></span>
-              </a>
-            </h1>
-          </div>
-          <div id="tools" class="panel-collapse collapse  <%= flash[:tools] ? flash[:tools ] : '' %>">
-            <div class="panel-body">
-              <%= link_to tools_path do %>
-                  <i class="fa fa-book" aria-hidden="true"></i> Catalogo de herramientas <i class="fa fa-cog fa-fw pull-right"></i>
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to incoming_tool_types_path do %>
-                  <i class="fa fa-share" aria-hidden="true"></i> Tipos de entrada <i class="fa fa-cog fa-fw pull-right"></i>
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to outgoing_tool_types_path do %>
-                  <i class="fa fa-reply" aria-hidden="true"></i> Tipos de salida <i class="fa fa-cog fa-fw pull-right"></i>
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to '#' do %>
-                  <i class="fa fa-users" aria-hidden="true"></i> Destinatarios <i class="fa fa-cog fa-fw pull-right"></i>
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to incoming_tools_path do %>
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Movimiento de entrada
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to outgoing_tools_path do %>
-                  <i class="fa fa-truck" aria-hidden="true"></i> Movimiento de salida
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to borrowed_tools_path do %>
-                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Resguardos
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to returned_tools_path do %>
-                  <i class="fa fa-truck" aria-hidden="true"></i> Devoluciones
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to assets_tool_quantities_path do %>
-                  <i class="fa fa-home" aria-hidden="true"></i> Activos <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to loaned_tools_list_tool_quantities_path do %>
-                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i> Pendientes <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
-              <% end %>
-            </div>
-            <div class="panel-body">
-              <%= link_to history_report_tool_quantities_path do %>
-                  <i class="fa fa-history" aria-hidden="true"></i> Histórico <i class="fa fa-bar-chart pull-right" aria-hidden="true"></i>
-              <% end %>
-            </div>
-
-          </div>
-        </div>
 
 
         <div class="panel panel-default">

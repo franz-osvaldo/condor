@@ -138,3 +138,7 @@ Fluid.create(part_id: 1, condition_id: 3, unit_id: 1, time_limit: 300, over_the_
 # **********************************************************************************************************************
 
 Fleet.create(aircraft_id: 1, name: 'Condor', aircraft_registration: 'FAB-001')
+
+1000.times{
+  Product.create(procurement_lead_time: Faker::Number.between(1, 10) ,part_number: Faker::Code.isbn,description: Faker::Name.last_name ,specification: Faker::Lorem.sentence(3),maximum: Faker::Number.between(1, 10), minimum: Faker::Number.between(1, 10), product_unit_id: 3)
+}

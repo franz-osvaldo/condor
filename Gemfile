@@ -15,6 +15,7 @@ group :development do
   gem 'table_print', '~> 1.5', '>= 1.5.6'
   gem 'better_errors', '~> 2.1', '>= 2.1.1'
   gem 'binding_of_caller', '~> 0.7.2'
+  gem 'faker'
 end
 
 
