@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   belongs_to :occupation
+  has_many :bug_reports
   has_many :borrowed_tools
   has_many :returned_tools
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

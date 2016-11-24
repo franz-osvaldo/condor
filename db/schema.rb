@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161109135351) do
+ActiveRecord::Schema.define(version: 20161124001815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,15 @@ ActiveRecord::Schema.define(version: 20161109135351) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_borrowed_tools_on_user_id", using: :btree
+  end
+
+  create_table "bug_reports", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "report"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "state",      default: false
+    t.index ["user_id"], name: "index_bug_reports_on_user_id", using: :btree
   end
 
   create_table "components", force: :cascade do |t|
@@ -557,6 +566,7 @@ ActiveRecord::Schema.define(version: 20161109135351) do
   add_foreign_key "borrowed_quantities", "borrowed_tools"
   add_foreign_key "borrowed_quantities", "tool_quantities"
   add_foreign_key "borrowed_tools", "users"
+  add_foreign_key "bug_reports", "users"
   add_foreign_key "components", "systems"
   add_foreign_key "fleets", "aircrafts"
   add_foreign_key "flights", "fleets"

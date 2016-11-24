@@ -49,7 +49,30 @@
 .users.index,
 .fleets.life_time_limits,
 .fleets.fluids,
-.occupations.index{
+.occupations.index,
+.bug_reports.index{
+  .bug-report-container{
+    .overflowed_bug_report{
+      overflow:hidden;
+      display:inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .item_bug_report{
+      padding-top: 6px;
+    }
+    .alert{
+      margin: 2px!important;
+      padding: 3px!important;
+    }
+    .alert-warning{
+      margin-bottom: 5px!important;
+      padding-top: 12px!important;
+      padding-bottom: 12px!important;
+    }
+  }
+
+
   margin-top: 10px;
   .modal_show, .modal_edit, .modal_delete{
     .modal-content{
@@ -146,6 +169,41 @@
       text-align: center;
     }
     .modal-footer{
+      border-top-color:#da4f4a;
+      button{
+        background-color:#da4f4a;
+      }
+      a{
+        background-color:#da4f4a;
+      }
+    }
+  }
+  .modal_bug{
+    .modal-content{
+      width: 400px;
+      margin: 0 auto;
+      border-radius: 0;
+    }
+    .modal-header{
+      text-align: center;
+      background-color:#da4f4a;
+      color: white;
+    }
+    .modal-body{
+      text-align: center;
+      textarea{
+        border-radius: 0;
+        height: 16em;
+      }
+      .btn{
+        background-color:#da4f4a;
+        border: 1px solid #da4f4a ;
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+    .modal-footer{
+      text-align: center;
       border-top-color:#da4f4a;
       button{
         background-color:#da4f4a;

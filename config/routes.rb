@@ -142,7 +142,7 @@ Rails.application.routes.draw do
     end
   end
   resources :occupations
-
+  resources :bug_reports
 end
 
 

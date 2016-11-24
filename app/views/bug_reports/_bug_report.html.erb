@@ -1,0 +1,10 @@
+<div class="row <%= bug_report.state ? 'alert alert-success' : 'alert alert-danger' %>" id="<%= dom_id(bug_report) %>">
+  <div class="col-md-6 item_bug_report overflowed_bug_report" ><%= bug_report.report %></div>
+  <div class="col-md-2"><%= link_to 'MOSTRAR', bug_report_path(bug_report), remote: true %></div>
+  <div class="col-md-2"><%= link_to User.find(bug_report.user_id).name, User.find(bug_report.user_id), remote: true %></div>
+  <div class="col-md-2">
+    <%= link_to bug_report_path(bug_report), remote: true, method: :put do %>
+        <%= bug_report.state ? 'CUMPLIDO' : 'PENDIENTE' %>
+    <% end %>
+  </div>
+</div>

@@ -7,12 +7,13 @@ class UserMailer < ApplicationMailer
   #
 
   def fluid_warning(emails, alert_fluid)
+
     headers['X-SMTPAPI'] = {
                               'filters': {
                                   'templates': {
                                       'settings': {
                                           'enable': 1,
-                                          'template_id': '1b361325-f39a-4389-b459-82532a9b2ce7'
+                                          'template_id': '63322334-c229-4cf0-9569-d50fa1dd2418'
                                       }
                                   }
                               }
@@ -28,7 +29,7 @@ class UserMailer < ApplicationMailer
             'templates': {
                 'settings': {
                     'enable': 1,
-                    'template_id': '2e643f36-85ba-4b93-82c3-1eebde299799'
+                    'template_id': '4d608fc9-405f-4cb7-8118-50e60eb6aff8'
                 }
             }
         }
@@ -44,7 +45,7 @@ class UserMailer < ApplicationMailer
             'templates': {
                 'settings': {
                     'enable': 1,
-                    'template_id': '1b361325-f39a-4389-b459-82532a9b2ce7'
+                    'template_id': '63322334-c229-4cf0-9569-d50fa1dd2418'
                 }
             }
         }
@@ -60,7 +61,7 @@ class UserMailer < ApplicationMailer
             'templates': {
                 'settings': {
                     'enable': 1,
-                    'template_id': '2e643f36-85ba-4b93-82c3-1eebde299799'
+                    'template_id': '4d608fc9-405f-4cb7-8118-50e60eb6aff8'
                 }
             }
         }
@@ -77,7 +78,7 @@ class UserMailer < ApplicationMailer
             'templates': {
                 'settings': {
                     'enable': 1,
-                    'template_id': '1b361325-f39a-4389-b459-82532a9b2ce7'
+                    'template_id': '63322334-c229-4cf0-9569-d50fa1dd2418'
                 }
             }
         }
@@ -93,7 +94,7 @@ class UserMailer < ApplicationMailer
             'templates': {
                 'settings': {
                     'enable': 1,
-                    'template_id': '2e643f36-85ba-4b93-82c3-1eebde299799'
+                    'template_id': '4d608fc9-405f-4cb7-8118-50e60eb6aff8'
                 }
             }
         }
@@ -102,5 +103,21 @@ class UserMailer < ApplicationMailer
     @alert_limit = alert_tbo
 
     mail to: emails, subject: 'Notificación'
+  end
+  def bug_report(report)
+    headers['X-SMTPAPI'] = {
+        'filters': {
+            'templates': {
+                'settings': {
+                    'enable': 1,
+                    'template_id': 'eb50880f-1e81-4c47-b8c1-fa3e3086a803'
+                }
+            }
+        }
+    }.to_json
+
+    @report = report
+
+    mail to: 'franzbeltran79@gmail.com', subject: 'BUG reportado'
   end
 end
