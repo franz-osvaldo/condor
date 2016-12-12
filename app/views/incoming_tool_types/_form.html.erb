@@ -1,7 +1,7 @@
 <%= form_for movement_type, remote: true do |f| %>
     <div class="form-group">
       <%= f.label :movement_type, 'Tipo de movimiento' %><span class="label label-danger">R</span>
-      <%= f.text_field :movement_type, class: 'form-control' %>
+      <%= f.text_field :movement_type, class: 'form-control', :required => true  %>
     </div>
     <%= f.submit 'Guardar', class: 'btn btn-primary btn-sm' %>
 <% end %>

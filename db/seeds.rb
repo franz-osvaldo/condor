@@ -45,8 +45,12 @@ Receiver.create(:receiver => 'Juan Perez')
 Receiver.create(:receiver => 'Gian Luca')
 Receiver.create(:receiver => 'Cat Stevens')
 
-occupation = Occupation.create(name: 'Admin')
-User.create(:name => 'Administrador', email: 'admin@gmail.com', password: '12345678', password_confirmation: '12345678', occupation_id: occupation.id)
+occupation1 = Occupation.create(name: 'Admin')
+occupation2 = Occupation.create(name: 'Mecanico')
+
+User.create(:name => 'Administrador', email: 'admin@gmail.com', password: '12345678', password_confirmation: '12345678', occupation_id: occupation1.id)
+User.create(:name => 'Franz Beltran', email: 'franzbeltran79@gmail.com', password: '12345678', password_confirmation: '12345678', occupation_id: occupation2.id, receiver: true)
+
 
 
 
@@ -96,6 +100,17 @@ Tool.create(:part_number => '105-31803 W2', :description => 'Measuring Device', 
                                     {description: 'parte 2', part_number: 'XYZ2'},
                                     ])
 
+
+# TAREAS
+
+Task.create(name: 'Tarea 1', task_number: '65-32-00, 6-1', tool_ids: [1], product_ids: [1], system_id: 1)
+Task.create(name: 'Tarea 2', task_number: '65-22-00, 6-6', tool_ids: [1], product_ids: [1], system_id: 1)
+
+
+
+
+
+
 Tbo.create(part_id: 1, condition_id: 3, unit_id: 1, time_limit: 800, over_the_time_limit: 100, alert_before: 100)
 Tbo.create(part_id: 2, condition_id: 3, unit_id: 2, time_limit: 5, over_the_time_limit: 0.5, alert_before: 0.5)
 Tbo.create(part_id: 3, condition_id: 1, unit_id: 2, time_limit: 5, over_the_time_limit: 0.5, alert_before: 0.5)
@@ -112,7 +127,7 @@ Tbo.create(part_id: 3, condition_id: 2, unit_id: 2, time_limit: 5, over_the_time
 # Fluid.create(part_id: 2, condition_id: 3, unit_id: 1, time_limit: 30, over_the_time_limit: 6, alert_before: 6)
 # Fluid.create(part_id: 5, condition_id: 1, unit_id: 1, time_limit: 30, over_the_time_limit: 4, alert_before: 4, tbo_id: 5)
 
-# LifeTimeLimit.create(part_id: 1, unit_id: 1, life_limit: 10,  alert_before: 2)
+LifeTimeLimit.create(part_id: 8, unit_id: 1, life_limit: 1200,  alert_before: 100)
 
 # Fluid.create(part_id: 1, condition_id: 1, unit_id: 1, time_limit: 100, over_the_time_limit: 20, alert_before: 20)
 # Fluid.create(part_id: 1, condition_id: 2, unit_id: 1, time_limit: 100, over_the_time_limit: 20, alert_before: 20)
@@ -127,7 +142,7 @@ Fluid.create(part_id: 1, condition_id: 1, unit_id: 1, time_limit: 400, over_the_
 # TSO - Flight hours
 Fluid.create(part_id: 1, condition_id: 2, unit_id: 1, time_limit: 400, over_the_time_limit: 100, alert_before: 100)
 # No requerido - Flight hours
-Fluid.create(part_id: 1, condition_id: 3, unit_id: 1, time_limit: 300, over_the_time_limit: 100, alert_before: 100)
+# Fluid.create(part_id: 1, condition_id: 3, unit_id: 1, time_limit: 300, over_the_time_limit: 100, alert_before: 100)
 # **********************************************************************************************************************
 # TSN - Months
 # Fluid.create(part_id: 1, condition_id: 1, unit_id: 3, time_limit: 12, over_the_time_limit: 3, alert_before: 3)
@@ -139,6 +154,6 @@ Fluid.create(part_id: 1, condition_id: 3, unit_id: 1, time_limit: 300, over_the_
 
 Fleet.create(aircraft_id: 1, name: 'Condor', aircraft_registration: 'FAB-001')
 
-1000.times{
-  Product.create(procurement_lead_time: Faker::Number.between(1, 10) ,part_number: Faker::Code.isbn,description: Faker::Name.last_name ,specification: Faker::Lorem.sentence(3),maximum: Faker::Number.between(1, 10), minimum: Faker::Number.between(1, 10), product_unit_id: 3)
-}
+# 1000.times{
+#   Product.create(procurement_lead_time: Faker::Number.between(1, 10) ,part_number: Faker::Code.isbn,description: Faker::Name.last_name ,specification: Faker::Lorem.sentence(3),maximum: Faker::Number.between(1, 10), minimum: Faker::Number.between(1, 10), product_unit_id: 3)
+# }
